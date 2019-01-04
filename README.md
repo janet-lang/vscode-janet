@@ -9,16 +9,14 @@
 This extension is not published yet. To install proceed to local install section.
 
 ## Local install
+```
+cd ~/.vscode/extensions
+git clone https://github.com/janet-lang/vscode-janet.git
+```
 
-To load an extension, you need to copy the files to your VS Code extensions folder .vscode/extensions. Depending on your platform, it is located in the following folders:
-
-- Windows %USERPROFILE%\.vscode\extensions
-- macOS ~/.vscode/extensions
-- Linux ~/.vscode/extensions
-
-## Debug this extention
+## Debug this extension
 
 - Run `npm install` in terminal to install dependencies
-- Run the `Run Extension` target in the Debug View. This will:
+- Run the `Run Extension` target in the Debug View in VS Code. This will:
 	- Start a task `npm: watch` to compile the code
 	- Run the extension in a new VS Code window
