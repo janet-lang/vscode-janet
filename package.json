@@ -18,17 +18,17 @@
 	"main": "./out/extension.js",
 	"contributes": {
 		"languages": [
-            {
-                "id": "janet",
-                "aliases": [
-                    "Janet",
+			{
+				"id": "janet",
+				"aliases": [
+					"Janet",
 					"janet"
-                ],
-                "extensions": [
-                    ".janet"
-                ],
-                "configuration": "./janet.configuration.json"
-            }
+				],
+				"extensions": [
+					".janet"
+				],
+				"configuration": "./janet.configuration.json"
+			}
 		],
 		"grammars": [
 			{
