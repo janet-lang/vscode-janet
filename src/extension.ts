@@ -1,26 +1,71 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "vscode-janet" is now active!');
+const janetCommand: string = 'janet';
+const terminalName: string = 'Janet REPL';
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('janet.helloJanet', () => {
-		// The code you place here will be executed every time your command is executed
+function newREPL(): vscode.Terminal {
+	let terminal = vscode.window.createTerminal(terminalName);
+	terminal.sendText(janetCommand, true);
 
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello Janet!');
-	});
+	// TODO: Check janet availability
 
-	context.subscriptions.push(disposable);
+	return terminal;
 }
 
-// this method is called when your extension is deactivated
+function getREPL(show: boolean): vscode.Terminal {
+	let terminal: vscode.Terminal = (<any>vscode.window).terminals.find(x => x._name === terminalName);
+
+	if (terminal == null) terminal = newREPL();
+	if (show) terminal.show();
+
+	return terminal;
+}
+
+function thenFocusTextEditor() {
+	setTimeout(() => vscode.commands.executeCommand('workbench.action.focusActiveEditorGroup'), 100);
+}
+
+export function activate(context: vscode.ExtensionContext) {
+
+	console.log('Extension "vscode-janet" is now active!');
+
+	context.subscriptions.push(vscode.commands.registerCommand(
+		'janet.startREPL', 
+		() => {
+			getREPL(true);
+		}
+	));
+
+	context.subscriptions.push(vscode.commands.registerCommand(
+		'janet.eval', 
+		() => {
+			let editor = vscode.window.activeTextEditor;
+			if (editor == null) return;
+
+			function send(terminal: vscode.Terminal) {
+				terminal.sendText(editor.document.getText(editor.selection), true);
+				thenFocusTextEditor();
+			}
+
+			let terminal = getREPL(true);
+			if (editor.selection.isEmpty) 
+				vscode.commands.executeCommand('editor.action.selectToBracket').then(() => send(terminal));
+			else
+				send(terminal);
+		}
+	));
+
+	context.subscriptions.push(vscode.commands.registerCommand(
+		'janet.evalFile', 
+		() => {
+			let editor = vscode.window.activeTextEditor;
+			if (editor == null) return;
+
+			let terminal = getREPL(true);
+			terminal.sendText(editor.document.getText(), true);
+			thenFocusTextEditor();
+		}
+	));
+}
+
 export function deactivate() {}

@@ -1,26 +1,54 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 const vscode = require("vscode");
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+const janetCommand = 'janet';
+const terminalName = 'Janet REPL';
+function newREPL() {
+    let terminal = vscode.window.createTerminal(terminalName);
+    terminal.sendText(janetCommand, true);
+    // TODO: Check janet availability
+    return terminal;
+}
+function getREPL(show) {
+    let terminal = vscode.window.terminals.find(x => x._name === terminalName);
+    if (terminal == null)
+        terminal = newREPL();
+    if (show)
+        terminal.show();
+    return terminal;
+}
+function thenFocusTextEditor() {
+    setTimeout(() => vscode.commands.executeCommand('workbench.action.focusActiveEditorGroup'), 100);
+}
 function activate(context) {
-    // Use the console to output diagnostic information (console.log) and errors (console.error)
-    // This line of code will only be executed once when your extension is activated
-    console.log('Congratulations, your extension "vscode-janet" is now active!');
-    // The command has been defined in the package.json file
-    // Now provide the implementation of the command with registerCommand
-    // The commandId parameter must match the command field in package.json
-    let disposable = vscode.commands.registerCommand('janet.helloJanet', () => {
-        // The code you place here will be executed every time your command is executed
-        // Display a message box to the user
-        vscode.window.showInformationMessage('Hello Janet!');
-    });
-    context.subscriptions.push(disposable);
+    console.log('Extension "vscode-janet" is now active!');
+    context.subscriptions.push(vscode.commands.registerCommand('janet.startREPL', () => {
+        getREPL(true);
+    }));
+    context.subscriptions.push(vscode.commands.registerCommand('janet.eval', () => {
+        let editor = vscode.window.activeTextEditor;
+        if (editor == null)
+            return;
+        function send(terminal) {
+            terminal.sendText(editor.document.getText(editor.selection), true);
+            thenFocusTextEditor();
+        }
+        let terminal = getREPL(true);
+        if (editor.selection.isEmpty)
+            vscode.commands.executeCommand('editor.action.selectToBracket').then(() => send(terminal));
+        else
+            send(terminal);
+    }));
+    context.subscriptions.push(vscode.commands.registerCommand('janet.evalFile', () => {
+        let editor = vscode.window.activeTextEditor;
+        if (editor == null)
+            return;
+        let terminal = getREPL(true);
+        terminal.sendText(editor.document.getText(), true);
+        thenFocusTextEditor();
+    }));
 }
 exports.activate = activate;
-// this method is called when your extension is deactivated
 function deactivate() { }
 exports.deactivate = deactivate;
 //# sourceMappingURL=extension.js.map

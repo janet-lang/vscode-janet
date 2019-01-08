@@ -13,7 +13,9 @@
 		"Programming Languages"
 	],
 	"activationEvents": [
-		"onCommand:janet.helloJanet"
+		"onCommand:janet.startREPL",
+		"onCommand:janet.eval",
+		"onCommand:janet.evalFile"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -39,8 +41,26 @@
 		],
 		"commands": [
 			{
-				"command": "janet.helloJanet",
-				"title": "Hello Janet"
+				"command": "janet.startREPL",
+				"title": "Janet: Start REPL"
+			},
+			{
+				"command": "janet.eval",
+				"title": "Janet: Evaluate expression"
+			},
+			{
+				"command": "janet.evalFile",
+				"title": "Janet: Evaluate file"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "janet.eval",
+				"key": "alt+e"
+			},
+			{
+				"command": "janet.evalFile",
+				"key": "alt+shift+e"
 			}
 		]
 	},
