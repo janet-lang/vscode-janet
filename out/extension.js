@@ -1,12 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const os = require("os");
+const fs = require("fs");
+const path = require("path");
 const vscode = require("vscode");
 const janetCommand = 'janet';
 const terminalName = 'Janet REPL';
+const win = os.platform() == 'win32';
+const pathSeparator = win ? ';' : ':';
+function janetExists() {
+    return process.env['PATH'].split(pathSeparator)
+        .some((x) => fs.existsSync(path.resolve(x, janetCommand + (win ? '.exe' : ''))));
+}
 function newREPL() {
     let terminal = vscode.window.createTerminal(terminalName);
     terminal.sendText(janetCommand, true);
-    // TODO: Check janet availability
     return terminal;
 }
 function getREPL(show) {
@@ -22,6 +30,10 @@ function thenFocusTextEditor() {
 }
 function activate(context) {
     console.log('Extension "vscode-janet" is now active!');
+    if (!janetExists()) {
+        vscode.window.showErrorMessage('Can\'t find Janet language on your computer! Check your PATH variable.');
+        return;
+    }
     context.subscriptions.push(vscode.commands.registerCommand('janet.startREPL', () => {
         getREPL(true);
     }));

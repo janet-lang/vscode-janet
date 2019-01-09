@@ -1,13 +1,22 @@
+import * as os from 'os';
+import * as fs from 'fs';
+import * as path from 'path';
 import * as vscode from 'vscode';
 
 const janetCommand: string = 'janet';
 const terminalName: string = 'Janet REPL';
 
+const win: boolean = os.platform() == 'win32';
+const pathSeparator: string = win ? ';' : ':';
+
+function janetExists(): boolean {
+	return process.env['PATH'].split(pathSeparator)
+		.some((x) => fs.existsSync(path.resolve(x, janetCommand + (win ? '.exe' : ''))));
+}
+
 function newREPL(): vscode.Terminal {
 	let terminal = vscode.window.createTerminal(terminalName);
 	terminal.sendText(janetCommand, true);
-
-	// TODO: Check janet availability
 
 	return terminal;
 }
@@ -29,15 +38,20 @@ export function activate(context: vscode.ExtensionContext) {
 
 	console.log('Extension "vscode-janet" is now active!');
 
+	if (!janetExists()) {
+		vscode.window.showErrorMessage('Can\'t find Janet language on your computer! Check your PATH variable.')
+		return;
+	}
+
 	context.subscriptions.push(vscode.commands.registerCommand(
-		'janet.startREPL', 
+		'janet.startREPL',
 		() => {
 			getREPL(true);
 		}
 	));
 
 	context.subscriptions.push(vscode.commands.registerCommand(
-		'janet.eval', 
+		'janet.eval',
 		() => {
 			let editor = vscode.window.activeTextEditor;
 			if (editor == null) return;
@@ -48,7 +62,7 @@ export function activate(context: vscode.ExtensionContext) {
 			}
 
 			let terminal = getREPL(true);
-			if (editor.selection.isEmpty) 
+			if (editor.selection.isEmpty)
 				vscode.commands.executeCommand('editor.action.selectToBracket').then(() => send(terminal));
 			else
 				send(terminal);
@@ -56,7 +70,7 @@ export function activate(context: vscode.ExtensionContext) {
 	));
 
 	context.subscriptions.push(vscode.commands.registerCommand(
-		'janet.evalFile', 
+		'janet.evalFile',
 		() => {
 			let editor = vscode.window.activeTextEditor;
 			if (editor == null) return;
@@ -68,4 +82,4 @@ export function activate(context: vscode.ExtensionContext) {
 	));
 }
 
-export function deactivate() {}
+export function deactivate() { }
