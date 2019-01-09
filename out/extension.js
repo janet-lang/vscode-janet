@@ -24,6 +24,7 @@ function newREPL() {
         var p = new Promise(resolve => {
             setTimeout(() => {
                 terminal.show();
+                thenFocusTextEditor();
                 resolve();
             }, 2000);
         });
@@ -48,7 +49,7 @@ function prep(input) {
     return input;
 }
 function thenFocusTextEditor() {
-    setTimeout(() => vscode.commands.executeCommand('workbench.action.focusActiveEditorGroup'), 100);
+    setTimeout(() => vscode.commands.executeCommand('workbench.action.focusActiveEditorGroup'), 250);
 }
 function activate(context) {
     console.log('Extension "vscode-janet" is now active!');

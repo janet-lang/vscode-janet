@@ -60,7 +60,7 @@
 			},
 			{
 				"command": "janet.evalFile",
-				"key": "alt+f"
+				"key": "alt+l"
 			}
 		]
 	},

@@ -27,6 +27,7 @@ function newREPL(): vscode.Terminal {
 		var p = new Promise(resolve => {
 			setTimeout(() => {
 				terminal.show();
+				thenFocusTextEditor();
 				resolve();
 			}, 2000);
 		});
@@ -57,7 +58,7 @@ function prep(input: string): string {
 }
 
 function thenFocusTextEditor() {
-	setTimeout(() => vscode.commands.executeCommand('workbench.action.focusActiveEditorGroup'), 100);
+	setTimeout(() => vscode.commands.executeCommand('workbench.action.focusActiveEditorGroup'), 250);
 }
 
 export function activate(context: vscode.ExtensionContext) {
