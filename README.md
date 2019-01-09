@@ -4,7 +4,7 @@
 
 - Syntax highlighting
 - Eval expression ```alt+e```
-- Eval file ```alt+shift+e```
+- Eval file ```alt+f```
 
 ## Notes
 
