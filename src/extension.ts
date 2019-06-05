@@ -1,55 +1,49 @@
-import * as os from 'os';
 import * as fs from 'fs';
+import * as os from 'os';
 import * as path from 'path';
 import * as vscode from 'vscode';
 
 const windows: boolean = os.platform() == 'win32';
-const linux: boolean = os.platform() == 'linux';
-const pathSeparator: string = windows ? ';' : ':';
 
-const janetCommand: string = windows ? 'janet.exe' : 'janet -s';
+const janetBinary: string = windows ? 'janet.exe' : 'janet';
 const terminalName: string = 'Janet REPL';
 
-
 function janetExists(): boolean {
-	return process.env['PATH'].split(pathSeparator)
-		.some((x) => fs.existsSync(path.resolve(x, janetCommand)));
+	return process.env['PATH'].split(path.delimiter)
+		.some((x) => fs.existsSync(path.resolve(x, janetBinary)));
 }
 
-function newREPL(): vscode.Terminal {
-	let terminal = vscode.window.createTerminal(terminalName);
-	terminal.sendText(janetCommand, true);
-
-	vscode.window.withProgress({
+function newREPL(): Thenable<vscode.Terminal> {
+	const terminal = vscode.window.createTerminal(terminalName);
+	terminal.sendText(janetBinary + ' -s', true);
+	return vscode.window.withProgress({
 		location: vscode.ProgressLocation.Notification,
 		title: "Running Janet REPL...",
 		cancellable: false
 	}, (progress, token) => {
-		var p = new Promise(resolve => {
+		return new Promise<vscode.Terminal>(resolve => {
 			setTimeout(() => {
 				terminal.show();
 				thenFocusTextEditor();
-				resolve();
+				resolve(terminal);
 			}, 2000);
 		});
-
-		return p;
 	});
-
-	return terminal;
 }
 
-function getREPL(show: boolean): vscode.Terminal {
+function getREPL(show: boolean): Thenable<vscode.Terminal> {
 	let terminal: vscode.Terminal = (<any>vscode.window).terminals.find(x => x._name === terminalName);
+	let terminalP = (terminal) ? Promise.resolve(terminal) : newREPL();
+	return terminalP.then(t => {
+		if (show) {
+			t.show();
+		}
+		return t;
+	});
+}
 
-	if (terminal == null) {
-		newREPL();
-		return null;
-	}
-
-	if (show) terminal.show();
-
-	return terminal;
+function sendSource(terminal: vscode.Terminal, text: string) {
+	terminal.sendText(text, true);
 }
 
 function thenFocusTextEditor() {
@@ -77,18 +71,16 @@ export function activate(context: vscode.ExtensionContext) {
 		() => {
 			let editor = vscode.window.activeTextEditor;
 			if (editor == null) return;
-
-			let terminal = getREPL(true);
-			if (terminal == null) return;
-
-			function send(terminal: vscode.Terminal) {
-				terminal.sendText(editor.document.getText(editor.selection), true);
-				thenFocusTextEditor();
-			}
-			if (editor.selection.isEmpty)
-				vscode.commands.executeCommand('editor.action.selectToBracket').then(() => send(terminal));
-			else
-				send(terminal);
+			getREPL(true).then(terminal => {
+				function send(terminal: vscode.Terminal) {
+					sendSource(terminal, editor.document.getText(editor.selection));
+					thenFocusTextEditor();
+				}
+				if (editor.selection.isEmpty)
+					vscode.commands.executeCommand('editor.action.selectToBracket').then(() => send(terminal));
+				else
+					send(terminal);
+			});
 		}
 	));
 
@@ -97,12 +89,10 @@ export function activate(context: vscode.ExtensionContext) {
 		() => {
 			let editor = vscode.window.activeTextEditor;
 			if (editor == null) return;
-
-			let terminal = getREPL(true);
-			if (terminal == null) return;
-
-			terminal.sendText(editor.document.getText(), true);
-			thenFocusTextEditor();
+			getREPL(true).then(terminal => {
+				sendSource(terminal, editor.document.getText());
+				thenFocusTextEditor();
+			});
 		}
 	));
 }

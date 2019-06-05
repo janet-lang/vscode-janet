@@ -1,5 +1,4 @@
 # Index ./out for easy local install
-#out
 node_modules
 .vscode-test/
 *.vsix

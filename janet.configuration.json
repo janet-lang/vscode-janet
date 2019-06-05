@@ -10,11 +10,19 @@
     "autoClosingPairs": [
         ["[", "]"],
         ["(", ")"],
-        ["{", "}"]
+        ["{", "}"],
+        { "open": "\"", "close": "\"", "notIn": ["string"] },
+        { "open": "`", "close": "`", "notIn": ["string", "comment"] },
+        { "open": "/**", "close": " */", "notIn": ["string"] }
     ],
     "surroundingPairs": [
         ["[", "]"],
         ["(", ")"],
         ["{", "}"]
-    ]
+    ],
+    "wordPattern": "[A-Za-z0-9\\!\\$\\%\\&\\*\\+\\-\\.\\/\\:\\<\\?\\=\\>\\@\\^\\_\\|\\x80-\\xFF]+",
+    "indentationRules": {
+		"increaseIndentPattern": "^((?!.*?\\/\\*).*\\*\/)?\\s*[\\}\\]].*$",
+		"decreaseIndentPattern": "^((?!\\/\\/).)*(\\{[^}\"'`]*|\\([^)\"'`]*|\\[[^\\]\"'`]*)$"
+    }
 }
