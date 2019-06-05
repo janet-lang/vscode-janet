@@ -3,16 +3,17 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
 
-const janetCommand: string = 'janet';
-const terminalName: string = 'Janet REPL';
-
 const windows: boolean = os.platform() == 'win32';
 const linux: boolean = os.platform() == 'linux';
 const pathSeparator: string = windows ? ';' : ':';
 
+const janetCommand: string = windows ? 'janet.exe' : 'janet -s';
+const terminalName: string = 'Janet REPL';
+
+
 function janetExists(): boolean {
 	return process.env['PATH'].split(pathSeparator)
-		.some((x) => fs.existsSync(path.resolve(x, janetCommand + (windows ? '.exe' : ''))));
+		.some((x) => fs.existsSync(path.resolve(x, janetCommand)));
 }
 
 function newREPL(): vscode.Terminal {
@@ -51,12 +52,6 @@ function getREPL(show: boolean): vscode.Terminal {
 	return terminal;
 }
 
-function prep(input: string): string {
-	// I don't know why, multiline send broken on Linux. Make 'em one liners!
-	if (linux) return input.replace(/(\r\n\t|\n|\r\t)/gm, ' ').replace(/ +/gm, ' ');
-	return input;
-}
-
 function thenFocusTextEditor() {
 	setTimeout(() => vscode.commands.executeCommand('workbench.action.focusActiveEditorGroup'), 250);
 }
@@ -87,7 +82,7 @@ export function activate(context: vscode.ExtensionContext) {
 			if (terminal == null) return;
 
 			function send(terminal: vscode.Terminal) {
-				terminal.sendText(prep(editor.document.getText(editor.selection)), true);
+				terminal.sendText(editor.document.getText(editor.selection), true);
 				thenFocusTextEditor();
 			}
 			if (editor.selection.isEmpty)
@@ -106,7 +101,7 @@ export function activate(context: vscode.ExtensionContext) {
 			let terminal = getREPL(true);
 			if (terminal == null) return;
 
-			terminal.sendText(prep(editor.document.getText()), true);
+			terminal.sendText(editor.document.getText(), true);
 			thenFocusTextEditor();
 		}
 	));
