@@ -4,6 +4,7 @@ const fs = require("fs");
 const os = require("os");
 const path = require("path");
 const vscode = require("vscode");
+const formatter_1 = require("./formatter");
 const windows = os.platform() == 'win32';
 const janetBinary = windows ? 'janet.exe' : 'janet';
 const terminalName = 'Janet REPL';
@@ -76,6 +77,12 @@ function activate(context) {
             sendSource(terminal, editor.document.getText());
             thenFocusTextEditor();
         });
+    }));
+    context.subscriptions.push(vscode.commands.registerCommand('janet.formatFile', () => {
+        let editor = vscode.window.activeTextEditor;
+        if (editor == null)
+            return;
+        formatter_1.format(editor.document.fileName);
     }));
 }
 exports.activate = activate;

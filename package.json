@@ -15,7 +15,8 @@
 	"activationEvents": [
 		"onCommand:janet.startREPL",
 		"onCommand:janet.eval",
-		"onCommand:janet.evalFile"
+		"onCommand:janet.evalFile",
+		"onCommand:janet.formatFile"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -51,6 +52,10 @@
 			{
 				"command": "janet.evalFile",
 				"title": "Janet: Evaluate file"
+			},
+			{
+				"command": "janet.formatFile",
+				"title": "Janet: Format File"
 			}
 		],
 		"keybindings": [

@@ -3,6 +3,8 @@ import * as os from 'os';
 import * as path from 'path';
 import * as vscode from 'vscode';
 
+import { format } from './formatter';
+
 const windows: boolean = os.platform() == 'win32';
 
 const janetBinary: string = windows ? 'janet.exe' : 'janet';
@@ -93,6 +95,15 @@ export function activate(context: vscode.ExtensionContext) {
 				sendSource(terminal, editor.document.getText());
 				thenFocusTextEditor();
 			});
+		}
+	));
+
+	context.subscriptions.push(vscode.commands.registerCommand(
+		'janet.formatFile',
+		() => {
+			let editor = vscode.window.activeTextEditor;
+			if (editor == null) return;
+			format(editor.document.fileName);
 		}
 	));
 }
