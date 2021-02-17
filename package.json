@@ -3,7 +3,7 @@
 	"displayName": "Janet",
 	"description": "Janet language support for Visual Studio Code",
 	"icon": "images/icon.png",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"publisher": "janet-lang",
 	"repository": "https://github.com/janet-lang/vscode-janet",
 	"engines": {
@@ -15,7 +15,8 @@
 	"activationEvents": [
 		"onCommand:janet.startREPL",
 		"onCommand:janet.eval",
-		"onCommand:janet.evalFile"
+		"onCommand:janet.evalFile",
+		"onCommand:janet.formatFile"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -51,6 +52,10 @@
 			{
 				"command": "janet.evalFile",
 				"title": "Janet: Evaluate file"
+			},
+			{
+				"command": "janet.formatFile",
+				"title": "Janet: Format file"
 			}
 		],
 		"keybindings": [
