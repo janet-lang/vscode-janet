@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.activate = void 0;
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
@@ -29,8 +30,8 @@ function newREPL() {
     });
 }
 function getREPL(show) {
-    let terminal = vscode.window.terminals.find(x => x._name === terminalName);
-    let terminalP = (terminal) ? Promise.resolve(terminal) : newREPL();
+    const terminal = vscode.window.terminals.find(x => x.name === terminalName);
+    const terminalP = (terminal) ? Promise.resolve(terminal) : newREPL();
     return terminalP.then(t => {
         if (show) {
             t.show();
@@ -54,7 +55,7 @@ function activate(context) {
         getREPL(true);
     }));
     context.subscriptions.push(vscode.commands.registerCommand('janet.eval', () => {
-        let editor = vscode.window.activeTextEditor;
+        const editor = vscode.window.activeTextEditor;
         if (editor == null)
             return;
         getREPL(true).then(terminal => {
@@ -69,7 +70,7 @@ function activate(context) {
         });
     }));
     context.subscriptions.push(vscode.commands.registerCommand('janet.evalFile', () => {
-        let editor = vscode.window.activeTextEditor;
+        const editor = vscode.window.activeTextEditor;
         if (editor == null)
             return;
         getREPL(true).then(terminal => {
@@ -87,6 +88,4 @@ function activate(context) {
     }));
 }
 exports.activate = activate;
-function deactivate() { }
-exports.deactivate = deactivate;
 //# sourceMappingURL=extension.js.map
