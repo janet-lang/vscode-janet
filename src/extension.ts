@@ -6,7 +6,7 @@ import * as vscode from 'vscode';
 const windows: boolean = os.platform() == 'win32';
 
 const janetBinary: string = windows ? 'janet.exe' : 'janet';
-const terminalName: string = 'Janet REPL';
+const terminalName = 'Janet REPL';
 
 function janetExists(): boolean {
 	return process.env['PATH'].split(path.delimiter)
@@ -32,8 +32,8 @@ function newREPL(): Thenable<vscode.Terminal> {
 }
 
 function getREPL(show: boolean): Thenable<vscode.Terminal> {
-	let terminal: vscode.Terminal = (<any>vscode.window).terminals.find(x => x._name === terminalName);
-	let terminalP = (terminal) ? Promise.resolve(terminal) : newREPL();
+	const terminal: vscode.Terminal = vscode.window.terminals.find(x => x.name === terminalName);
+	const terminalP = (terminal) ? Promise.resolve(terminal) : newREPL();
 	return terminalP.then(t => {
 		if (show) {
 			t.show();
@@ -55,7 +55,7 @@ export function activate(context: vscode.ExtensionContext) {
 	console.log('Extension "vscode-janet" is now active!');
 
 	if (!janetExists()) {
-		vscode.window.showErrorMessage('Can\'t find Janet language on your computer! Check your PATH variable.')
+		vscode.window.showErrorMessage('Can\'t find Janet language on your computer! Check your PATH variable.');
 		return;
 	}
 
@@ -69,7 +69,7 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(vscode.commands.registerCommand(
 		'janet.eval',
 		() => {
-			let editor = vscode.window.activeTextEditor;
+			const editor = vscode.window.activeTextEditor;
 			if (editor == null) return;
 			getREPL(true).then(terminal => {
 				function send(terminal: vscode.Terminal) {
@@ -87,7 +87,7 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(vscode.commands.registerCommand(
 		'janet.evalFile',
 		() => {
-			let editor = vscode.window.activeTextEditor;
+			const editor = vscode.window.activeTextEditor;
 			if (editor == null) return;
 			getREPL(true).then(terminal => {
 				sendSource(terminal, editor.document.getText());
@@ -96,5 +96,3 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	));
 }
-
-export function deactivate() { }
