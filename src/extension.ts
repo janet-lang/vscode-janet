@@ -95,4 +95,17 @@ export function activate(context: vscode.ExtensionContext) {
 			});
 		}
 	));
+
+	context.subscriptions.push(vscode.commands.registerCommand(
+		'janet.formatFile',
+		() => {
+			
+			getREPL(true).then(terminal => {
+				sendSource(terminal, "(import spork/fmt)(fmt/format-file \""+
+					vscode.window.activeTextEditor.document.uri.fsPath.replace(/\\/g, "/")
+				+"\")");
+				thenFocusTextEditor();
+			});
+		}
+	));
 }
