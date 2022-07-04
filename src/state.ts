@@ -68,7 +68,7 @@ export function getProjectConfig(useCache = true) {
 //   }
 // }
 
-const NON_PROJECT_DIR_KEY = 'calva.connect.nonProjectDir';
+const NON_PROJECT_DIR_KEY = 'janet.connect.nonProjectDir';
 
 export async function getNonProjectRootDir(
   context: vscode.ExtensionContext

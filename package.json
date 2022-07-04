@@ -127,356 +127,356 @@
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.togglemode",
+				"command": "janet.paredit.togglemode",
 				"title": "Toggle Paredit Mode",
 				"when": "editorLangId == janet && paredit:keyMap =~ /original|strict/",
 				"enablement": "editorLangId == janet && paredit:keyMap =~ /original|strict/"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.forwardSexp",
+				"command": "janet.paredit.forwardSexp",
 				"title": "Move Cursor Forward Sexp/Form",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.backwardSexp",
+				"command": "janet.paredit.backwardSexp",
 				"title": "Move Cursor Backward Sexp/Form",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.forwardSexpOrUp",
+				"command": "janet.paredit.forwardSexpOrUp",
 				"title": "Move Cursor Forward or Up Sexp/Form",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.backwardSexpOrUp",
+				"command": "janet.paredit.backwardSexpOrUp",
 				"title": "Move Cursor Backward or Up Sexp/Form",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.forwardDownSexp",
+				"command": "janet.paredit.forwardDownSexp",
 				"title": "Move Cursor Forward Down Sexp/Form",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.backwardDownSexp",
+				"command": "janet.paredit.backwardDownSexp",
 				"title": "Move Cursor Backward Down Sexp/Form",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.backwardUpSexp",
+				"command": "janet.paredit.backwardUpSexp",
 				"title": "Move Cursor Backward Up Sexp/Form",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.forwardUpSexp",
+				"command": "janet.paredit.forwardUpSexp",
 				"title": "Move Cursor Forward Up Sexp/Form",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.closeList",
+				"command": "janet.paredit.closeList",
 				"title": "Move Cursor Forward to List End/Close",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.selectForwardSexp",
+				"command": "janet.paredit.selectForwardSexp",
 				"title": "Select Forward Sexp",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.selectRight",
+				"command": "janet.paredit.selectRight",
 				"title": "Select Right",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.selectBackwardSexp",
+				"command": "janet.paredit.selectBackwardSexp",
 				"title": "Select Backward Sexp",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.selectForwardDownSexp",
+				"command": "janet.paredit.selectForwardDownSexp",
 				"title": "Select Forward Down Sexp",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.selectBackwardDownSexp",
+				"command": "janet.paredit.selectBackwardDownSexp",
 				"title": "Select Backward Down Sexp",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.selectBackwardUpSexp",
+				"command": "janet.paredit.selectBackwardUpSexp",
 				"title": "Select Backward Up Sexp",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.selectForwardUpSexp",
+				"command": "janet.paredit.selectForwardUpSexp",
 				"title": "Select Forward Up Sexp",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.selectBackwardSexpOrUp",
+				"command": "janet.paredit.selectBackwardSexpOrUp",
 				"title": "Select Backward Or Up Sexp",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.selectForwardSexpOrUp",
+				"command": "janet.paredit.selectForwardSexpOrUp",
 				"title": "Select Forward Or Up Sexp",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.selectCloseList",
+				"command": "janet.paredit.selectCloseList",
 				"title": "Select Forward to List End/Close",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.selectOpenList",
+				"command": "janet.paredit.selectOpenList",
 				"title": "Select Backward to List Start/Open",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.rangeForDefun",
+				"command": "janet.paredit.rangeForDefun",
 				"title": "Select Current Top Level (aka defun) Form",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.sexpRangeExpansion",
+				"command": "janet.paredit.sexpRangeExpansion",
 				"title": "Expand Selection",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.sexpRangeContraction",
+				"command": "janet.paredit.sexpRangeContraction",
 				"title": "Shrink Selection",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.slurpSexpForward",
+				"command": "janet.paredit.slurpSexpForward",
 				"title": "Slurp Sexp Forward",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.slurpSexpBackward",
+				"command": "janet.paredit.slurpSexpBackward",
 				"title": "Slurp Sexp Backward",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.barfSexpForward",
+				"command": "janet.paredit.barfSexpForward",
 				"title": "Barf Sexp Forward",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.barfSexpBackward",
+				"command": "janet.paredit.barfSexpBackward",
 				"title": "Barf Sexp Backward",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.spliceSexp",
+				"command": "janet.paredit.spliceSexp",
 				"title": "Splice Sexp",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.splitSexp",
+				"command": "janet.paredit.splitSexp",
 				"title": "Split Sexp",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.joinSexp",
+				"command": "janet.paredit.joinSexp",
 				"title": "Join Sexp",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.raiseSexp",
+				"command": "janet.paredit.raiseSexp",
 				"title": "Raise Sexp",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.transpose",
+				"command": "janet.paredit.transpose",
 				"title": "Transpose (Swap) the two Sexps Around the Cursor",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.dragSexprBackward",
+				"command": "janet.paredit.dragSexprBackward",
 				"title": "Drag Sexp Backward",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.dragSexprForward",
+				"command": "janet.paredit.dragSexprForward",
 				"title": "Drag Sexp Forward",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.dragSexprBackwardUp",
+				"command": "janet.paredit.dragSexprBackwardUp",
 				"title": "Drag Sexp Backward Up",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.dragSexprForwardDown",
+				"command": "janet.paredit.dragSexprForwardDown",
 				"title": "Drag Sexp Forward Down",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.dragSexprForwardUp",
+				"command": "janet.paredit.dragSexprForwardUp",
 				"title": "Drag Sexp Forward Up",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.dragSexprBackwardDown",
+				"command": "janet.paredit.dragSexprBackwardDown",
 				"title": "Drag Sexp Backward Down",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.convolute",
+				"command": "janet.paredit.convolute",
 				"title": "Convolute Sexp ¯\\_(ツ)_/¯",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.killRight",
+				"command": "janet.paredit.killRight",
 				"title": "Kill/Delete Right",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.killSexpForward",
+				"command": "janet.paredit.killSexpForward",
 				"title": "Kill/Delete Sexp Forward",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.killSexpBackward",
+				"command": "janet.paredit.killSexpBackward",
 				"title": "Kill/Delete Sexp Backward",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.killListForward",
+				"command": "janet.paredit.killListForward",
 				"title": "Kill/Delete Forward to End of List",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.killListBackward",
+				"command": "janet.paredit.killListBackward",
 				"title": "Kill/Delete Backward to Start of List",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.spliceSexpKillForward",
+				"command": "janet.paredit.spliceSexpKillForward",
 				"title": "Splice & Kill/Delete Forward",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.spliceSexpKillBackward",
+				"command": "janet.paredit.spliceSexpKillBackward",
 				"title": "Splice & Kill/Delete Backward",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.deleteForward",
+				"command": "janet.paredit.deleteForward",
 				"title": "Delete Forward",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.deleteBackward",
+				"command": "janet.paredit.deleteBackward",
 				"title": "Delete Backward",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.forceDeleteForward",
+				"command": "janet.paredit.forceDeleteForward",
 				"title": "Force Delete Forward",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.forceDeleteBackward",
+				"command": "janet.paredit.forceDeleteBackward",
 				"title": "Force Delete Backward",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.wrapAroundParens",
+				"command": "janet.paredit.wrapAroundParens",
 				"title": "Wrap Around ()",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.wrapAroundSquare",
+				"command": "janet.paredit.wrapAroundSquare",
 				"title": "Wrap Around []",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.wrapAroundCurly",
+				"command": "janet.paredit.wrapAroundCurly",
 				"title": "Wrap Around {}",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.wrapAroundQuote",
+				"command": "janet.paredit.wrapAroundQuote",
 				"title": "Wrap Around \"\"",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.rewrapParens",
+				"command": "janet.paredit.rewrapParens",
 				"title": "Rewrap ()",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.rewrapSquare",
+				"command": "janet.paredit.rewrapSquare",
 				"title": "Rewrap []",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.rewrapCurly",
+				"command": "janet.paredit.rewrapCurly",
 				"title": "Rewrap {}",
 				"enablement": "editorLangId == janet"
 			},
 			{
 				"category": "Janet Paredit",
-				"command": "paredit.rewrapQuote",
+				"command": "janet.paredit.rewrapQuote",
 				"title": "Rewrap \"\"",
 				"enablement": "editorLangId == janet"
 			}
@@ -491,324 +491,324 @@
 				"key": "alt+l"
 			},
 			{
-				"command": "paredit.togglemode",
+				"command": "janet.paredit.togglemode",
 				"key": "ctrl+alt+p ctrl+alt+m",
 				"when": "editorLangId == janet janet:keybindingsEnabled && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.backwardSexp",
+				"command": "janet.paredit.backwardSexp",
 				"mac": "ctrl+left",
 				"win": "alt+left",
 				"linux": "alt+left",
-				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && !config.janet.paredit.hijackVSCodeDefaults && !calva:cursorInComment || calva:cursorBeforeComment"
+				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && !config.janet.paredit.hijackVSCodeDefaults && !janet:cursorInComment || janet:cursorBeforeComment"
 			},
 			{
-				"command": "paredit.backwardSexp",
+				"command": "janet.paredit.backwardSexp",
 				"mac": "alt+left",
 				"win": "ctrl+left",
 				"linux": "ctrl+left",
-				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && config.janet.paredit.hijackVSCodeDefaults && !calva:cursorInComment || calva:cursorBeforeComment"
+				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && config.janet.paredit.hijackVSCodeDefaults && !janet:cursorInComment || janet:cursorBeforeComment"
 			},
 			{
-				"command": "paredit.forwardSexp",
+				"command": "janet.paredit.forwardSexp",
 				"mac": "ctrl+right",
 				"win": "alt+right",
 				"linux": "alt+right",
-				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && !config.janet.paredit.hijackVSCodeDefaults && !calva:cursorInComment || calva:cursorAfterComment"
+				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && !config.janet.paredit.hijackVSCodeDefaults && !janet:cursorInComment || janet:cursorAfterComment"
 			},
 			{
-				"command": "paredit.forwardSexp",
+				"command": "janet.paredit.forwardSexp",
 				"mac": "alt+right",
 				"win": "ctrl+right",
 				"linux": "ctrl+right",
-				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && config.janet.paredit.hijackVSCodeDefaults && !calva:cursorInComment || calva:cursorAfterComment"
+				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && config.janet.paredit.hijackVSCodeDefaults && !janet:cursorInComment || janet:cursorAfterComment"
 			},
 			{
-				"command": "paredit.forwardDownSexp",
+				"command": "janet.paredit.forwardDownSexp",
 				"key": "ctrl+down",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.backwardDownSexp",
+				"command": "janet.paredit.backwardDownSexp",
 				"key": "ctrl+alt+up",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.forwardUpSexp",
+				"command": "janet.paredit.forwardUpSexp",
 				"key": "ctrl+alt+down",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.backwardUpSexp",
+				"command": "janet.paredit.backwardUpSexp",
 				"key": "ctrl+up",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.closeList",
+				"command": "janet.paredit.closeList",
 				"key": "ctrl+end",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.openList",
+				"command": "janet.paredit.openList",
 				"key": "ctrl+home",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.selectForwardSexp",
+				"command": "janet.paredit.selectForwardSexp",
 				"mac": "shift+alt+right",
 				"win": "shift+ctrl+right",
 				"linux": "shift+ctrl+right",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.selectRight",
+				"command": "janet.paredit.selectRight",
 				"mac": "ctrl+shift+k",
 				"win": "ctrl+k ctrl+shift+k",
 				"linux": "ctrl+k ctrl+shift+k",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && !selectionAnchorSet && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.selectBackwardSexp",
+				"command": "janet.paredit.selectBackwardSexp",
 				"mac": "shift+alt+left",
 				"win": "shift+ctrl+left",
 				"linux": "shift+ctrl+left",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.selectForwardDownSexp",
+				"command": "janet.paredit.selectForwardDownSexp",
 				"key": "ctrl+shift+down",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.selectBackwardDownSexp",
+				"command": "janet.paredit.selectBackwardDownSexp",
 				"key": "ctrl+shift+alt+up",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.selectForwardUpSexp",
+				"command": "janet.paredit.selectForwardUpSexp",
 				"key": "ctrl+shift+alt+down",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.selectBackwardUpSexp",
+				"command": "janet.paredit.selectBackwardUpSexp",
 				"key": "ctrl+shift+up",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.selectCloseList",
+				"command": "janet.paredit.selectCloseList",
 				"key": "ctrl+shift+end",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.selectOpenList",
+				"command": "janet.paredit.selectOpenList",
 				"key": "ctrl+shift+home",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.rangeForDefun",
+				"command": "janet.paredit.rangeForDefun",
 				"key": "ctrl+alt+w space",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.sexpRangeExpansion",
+				"command": "janet.paredit.sexpRangeExpansion",
 				"mac": "ctrl+w",
 				"win": "shift+alt+right",
 				"linux": "shift+alt+right",
-				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && !calva:cursorInComment"
+				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && !janet:cursorInComment"
 			},
 			{
-				"command": "paredit.sexpRangeContraction",
+				"command": "janet.paredit.sexpRangeContraction",
 				"mac": "ctrl+shift+w",
 				"win": "shift+alt+left",
 				"linux": "shift+alt+left",
-				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && !calva:cursorInComment"
+				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && !janet:cursorInComment"
 			},
 			{
-				"command": "paredit.slurpSexpForward",
-				"key": "ctrl+alt+right",
+				"command": "janet.paredit.slurpSexpForward",
+				"key": "ctrl+alt+win+right",
 				"linux": "ctrl+alt+.",
+				"when": "janet:keybindingsEnabled && editorLangId == janet"
+			},
+			{
+				"command": "janet.paredit.slurpSexpBackward",
+				"key": "ctrl+alt+win+left",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.slurpSexpBackward",
+				"command": "janet.paredit.barfSexpForward",
 				"key": "ctrl+alt+shift+left",
-				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
-			},
-			{
-				"command": "paredit.barfSexpForward",
-				"key": "ctrl+alt+left",
 				"linux": "ctrl+alt+,",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.barfSexpBackward",
+				"command": "janet.paredit.barfSexpBackward",
 				"key": "ctrl+alt+shift+right",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.spliceSexp",
+				"command": "janet.paredit.spliceSexp",
 				"key": "ctrl+alt+s",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.splitSexp",
+				"command": "janet.paredit.splitSexp",
 				"key": "ctrl+shift+s",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.joinSexp",
+				"command": "janet.paredit.joinSexp",
 				"key": "ctrl+shift+j",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.raiseSexp",
+				"command": "janet.paredit.raiseSexp",
 				"key": "ctrl+alt+p ctrl+alt+r",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.transpose",
+				"command": "janet.paredit.transpose",
 				"key": "ctrl+alt+t",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.dragSexprBackward",
+				"command": "janet.paredit.dragSexprBackward",
 				"key": "ctrl+shift+alt+b",
-				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && !calva:cursorInComment"
+				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && !janet:cursorInComment"
 			},
 			{
-				"command": "paredit.dragSexprForward",
+				"command": "janet.paredit.dragSexprForward",
 				"key": "ctrl+shift+alt+f",
-				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && !calva:cursorInComment"
+				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && !janet:cursorInComment"
 			},
 			{
-				"command": "paredit.dragSexprBackward",
+				"command": "janet.paredit.dragSexprBackward",
 				"key": "alt+up",
-				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && config.janet.paredit.hijackVSCodeDefaults && !calva:cursorInComment"
+				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && config.janet.paredit.hijackVSCodeDefaults && !janet:cursorInComment"
 			},
 			{
-				"command": "paredit.dragSexprForward",
+				"command": "janet.paredit.dragSexprForward",
 				"key": "alt+down",
-				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && config.janet.paredit.hijackVSCodeDefaults && !calva:cursorInComment"
+				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && config.janet.paredit.hijackVSCodeDefaults && !janet:cursorInComment"
 			},
 			{
-				"command": "paredit.dragSexprBackwardUp",
+				"command": "janet.paredit.dragSexprBackwardUp",
 				"key": "ctrl+shift+alt+u",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.dragSexprForwardDown",
+				"command": "janet.paredit.dragSexprForwardDown",
 				"key": "ctrl+shift+alt+d",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.dragSexprForwardUp",
+				"command": "janet.paredit.dragSexprForwardUp",
 				"key": "ctrl+shift+alt+k",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.dragSexprBackwardDown",
+				"command": "janet.paredit.dragSexprBackwardDown",
 				"key": "ctrl+shift+alt+j",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.convolute",
+				"command": "janet.paredit.convolute",
 				"key": "ctrl+shift+c",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.killRight",
+				"command": "janet.paredit.killRight",
 				"mac": "ctrl+k",
 				"win": "ctrl+k ctrl+k",
 				"linux": "ctrl+k ctrl+k",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && !selectionAnchorSet && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.killSexpForward",
+				"command": "janet.paredit.killSexpForward",
 				"key": "ctrl+shift+delete",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.killSexpBackward",
+				"command": "janet.paredit.killSexpBackward",
 				"key": "ctrl+alt+backspace",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.killListForward",
+				"command": "janet.paredit.killListForward",
 				"key": "ctrl+delete",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.killListBackward",
+				"command": "janet.paredit.killListBackward",
 				"key": "ctrl+backspace",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.spliceSexpKillForward",
+				"command": "janet.paredit.spliceSexpKillForward",
 				"key": "ctrl+alt+shift+delete",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.spliceSexpKillBackward",
+				"command": "janet.paredit.spliceSexpKillBackward",
 				"key": "ctrl+alt+shift+backspace",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.wrapAroundParens",
+				"command": "janet.paredit.wrapAroundParens",
 				"key": "ctrl+alt+shift+p",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.wrapAroundSquare",
+				"command": "janet.paredit.wrapAroundSquare",
 				"key": "ctrl+alt+shift+s",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.wrapAroundCurly",
+				"command": "janet.paredit.wrapAroundCurly",
 				"key": "ctrl+alt+shift+c",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.wrapAroundQuote",
+				"command": "janet.paredit.wrapAroundQuote",
 				"key": "ctrl+alt+shift+q",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.rewrapParens",
+				"command": "janet.paredit.rewrapParens",
 				"key": "ctrl+alt+r ctrl+alt+p",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.rewrapSquare",
+				"command": "janet.paredit.rewrapSquare",
 				"key": "ctrl+alt+r ctrl+alt+s",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.rewrapCurly",
+				"command": "janet.paredit.rewrapCurly",
 				"key": "ctrl+alt+r ctrl+alt+c",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.rewrapQuote",
+				"command": "janet.paredit.rewrapQuote",
 				"key": "ctrl+alt+r ctrl+alt+q",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
 			},
 			{
-				"command": "paredit.deleteForward",
+				"command": "janet.paredit.deleteForward",
 				"key": "delete",
-				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap == strict && !editorReadOnly && !editorHasMultipleSelections && !calva:cursorInComment"
+				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap == strict && !editorReadOnly && !editorHasMultipleSelections && !janet:cursorInComment"
 			},
 			{
-				"command": "paredit.deleteBackward",
+				"command": "janet.paredit.deleteBackward",
 				"key": "backspace",
-				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap == strict && !editorReadOnly && !editorHasMultipleSelections && !calva:cursorInComment"
+				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap == strict && !editorReadOnly && !editorHasMultipleSelections && !janet:cursorInComment"
 			},
 			{
-				"command": "paredit.forceDeleteForward",
+				"command": "janet.paredit.forceDeleteForward",
 				"key": "alt+delete",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap == strict && !editorReadOnly && !editorHasMultipleSelections"
 			},
 			{
-				"command": "paredit.forceDeleteBackward",
+				"command": "janet.paredit.forceDeleteBackward",
 				"key": "alt+backspace",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap == strict && !editorReadOnly && !editorHasMultipleSelections"
 			}

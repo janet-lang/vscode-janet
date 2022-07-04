@@ -5,12 +5,12 @@ import * as formatter from './format';
 import * as inferer from './infer';
 import * as docmirror from '../../doc-mirror/index';
 import * as config from './config';
-import * as calvaConfig from '../../config';
+import * as janetConfig from '../../config';
 
 function getLanguageConfiguration(autoIndentOn: boolean): vscode.LanguageConfiguration {
   return {
     onEnterRules:
-      autoIndentOn && calvaConfig.getConfig().format
+      autoIndentOn && janetConfig.getConfig().format
         ? [
             // When Calva is the formatter disable all vscode default indentation
             // (By outdenting a lot, which is the only way I have found that works)
@@ -66,7 +66,7 @@ export async function activate(context: vscode.ExtensionContext) {
   );
   context.subscriptions.push(
     vscode.languages.registerOnTypeFormattingEditProvider(
-      calvaConfig.documentSelector,
+      janetConfig.documentSelector,
       new FormatOnTypeEditProvider(),
       '\r',
       '\n',
@@ -77,7 +77,7 @@ export async function activate(context: vscode.ExtensionContext) {
   );
   context.subscriptions.push(
     vscode.languages.registerDocumentRangeFormattingEditProvider(
-      calvaConfig.documentSelector,
+      janetConfig.documentSelector,
       new RangeEditProvider()
     )
   );

@@ -8,8 +8,8 @@ import _ = require('lodash');
 import { isDefined } from './utilities';
 
 const REPL_FILE_EXT = 'calva-repl';
-const KEYBINDINGS_ENABLED_CONFIG_KEY = 'calva.keybindingsEnabled';
-const KEYBINDINGS_ENABLED_CONTEXT_KEY = 'calva:keybindingsEnabled';
+const KEYBINDINGS_ENABLED_CONFIG_KEY = 'janet.keybindingsEnabled';
+const KEYBINDINGS_ENABLED_CONTEXT_KEY = 'janet:keybindingsEnabled';
 
 type ReplSessionType = 'clj' | 'cljs';
 
@@ -101,8 +101,8 @@ function _trimAliasName(name: string): string {
 
 // TODO find a way to validate the configs
 function getConfig() {
-  const configOptions = vscode.workspace.getConfiguration('calva');
-  const pareditOptions = vscode.workspace.getConfiguration('calva.paredit');
+  const configOptions = vscode.workspace.getConfiguration('janet');
+  const pareditOptions = vscode.workspace.getConfiguration('janet.paredit');
 
   const w =
     configOptions.inspect<customREPLCommandSnippet[]>('customREPLCommandSnippets')

@@ -8,6 +8,8 @@ const vscode = require("vscode");
 const paredit = require("./paredit/extension");
 const fmt = require("./calva-fmt/src/extension");
 const model = require("./cursor-doc/model");
+const config = require("./config");
+const whenContexts = require("./when-contexts");
 const windows = os.platform() == 'win32';
 const janetBinary = windows ? 'janet.exe' : 'janet';
 const terminalName = 'Janet REPL';
@@ -47,6 +49,21 @@ function sendSource(terminal, text) {
 }
 function thenFocusTextEditor() {
     setTimeout(() => vscode.commands.executeCommand('workbench.action.focusActiveEditorGroup'), 250);
+}
+function onDidOpen(document) {
+    if (document.languageId !== 'clojure') {
+        return;
+    }
+}
+function onDidChangeEditorOrSelection(editor) {
+    // replHistory.setReplHistoryCommandsActiveContext(editor);
+    whenContexts.setCursorContextIfChanged(editor);
+}
+function setKeybindingsEnabledContext() {
+    const keybindingsEnabled = vscode.workspace
+        .getConfiguration()
+        .get(config.KEYBINDINGS_ENABLED_CONFIG_KEY);
+    void vscode.commands.executeCommand('setContext', config.KEYBINDINGS_ENABLED_CONTEXT_KEY, keybindingsEnabled);
 }
 function activate(context) {
     console.log('Extension "vscode-janet" is now active!');
@@ -90,6 +107,13 @@ function activate(context) {
         });
     }));
     model.initScanner(vscode.workspace.getConfiguration('editor').get('maxTokenizationLineLength'));
+    // Initial set of the provided contexts
+    setKeybindingsEnabledContext();
+    context.subscriptions.push(vscode.workspace.onDidChangeConfiguration((e) => {
+        if (e.affectsConfiguration(config.KEYBINDINGS_ENABLED_CONFIG_KEY)) {
+            setKeybindingsEnabledContext();
+        }
+    }));
     try {
         void fmt.activate(context);
     }

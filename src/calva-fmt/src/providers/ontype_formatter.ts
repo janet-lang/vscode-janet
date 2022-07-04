@@ -13,7 +13,7 @@ export class FormatOnTypeEditProvider implements vscode.OnTypeFormattingEditProv
     ch: string,
     _options
   ): Promise<vscode.TextEdit[] | undefined> {
-    let keyMap = vscode.workspace.getConfiguration().get('calva.paredit.defaultKeyMap');
+    let keyMap = vscode.workspace.getConfiguration().get('janet.paredit.defaultKeyMap');
     keyMap = String(keyMap).trim().toLowerCase();
     if ([')', ']', '}'].includes(ch)) {
       if (keyMap === 'strict' && getConfig().strictPreventUnmatchedClosingBracket) {

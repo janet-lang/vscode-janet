@@ -54,7 +54,7 @@ export class StatusBar {
         this.visible = true;
         this._toggleBarItem.text = 'λ';
         this._toggleBarItem.tooltip =
-          'Calva Paredit Keymap is set to none, Toggle to Strict Mode is Disabled';
+          'Janet Paredit Keymap is set to none, Toggle to Strict Mode is Disabled';
         this._toggleBarItem.color = color.inactive;
     }
   }

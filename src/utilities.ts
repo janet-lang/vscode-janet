@@ -144,7 +144,7 @@ async function quickPick(
 }
 
 function getCljsReplStartCode() {
-  return vscode.workspace.getConfiguration('calva').startCLJSREPLCommand;
+  return vscode.workspace.getConfiguration('janet').startCLJSREPLCommand;
 }
 
 function getShadowCljsReplStartCode(build) {
@@ -498,8 +498,8 @@ function randomSlug(length = 7) {
   return Math.random().toString(36).substring(7);
 }
 
-function calvaTmpDir() {
-  return path.join(os.tmpdir(), 'betterthantomorrow.calva');
+function janetTmpDir() {
+  return path.join(os.tmpdir(), 'janet-lang.janet');
 }
 
 const isWindows = process.platform === 'win32';
@@ -582,5 +582,5 @@ export {
   tryToGetActiveTextEditor,
   getActiveTextEditor,
   pathExists,
-  calvaTmpDir,
+  janetTmpDir,
 };

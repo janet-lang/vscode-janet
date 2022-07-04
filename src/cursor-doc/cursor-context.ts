@@ -1,12 +1,12 @@
 import { EditableDocument } from './model';
 
 export const allCursorContexts = [
-  'calva:cursorInString',
-  'calva:cursorInComment',
-  'calva:cursorAtStartOfLine',
-  'calva:cursorAtEndOfLine',
-  'calva:cursorBeforeComment',
-  'calva:cursorAfterComment',
+  'janet:cursorInString',
+  'janet:cursorInComment',
+  'janet:cursorAtStartOfLine',
+  'janet:cursorAtEndOfLine',
+  'janet:cursorBeforeComment',
+  'janet:cursorAfterComment',
 ] as const;
 
 export type CursorContext = typeof allCursorContexts[number];
@@ -64,28 +64,28 @@ export function determineContexts(
   const contexts: CursorContext[] = [];
 
   if (isAtLineStartInclWS(doc)) {
-    contexts.push('calva:cursorAtStartOfLine');
+    contexts.push('janet:cursorAtStartOfLine');
   } else if (isAtLineEndInclWS(doc)) {
-    contexts.push('calva:cursorAtEndOfLine');
+    contexts.push('janet:cursorAtEndOfLine');
   }
 
   if (tokenCursor.withinString()) {
-    contexts.push('calva:cursorInString');
+    contexts.push('janet:cursorInString');
   } else if (tokenCursor.withinComment()) {
-    contexts.push('calva:cursorInComment');
+    contexts.push('janet:cursorInComment');
   }
 
   // Compound contexts
-  if (contexts.includes('calva:cursorInComment')) {
-    if (contexts.includes('calva:cursorAtEndOfLine')) {
+  if (contexts.includes('janet:cursorInComment')) {
+    if (contexts.includes('janet:cursorAtEndOfLine')) {
       tokenCursor.forwardWhitespace(false);
       if (tokenCursor.getToken().type != 'comment') {
-        contexts.push('calva:cursorAfterComment');
+        contexts.push('janet:cursorAfterComment');
       }
-    } else if (contexts.includes('calva:cursorAtStartOfLine')) {
+    } else if (contexts.includes('janet:cursorAtStartOfLine')) {
       tokenCursor.backwardWhitespace(false);
       if (tokenCursor.getPrevToken().type != 'comment') {
-        contexts.push('calva:cursorBeforeComment');
+        contexts.push('janet:cursorBeforeComment');
       }
     }
   }

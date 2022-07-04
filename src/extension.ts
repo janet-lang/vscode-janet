@@ -5,6 +5,8 @@ import * as vscode from 'vscode';
 import * as paredit from './paredit/extension';
 import * as fmt from './calva-fmt/src/extension';
 import * as model from './cursor-doc/model';
+import * as config from './config';
+import * as whenContexts from './when-contexts';
 
 const windows: boolean = os.platform() == 'win32';
 
@@ -51,6 +53,28 @@ function sendSource(terminal: vscode.Terminal, text: string) {
 
 function thenFocusTextEditor() {
 	setTimeout(() => vscode.commands.executeCommand('workbench.action.focusActiveEditorGroup'), 250);
+}
+
+function onDidOpen(document) {
+	if (document.languageId !== 'clojure') {
+	  return;
+	}
+}
+  
+  function onDidChangeEditorOrSelection(editor: vscode.TextEditor) {
+	// replHistory.setReplHistoryCommandsActiveContext(editor);
+	whenContexts.setCursorContextIfChanged(editor);
+}
+  
+function setKeybindingsEnabledContext() {
+	const keybindingsEnabled = vscode.workspace
+	  .getConfiguration()
+	  .get(config.KEYBINDINGS_ENABLED_CONFIG_KEY);
+	void vscode.commands.executeCommand(
+	  'setContext',
+	  config.KEYBINDINGS_ENABLED_CONTEXT_KEY,
+	  keybindingsEnabled
+	);
 }
 
 export function activate(context: vscode.ExtensionContext) {
@@ -113,6 +137,17 @@ export function activate(context: vscode.ExtensionContext) {
 	));
 
 	model.initScanner(vscode.workspace.getConfiguration('editor').get('maxTokenizationLineLength'));
+
+	// Initial set of the provided contexts
+	setKeybindingsEnabledContext();
+
+	context.subscriptions.push(
+		vscode.workspace.onDidChangeConfiguration((e: vscode.ConfigurationChangeEvent) => {
+		  if (e.affectsConfiguration(config.KEYBINDINGS_ENABLED_CONFIG_KEY)) {
+			setKeybindingsEnabledContext();
+		  }
+		})
+	);
 
 	try {
 		void fmt.activate(context);

@@ -17,7 +17,7 @@ import { EditableDocument } from '../cursor-doc/model';
 
 const onPareditKeyMapChangedEmitter = new EventEmitter<string>();
 
-const languages = new Set(['clojure', 'lisp', 'scheme']);
+const languages = new Set(['clojure', 'lisp', 'scheme', 'janet']);
 const enabled = true;
 
 /**
@@ -35,7 +35,7 @@ async function copyRangeToClipboard(doc: EditableDocument, [start, end]) {
  * @returns boolean
  */
 function shouldKillAlsoCutToClipboard() {
-  return workspace.getConfiguration().get('calva.paredit.killAlsoCutsToClipboard');
+  return workspace.getConfiguration().get('janet.paredit.killAlsoCutsToClipboard');
 }
 
 function assertIsDefined<T>(
@@ -54,61 +54,61 @@ type PareditCommand = {
 const pareditCommands: PareditCommand[] = [
   // NAVIGATING
   {
-    command: 'paredit.forwardSexp',
+    command: 'janet.paredit.forwardSexp',
     handler: (doc: EditableDocument) => {
       paredit.moveToRangeRight(doc, paredit.forwardSexpRange(doc));
     },
   },
   {
-    command: 'paredit.backwardSexp',
+    command: 'janet.paredit.backwardSexp',
     handler: (doc: EditableDocument) => {
       paredit.moveToRangeLeft(doc, paredit.backwardSexpRange(doc));
     },
   },
   {
-    command: 'paredit.forwardDownSexp',
+    command: 'janet.paredit.forwardDownSexp',
     handler: (doc: EditableDocument) => {
       paredit.moveToRangeRight(doc, paredit.rangeToForwardDownList(doc));
     },
   },
   {
-    command: 'paredit.backwardDownSexp',
+    command: 'janet.paredit.backwardDownSexp',
     handler: (doc: EditableDocument) => {
       paredit.moveToRangeLeft(doc, paredit.rangeToBackwardDownList(doc));
     },
   },
   {
-    command: 'paredit.forwardUpSexp',
+    command: 'janet.paredit.forwardUpSexp',
     handler: (doc: EditableDocument) => {
       paredit.moveToRangeRight(doc, paredit.rangeToForwardUpList(doc));
     },
   },
   {
-    command: 'paredit.backwardUpSexp',
+    command: 'janet.paredit.backwardUpSexp',
     handler: (doc: EditableDocument) => {
       paredit.moveToRangeLeft(doc, paredit.rangeToBackwardUpList(doc));
     },
   },
   {
-    command: 'paredit.forwardSexpOrUp',
+    command: 'janet.paredit.forwardSexpOrUp',
     handler: (doc: EditableDocument) => {
       paredit.moveToRangeRight(doc, paredit.forwardSexpOrUpRange(doc));
     },
   },
   {
-    command: 'paredit.backwardSexpOrUp',
+    command: 'janet.paredit.backwardSexpOrUp',
     handler: (doc: EditableDocument) => {
       paredit.moveToRangeLeft(doc, paredit.backwardSexpOrUpRange(doc));
     },
   },
   {
-    command: 'paredit.closeList',
+    command: 'janet.paredit.closeList',
     handler: (doc: EditableDocument) => {
       paredit.moveToRangeRight(doc, paredit.rangeToForwardList(doc));
     },
   },
   {
-    command: 'paredit.openList',
+    command: 'janet.paredit.openList',
     handler: (doc: EditableDocument) => {
       paredit.moveToRangeLeft(doc, paredit.rangeToBackwardList(doc));
     },
@@ -116,133 +116,133 @@ const pareditCommands: PareditCommand[] = [
 
   // SELECTING
   {
-    command: 'paredit.rangeForDefun',
+    command: 'janet.paredit.rangeForDefun',
     handler: (doc: EditableDocument) => {
       paredit.selectRange(doc, paredit.rangeForDefun(doc));
     },
   },
   {
-    command: 'paredit.sexpRangeExpansion',
+    command: 'janet.paredit.sexpRangeExpansion',
     handler: paredit.growSelection,
   }, // TODO: Inside string should first select contents
   {
-    command: 'paredit.sexpRangeContraction',
+    command: 'janet.paredit.sexpRangeContraction',
     handler: paredit.shrinkSelection,
   },
 
   {
-    command: 'paredit.selectForwardSexp',
+    command: 'janet.paredit.selectForwardSexp',
     handler: paredit.selectForwardSexp,
   },
   {
-    command: 'paredit.selectRight',
+    command: 'janet.paredit.selectRight',
     handler: paredit.selectRight,
   },
   {
-    command: 'paredit.selectBackwardSexp',
+    command: 'janet.paredit.selectBackwardSexp',
     handler: paredit.selectBackwardSexp,
   },
   {
-    command: 'paredit.selectForwardDownSexp',
+    command: 'janet.paredit.selectForwardDownSexp',
     handler: paredit.selectForwardDownSexp,
   },
   {
-    command: 'paredit.selectBackwardDownSexp',
+    command: 'janet.paredit.selectBackwardDownSexp',
     handler: paredit.selectBackwardDownSexp,
   },
   {
-    command: 'paredit.selectForwardUpSexp',
+    command: 'janet.paredit.selectForwardUpSexp',
     handler: paredit.selectForwardUpSexp,
   },
   {
-    command: 'paredit.selectForwardSexpOrUp',
+    command: 'janet.paredit.selectForwardSexpOrUp',
     handler: paredit.selectForwardSexpOrUp,
   },
   {
-    command: 'paredit.selectBackwardSexpOrUp',
+    command: 'janet.paredit.selectBackwardSexpOrUp',
     handler: paredit.selectBackwardSexpOrUp,
   },
   {
-    command: 'paredit.selectBackwardUpSexp',
+    command: 'janet.paredit.selectBackwardUpSexp',
     handler: paredit.selectBackwardUpSexp,
   },
   {
-    command: 'paredit.selectCloseList',
+    command: 'janet.paredit.selectCloseList',
     handler: paredit.selectCloseList,
   },
   {
-    command: 'paredit.selectOpenList',
+    command: 'janet.paredit.selectOpenList',
     handler: paredit.selectOpenList,
   },
 
   // EDITING
   {
-    command: 'paredit.slurpSexpForward',
+    command: 'janet.paredit.slurpSexpForward',
     handler: paredit.forwardSlurpSexp,
   },
   {
-    command: 'paredit.barfSexpForward',
+    command: 'janet.paredit.barfSexpForward',
     handler: paredit.forwardBarfSexp,
   },
   {
-    command: 'paredit.slurpSexpBackward',
+    command: 'janet.paredit.slurpSexpBackward',
     handler: paredit.backwardSlurpSexp,
   },
   {
-    command: 'paredit.barfSexpBackward',
+    command: 'janet.paredit.barfSexpBackward',
     handler: paredit.backwardBarfSexp,
   },
   {
-    command: 'paredit.splitSexp',
+    command: 'janet.paredit.splitSexp',
     handler: paredit.splitSexp,
   },
   {
-    command: 'paredit.joinSexp',
+    command: 'janet.paredit.joinSexp',
     handler: paredit.joinSexp,
   },
   {
-    command: 'paredit.spliceSexp',
+    command: 'janet.paredit.spliceSexp',
     handler: paredit.spliceSexp,
   },
   // ['paredit.transpose', ], // TODO: Not yet implemented
   {
-    command: 'paredit.raiseSexp',
+    command: 'janet.paredit.raiseSexp',
     handler: paredit.raiseSexp,
   },
   {
-    command: 'paredit.transpose',
+    command: 'janet.paredit.transpose',
     handler: paredit.transpose,
   },
   {
-    command: 'paredit.dragSexprBackward',
+    command: 'janet.paredit.dragSexprBackward',
     handler: paredit.dragSexprBackward,
   },
   {
-    command: 'paredit.dragSexprForward',
+    command: 'janet.paredit.dragSexprForward',
     handler: paredit.dragSexprForward,
   },
   {
-    command: 'paredit.dragSexprBackwardUp',
+    command: 'janet.paredit.dragSexprBackwardUp',
     handler: paredit.dragSexprBackwardUp,
   },
   {
-    command: 'paredit.dragSexprForwardDown',
+    command: 'janet.paredit.dragSexprForwardDown',
     handler: paredit.dragSexprForwardDown,
   },
   {
-    command: 'paredit.dragSexprForwardUp',
+    command: 'janet.paredit.dragSexprForwardUp',
     handler: paredit.dragSexprForwardUp,
   },
   {
-    command: 'paredit.dragSexprBackwardDown',
+    command: 'janet.paredit.dragSexprBackwardDown',
     handler: paredit.dragSexprBackwardDown,
   },
   {
-    command: 'paredit.convolute',
+    command: 'janet.paredit.convolute',
     handler: paredit.convolute,
   },
   {
-    command: 'paredit.killRight',
+    command: 'janet.paredit.killRight',
     handler: async (doc: EditableDocument) => {
       const range = paredit.forwardHybridSexpRange(doc);
       if (shouldKillAlsoCutToClipboard()) {
@@ -252,7 +252,7 @@ const pareditCommands: PareditCommand[] = [
     },
   },
   {
-    command: 'paredit.killSexpForward',
+    command: 'janet.paredit.killSexpForward',
     handler: async (doc: EditableDocument) => {
       const range = paredit.forwardSexpRange(doc);
       if (shouldKillAlsoCutToClipboard()) {
@@ -262,7 +262,7 @@ const pareditCommands: PareditCommand[] = [
     },
   },
   {
-    command: 'paredit.killSexpBackward',
+    command: 'janet.paredit.killSexpBackward',
     handler: async (doc: EditableDocument) => {
       const range = paredit.backwardSexpRange(doc);
       if (shouldKillAlsoCutToClipboard()) {
@@ -272,7 +272,7 @@ const pareditCommands: PareditCommand[] = [
     },
   },
   {
-    command: 'paredit.killListForward',
+    command: 'janet.paredit.killListForward',
     handler: async (doc: EditableDocument) => {
       const range = paredit.forwardListRange(doc);
       if (shouldKillAlsoCutToClipboard()) {
@@ -282,7 +282,7 @@ const pareditCommands: PareditCommand[] = [
     },
   }, // TODO: Implement with killRange
   {
-    command: 'paredit.killListBackward',
+    command: 'janet.paredit.killListBackward',
     handler: async (doc: EditableDocument) => {
       const range = paredit.backwardListRange(doc);
       if (shouldKillAlsoCutToClipboard()) {
@@ -292,7 +292,7 @@ const pareditCommands: PareditCommand[] = [
     },
   }, // TODO: Implement with killRange
   {
-    command: 'paredit.spliceSexpKillForward',
+    command: 'janet.paredit.spliceSexpKillForward',
     handler: async (doc: EditableDocument) => {
       const range = paredit.forwardListRange(doc);
       if (shouldKillAlsoCutToClipboard()) {
@@ -304,7 +304,7 @@ const pareditCommands: PareditCommand[] = [
     },
   },
   {
-    command: 'paredit.spliceSexpKillBackward',
+    command: 'janet.paredit.spliceSexpKillBackward',
     handler: async (doc: EditableDocument) => {
       const range = paredit.backwardListRange(doc);
       if (shouldKillAlsoCutToClipboard()) {
@@ -316,79 +316,79 @@ const pareditCommands: PareditCommand[] = [
     },
   },
   {
-    command: 'paredit.wrapAroundParens',
+    command: 'janet.paredit.wrapAroundParens',
     handler: (doc: EditableDocument) => {
       return paredit.wrapSexpr(doc, '(', ')');
     },
   },
   {
-    command: 'paredit.wrapAroundSquare',
+    command: 'janet.paredit.wrapAroundSquare',
     handler: (doc: EditableDocument) => {
       return paredit.wrapSexpr(doc, '[', ']');
     },
   },
   {
-    command: 'paredit.wrapAroundCurly',
+    command: 'janet.paredit.wrapAroundCurly',
     handler: (doc: EditableDocument) => {
       return paredit.wrapSexpr(doc, '{', '}');
     },
   },
   {
-    command: 'paredit.wrapAroundQuote',
+    command: 'janet.paredit.wrapAroundQuote',
     handler: (doc: EditableDocument) => {
       return paredit.wrapSexpr(doc, '"', '"');
     },
   },
   {
-    command: 'paredit.rewrapParens',
+    command: 'janet.paredit.rewrapParens',
     handler: (doc: EditableDocument) => {
       return paredit.rewrapSexpr(doc, '(', ')');
     },
   },
   {
-    command: 'paredit.rewrapSquare',
+    command: 'janet.paredit.rewrapSquare',
     handler: (doc: EditableDocument) => {
       return paredit.rewrapSexpr(doc, '[', ']');
     },
   },
   {
-    command: 'paredit.rewrapCurly',
+    command: 'janet.paredit.rewrapCurly',
     handler: (doc: EditableDocument) => {
       return paredit.rewrapSexpr(doc, '{', '}');
     },
   },
   {
-    command: 'paredit.rewrapQuote',
+    command: 'janet.paredit.rewrapQuote',
     handler: (doc: EditableDocument) => {
       return paredit.rewrapSexpr(doc, '"', '"');
     },
   },
   {
-    command: 'paredit.deleteForward',
+    command: 'janet.paredit.deleteForward',
     handler: async (doc: EditableDocument) => {
       await paredit.deleteForward(doc);
     },
   },
   {
-    command: 'paredit.deleteBackward',
+    command: 'janet.paredit.deleteBackward',
     handler: async (doc: EditableDocument) => {
       await paredit.backspace(doc);
     },
   },
   {
-    command: 'paredit.forceDeleteForward',
+    command: 'janet.paredit.forceDeleteForward',
     handler: () => {
       return vscode.commands.executeCommand('deleteRight');
     },
   },
   {
-    command: 'paredit.forceDeleteBackward',
+    command: 'janet.paredit.forceDeleteBackward',
     handler: () => {
       return vscode.commands.executeCommand('deleteLeft');
     },
   },
   {
-    command: 'paredit.addRichComment',
+    command: 'janet.paredit.addRichComment',
     handler: async (doc: EditableDocument) => {
       await paredit.addRichComment(doc);
     },
@@ -414,12 +414,12 @@ function wrapPareditCommand(command: PareditCommand) {
 }
 
 export function getKeyMapConf(): string {
-  const keyMap = workspace.getConfiguration().get('calva.paredit.defaultKeyMap');
+  const keyMap = workspace.getConfiguration().get('janet.paredit.defaultKeyMap');
   return String(keyMap);
 }
 
 function setKeyMapConf() {
-  const keyMap = workspace.getConfiguration().get('calva.paredit.defaultKeyMap');
+  const keyMap = workspace.getConfiguration().get('janet.paredit.defaultKeyMap');
   void commands.executeCommand('setContext', 'paredit:keyMap', keyMap);
   onPareditKeyMapChangedEmitter.fire(String(keyMap));
 }
@@ -431,23 +431,23 @@ export function activate(context: ExtensionContext) {
   context.subscriptions.push(
     statusBar,
     commands.registerCommand('paredit.togglemode', () => {
-      let keyMap = workspace.getConfiguration().get('calva.paredit.defaultKeyMap');
+      let keyMap = workspace.getConfiguration().get('janet.paredit.defaultKeyMap');
       keyMap = String(keyMap).trim().toLowerCase();
       if (keyMap == 'original') {
         void workspace
           .getConfiguration()
-          .update('calva.paredit.defaultKeyMap', 'strict', vscode.ConfigurationTarget.Global);
+          .update('janet.paredit.defaultKeyMap', 'strict', vscode.ConfigurationTarget.Global);
       } else if (keyMap == 'strict') {
         void workspace
           .getConfiguration()
-          .update('calva.paredit.defaultKeyMap', 'original', vscode.ConfigurationTarget.Global);
+          .update('janet.paredit.defaultKeyMap', 'original', vscode.ConfigurationTarget.Global);
       }
     }),
     window.onDidChangeActiveTextEditor(
       (e) => e && e.document && languages.has(e.document.languageId)
     ),
     workspace.onDidChangeConfiguration((e: ConfigurationChangeEvent) => {
-      if (e.affectsConfiguration('calva.paredit.defaultKeyMap')) {
+      if (e.affectsConfiguration('janet.paredit.defaultKeyMap')) {
         setKeyMapConf();
       }
     }),
