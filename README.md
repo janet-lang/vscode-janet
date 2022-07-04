@@ -5,6 +5,7 @@
 - Syntax highlighting
 - Eval expression ```alt+e```
 - Eval file ```alt+l```
+- Structural editing via ParEdit-style Sexp commands
 
 ## Notes
 
