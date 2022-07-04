@@ -51,7 +51,7 @@ function thenFocusTextEditor() {
     setTimeout(() => vscode.commands.executeCommand('workbench.action.focusActiveEditorGroup'), 250);
 }
 function onDidOpen(document) {
-    if (document.languageId !== 'clojure') {
+    if (document.languageId !== 'janet') {
         return;
     }
 }

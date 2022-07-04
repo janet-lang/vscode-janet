@@ -56,7 +56,7 @@ function thenFocusTextEditor() {
 }
 
 function onDidOpen(document) {
-	if (document.languageId !== 'clojure') {
+	if (document.languageId !== 'janet') {
 	  return;
 	}
 }

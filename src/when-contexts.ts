@@ -45,7 +45,7 @@ export function setCursorContextIfChanged(editor: vscode.TextEditor) {
   if (
     !editor ||
     !editor.document ||
-    editor.document.languageId !== 'clojure' ||
+    editor.document.languageId !== 'janet' ||
     editor !== util.tryToGetActiveTextEditor()
   ) {
     return;

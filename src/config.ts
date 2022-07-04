@@ -17,9 +17,9 @@ type ReplSessionType = 'clj' | 'cljs';
 // document selector. All other schemes are
 // not known and therefore not supported.
 const documentSelector = [
-  { scheme: 'file', language: 'clojure' },
-  { scheme: 'jar', language: 'clojure' },
-  { scheme: 'untitled', language: 'clojure' },
+  { scheme: 'file', language: 'janet' },
+  { scheme: 'jar', language: 'janet' },
+  { scheme: 'untitled', language: 'janet' },
 ];
 
 /**

@@ -30,7 +30,7 @@ function getLanguageConfiguration(autoIndentOn: boolean): vscode.LanguageConfigu
 export async function activate(context: vscode.ExtensionContext) {
   docmirror.activate();
   vscode.languages.setLanguageConfiguration(
-    'clojure',
+    'janet',
     getLanguageConfiguration(await config.getConfig()['format-as-you-type'])
   );
   context.subscriptions.push(
@@ -85,7 +85,7 @@ export async function activate(context: vscode.ExtensionContext) {
   vscode.workspace.onDidChangeConfiguration(async (e) => {
     if (e.affectsConfiguration('calva.fmt.formatAsYouType')) {
       vscode.languages.setLanguageConfiguration(
-        'clojure',
+        'janet',
         getLanguageConfiguration(await config.getConfig()['format-as-you-type'])
       );
     }
