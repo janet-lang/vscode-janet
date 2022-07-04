@@ -2,6 +2,9 @@ import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
 import * as vscode from 'vscode';
+import * as paredit from './paredit/extension';
+import * as fmt from './calva-fmt/src/extension';
+import * as model from './cursor-doc/model';
 
 const windows: boolean = os.platform() == 'win32';
 
@@ -108,4 +111,18 @@ export function activate(context: vscode.ExtensionContext) {
 			});
 		}
 	));
+
+	model.initScanner(vscode.workspace.getConfiguration('editor').get('maxTokenizationLineLength'));
+
+	try {
+		void fmt.activate(context);
+	} catch (e) {
+		console.error('Failed activating Formatter: ' + e.message);
+	}
+
+	try {
+		paredit.activate(context);
+	} catch (e) {
+		console.error('Failed activating Paredit: ' + e.message);
+	}
 }

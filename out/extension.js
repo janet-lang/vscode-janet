@@ -5,6 +5,9 @@ const fs = require("fs");
 const os = require("os");
 const path = require("path");
 const vscode = require("vscode");
+const paredit = require("./paredit/extension");
+const fmt = require("./calva-fmt/src/extension");
+const model = require("./cursor-doc/model");
 const windows = os.platform() == 'win32';
 const janetBinary = windows ? 'janet.exe' : 'janet';
 const terminalName = 'Janet REPL';
@@ -86,6 +89,19 @@ function activate(context) {
             thenFocusTextEditor();
         });
     }));
+    model.initScanner(vscode.workspace.getConfiguration('editor').get('maxTokenizationLineLength'));
+    try {
+        void fmt.activate(context);
+    }
+    catch (e) {
+        console.error('Failed activating Formatter: ' + e.message);
+    }
+    try {
+        paredit.activate(context);
+    }
+    catch (e) {
+        console.error('Failed activating Paredit: ' + e.message);
+    }
 }
 exports.activate = activate;
 //# sourceMappingURL=extension.js.map

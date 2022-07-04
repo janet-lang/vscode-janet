@@ -4,3 +4,8 @@ node_modules
 *.vsix
 
 package-lock.json
+.clj-kondo
+.cpcache
+.lsp
+out
+.shadow-cljs
