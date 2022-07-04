@@ -484,16 +484,18 @@
 		"keybindings": [
 			{
 				"command": "janet.eval",
-				"key": "alt+enter"
+				"key": "alt+e",
+				"when": "editorLangId == janet && janet:keybindingsEnabled"
 			},
 			{
 				"command": "janet.evalFile",
-				"key": "alt+l"
+				"key": "alt+l",
+				"when": "editorLangId == janet && janet:keybindingsEnabled"
 			},
 			{
 				"command": "janet.paredit.togglemode",
 				"key": "ctrl+alt+p ctrl+alt+m",
-				"when": "editorLangId == janet janet:keybindingsEnabled && paredit:keyMap =~ /original|strict/"
+				"when": "editorLangId == janet && janet:keybindingsEnabled && paredit:keyMap =~ /original|strict/"
 			},
 			{
 				"command": "janet.paredit.backwardSexp",
