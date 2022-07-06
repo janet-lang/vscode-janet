@@ -131,7 +131,10 @@
   {:meta "^", :meta* "#^", :vector "[",       :map "{"
    :list "(", :eval "#=",  :uneval "#_",      :fn "#("
    :set "#{", :deref "@",  :reader-macro "#", :unquote "~"
-   :var "#'", :quote "'",  :syntax-quote "`", :unquote-splicing "~@"})
+   :var "#'", :quote "'",  :syntax-quote "`", :unquote-splicing "~@"
+   ;; Janet-specific options
+   :j-table "@{" :j-array "@[" :j-buffer "@\""
+   })
 
 (defn- prior-line-string [zloc]
   (loop [zloc     zloc

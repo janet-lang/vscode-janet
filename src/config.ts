@@ -5,13 +5,13 @@ import { customREPLCommandSnippet } from './evaluate';
 // import { parseEdn } from '../out/cljs-lib/cljs-lib';
 import { getProjectConfig } from './state';
 import _ = require('lodash');
-import { isDefined } from './utilities';
+// import { isDefined } from './utilities';
 
-const REPL_FILE_EXT = 'calva-repl';
+// const REPL_FILE_EXT = 'calva-repl';
 const KEYBINDINGS_ENABLED_CONFIG_KEY = 'janet.keybindingsEnabled';
 const KEYBINDINGS_ENABLED_CONTEXT_KEY = 'janet:keybindingsEnabled';
 
-type ReplSessionType = 'clj' | 'cljs';
+// type ReplSessionType = 'clj' | 'cljs';
 
 // include the 'file' and 'untitled' to the
 // document selector. All other schemes are
@@ -170,10 +170,10 @@ function getConfig() {
 export {
   // readEdnWorkspaceConfig,
   // addEdnConfig,
-  REPL_FILE_EXT,
+  // REPL_FILE_EXT,
   KEYBINDINGS_ENABLED_CONFIG_KEY,
   KEYBINDINGS_ENABLED_CONTEXT_KEY,
   documentSelector,
-  ReplSessionType,
+  // ReplSessionType,
   getConfig,
 };

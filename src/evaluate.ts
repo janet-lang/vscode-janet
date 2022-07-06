@@ -1,8 +1,8 @@
-import * as vscode from 'vscode';
+// import * as vscode from 'vscode';
 // import * as state from './state';
 // import annotations from './providers/annotations';
-import * as path from 'path';
-import * as util from './utilities';
+// import * as path from 'path';
+// import * as util from './utilities';
 // import { NReplSession, NReplEvaluation } from './nrepl';
 // import statusbar from './statusbar';
 // import { PrettyPrintingOptions } from './printer';
@@ -12,7 +12,7 @@ import * as util from './utilities';
 // import * as replHistory from './results-output/repl-history';
 // import { formatAsLineComments } from './results-output/util';
 // import { getStateValue } from '../out/cljs-lib/cljs-lib';
-import { getConfig } from './config';
+// import { getConfig } from './config';
 // import * as replSession from './nrepl/repl-session';
 // import * as getText from './util/get-text';
 
@@ -39,24 +39,24 @@ import { getConfig } from './config';
 //   void vscode.window.showInformationMessage('Not connected to a REPL server');
 // }
 
-async function addAsComment(
-  c: number,
-  result: string,
-  codeSelection: vscode.Selection,
-  editor: vscode.TextEditor,
-  selection: vscode.Selection
-) {
-  const indent = `${' '.repeat(c)}`,
-    output = result
-      .replace(/\n\r?$/, '')
-      .split(/\n\r?/)
-      .join(`\n${indent};;    `),
-    edit = vscode.TextEdit.insert(codeSelection.end, `\n${indent};; => ${output}\n`),
-    wsEdit = new vscode.WorkspaceEdit();
-  wsEdit.set(editor.document.uri, [edit]);
-  await vscode.workspace.applyEdit(wsEdit);
-  editor.selection = selection;
-}
+// async function addAsComment(
+//   c: number,
+//   result: string,
+//   codeSelection: vscode.Selection,
+//   editor: vscode.TextEditor,
+//   selection: vscode.Selection
+// ) {
+//   const indent = `${' '.repeat(c)}`,
+//     output = result
+//       .replace(/\n\r?$/, '')
+//       .split(/\n\r?/)
+//       .join(`\n${indent};;    `),
+//     edit = vscode.TextEdit.insert(codeSelection.end, `\n${indent};; => ${output}\n`),
+//     wsEdit = new vscode.WorkspaceEdit();
+//   wsEdit.set(editor.document.uri, [edit]);
+//   await vscode.workspace.applyEdit(wsEdit);
+//   editor.selection = selection;
+// }
 
 // async function evaluateCodeUpdatingUI(
 //   code: string,
@@ -251,20 +251,20 @@ async function addAsComment(
 //   }
 // }
 
-function printWarningForError(e: any) {
-  console.warn(`Unhandled error: ${e.message}`);
-}
+// function printWarningForError(e: any) {
+//   console.warn(`Unhandled error: ${e.message}`);
+// }
 
-function normalizeNewLines(str: string, asLineComment = false): string {
-  const s = str.replace(/\n\r?$/, '');
-  return asLineComment ? s.replace(/\n\r?/, '\n; ') : s;
-}
+// function normalizeNewLines(str: string, asLineComment = false): string {
+//   const s = str.replace(/\n\r?$/, '');
+//   return asLineComment ? s.replace(/\n\r?/, '\n; ') : s;
+// }
 
-function normalizeNewLinesAndJoin(strings: string[], asLineComment = false): string {
-  return strings
-    .map((s) => normalizeNewLines(s, asLineComment), asLineComment)
-    .join(`\n${asLineComment ? '; ' : ''}`);
-}
+// function normalizeNewLinesAndJoin(strings: string[], asLineComment = false): string {
+//   return strings
+//     .map((s) => normalizeNewLines(s, asLineComment), asLineComment)
+//     .join(`\n${asLineComment ? '; ' : ''}`);
+// }
 
 // function _currentSelectionElseCurrentForm(editor: vscode.TextEditor): getText.SelectionAndText {
 //   if (editor.selection.isEmpty) {

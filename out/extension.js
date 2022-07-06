@@ -10,6 +10,8 @@ const fmt = require("./calva-fmt/src/extension");
 const model = require("./cursor-doc/model");
 const config = require("./config");
 const whenContexts = require("./when-contexts");
+const state = require("./state");
+const status_1 = require("./status");
 const windows = os.platform() == 'win32';
 const janetBinary = windows ? 'janet.exe' : 'janet';
 const terminalName = 'Janet REPL';
@@ -50,6 +52,22 @@ function sendSource(terminal, text) {
 function thenFocusTextEditor() {
     setTimeout(() => vscode.commands.executeCommand('workbench.action.focusActiveEditorGroup'), 250);
 }
+async function onDidSave(testController, document) {
+    const { evaluate, test } = config.getConfig();
+    if (document.languageId !== 'janet') {
+        return;
+    }
+    // 	if (test && util.getConnectedState()) {
+    // 	//   void testRunner.runNamespaceTests(testController, document);
+    // 	  state.analytics().logEvent('Calva', 'OnSaveTest').send();
+    // 	} else if (evaluate) {
+    // 	  if (!outputWindow.isResultsDoc(document)) {
+    // 		await eval.loadFile(document, config.getConfig().prettyPrintingOptions);
+    // 		outputWindow.appendPrompt();
+    // 		state.analytics().logEvent('Calva', 'OnSaveLoad').send();
+    // 	  }
+    // 	}
+}
 function onDidOpen(document) {
     if (document.languageId !== 'janet') {
         return;
@@ -67,6 +85,8 @@ function setKeybindingsEnabledContext() {
 }
 function activate(context) {
     console.log('Extension "vscode-janet" is now active!');
+    const controller = vscode.tests.createTestController('calvaTestController', 'Calva');
+    context.subscriptions.push(controller);
     if (!janetExists()) {
         vscode.window.showErrorMessage('Can\'t find Janet language on your computer! Check your PATH variable.');
         return;
@@ -106,6 +126,20 @@ function activate(context) {
             thenFocusTextEditor();
         });
     }));
+    // //EVENTS
+    context.subscriptions.push(vscode.workspace.onDidOpenTextDocument((document) => {
+        onDidOpen(document);
+    }));
+    context.subscriptions.push(vscode.workspace.onDidSaveTextDocument((document) => {
+        void onDidSave(controller, document);
+    }));
+    context.subscriptions.push(vscode.window.onDidChangeActiveTextEditor((editor) => {
+        status_1.default.update();
+        onDidChangeEditorOrSelection(editor);
+    }));
+    //   context.subscriptions.push(
+    // 		vscode.workspace.onDidChangeTextDocument(annotations.onDidChangeTextDocument)
+    //   );
     model.initScanner(vscode.workspace.getConfiguration('editor').get('maxTokenizationLineLength'));
     // Initial set of the provided contexts
     setKeybindingsEnabledContext();
@@ -128,4 +162,10 @@ function activate(context) {
     }
 }
 exports.activate = activate;
+function deactivate() {
+    state.analytics().logEvent('LifeCycle', 'Deactivated').send();
+    // jackIn.calvaJackout();
+    return paredit.deactivate();
+    // return lsp.deactivate();
+}
 //# sourceMappingURL=extension.js.map
