@@ -1,4 +1,4 @@
-import { validPair } from './clojure-lexer';
+import { validPair } from './cdf-edits/janet-lexer';
 import { getIndent } from './indent';
 import { ModelEdit, EditableDocument, ModelEditSelection } from './model';
 import { LispTokenCursor } from './token-cursor';

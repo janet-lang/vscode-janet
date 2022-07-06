@@ -1,4 +1,4 @@
-import { Scanner, Token, ScannerState } from './clojure-lexer';
+import { Scanner, Token, ScannerState } from './cdf-edits/janet-lexer';
 import { LispTokenCursor } from './token-cursor';
 // import { deepEqual as equal } from '../util/object';
 import { isUndefined } from 'lodash';

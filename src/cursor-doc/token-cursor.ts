@@ -1,5 +1,5 @@
 import { LineInputModel } from './model';
-import { Token, validPair } from './clojure-lexer';
+import { Token, validPair } from './cdf-edits/janet-lexer';
 
 function tokenIsWhiteSpace(token: Token) {
   return token.type === 'eol' || token.type == 'ws';
