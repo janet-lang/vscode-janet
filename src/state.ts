@@ -1,18 +1,18 @@
 import * as vscode from 'vscode';
-// import Analytics from './analytics';
-import * as util from './utilities';
-import * as path from 'path';
-import * as os from 'os';
+import Analytics from './analytics';
+// import * as util from './utilities';
+// import * as path from 'path';
+// import * as os from 'os';
 import { getStateValue, setStateValue } from '../out/cljs-lib/cljs-lib';
 // import * as projectRoot from './project-root';
 
 let extensionContext: vscode.ExtensionContext;
-export function setExtensionContext(context: vscode.ExtensionContext) {
-  extensionContext = context;
-  if (context.workspaceState.get('selectedCljTypeName') == undefined) {
-    void context.workspaceState.update('selectedCljTypeName', 'unknown');
-  }
-}
+// export function setExtensionContext(context: vscode.ExtensionContext) {
+//   extensionContext = context;
+//   if (context.workspaceState.get('selectedCljTypeName') == undefined) {
+//     void context.workspaceState.update('selectedCljTypeName', 'unknown');
+//   }
+// }
 
 // Super-quick fix for: https://github.com/BetterThanTomorrow/calva/issues/144
 // TODO: Revisit the whole state management business.
@@ -33,17 +33,17 @@ export function setExtensionContext(context: vscode.ExtensionContext) {
 //   return _outputChannel('connectionLogChannel');
 // }
 
-// function analytics(): Analytics {
-//   const analytics = getStateValue('analytics');
-//   if (analytics.toJS !== undefined) {
-//     return analytics.toJS();
-//   } else {
-//     return analytics;
-//   }
-// }
+function analytics(): Analytics {
+  const analytics = getStateValue('analytics');
+  if (analytics.toJS !== undefined) {
+    return analytics.toJS();
+  } else {
+    return analytics;
+  }
+}
 
-const PROJECT_DIR_KEY = 'connect.projectDir';
-const PROJECT_DIR_URI_KEY = 'connect.projectDirNew';
+// const PROJECT_DIR_KEY = 'connect.projectDir';
+// const PROJECT_DIR_URI_KEY = 'connect.projectDirNew';
 const PROJECT_CONFIG_MAP = 'config';
 
 // export function getProjectRootLocal(useCache = true): string | undefined {
@@ -68,35 +68,35 @@ export function getProjectConfig(useCache = true) {
 //   }
 // }
 
-const NON_PROJECT_DIR_KEY = 'janet.connect.nonProjectDir';
+// const NON_PROJECT_DIR_KEY = 'janet.connect.nonProjectDir';
 
-export async function getNonProjectRootDir(
-  context: vscode.ExtensionContext
-): Promise<vscode.Uri | undefined> {
-  let root: vscode.Uri | undefined = undefined;
-  if (!process.env['NEW_DRAMS']) {
-    root = await context.globalState.get<Promise<vscode.Uri>>(NON_PROJECT_DIR_KEY);
-  }
-  if (root) {
-    const createNewOption = 'Create new temp directory, download new files';
-    const useExistingOption = 'Use existing temp directory, reuse any existing files';
-    root = await vscode.window
-      .showQuickPick([useExistingOption, createNewOption], {
-        placeHolder: 'Reuse the existing REPL temp dir and its files?',
-      })
-      .then((option) => {
-        return option === useExistingOption ? root : undefined;
-      });
-  }
-  if (typeof root === 'object') {
-    root = vscode.Uri.file(root.path);
-  }
-  return root;
-}
+// export async function getNonProjectRootDir(
+//   context: vscode.ExtensionContext
+// ): Promise<vscode.Uri | undefined> {
+//   let root: vscode.Uri | undefined = undefined;
+//   if (!process.env['NEW_DRAMS']) {
+//     root = await context.globalState.get<Promise<vscode.Uri>>(NON_PROJECT_DIR_KEY);
+//   }
+//   if (root) {
+//     const createNewOption = 'Create new temp directory, download new files';
+//     const useExistingOption = 'Use existing temp directory, reuse any existing files';
+//     root = await vscode.window
+//       .showQuickPick([useExistingOption, createNewOption], {
+//         placeHolder: 'Reuse the existing REPL temp dir and its files?',
+//       })
+//       .then((option) => {
+//         return option === useExistingOption ? root : undefined;
+//       });
+//   }
+//   if (typeof root === 'object') {
+//     root = vscode.Uri.file(root.path);
+//   }
+//   return root;
+// }
 
-export async function setNonProjectRootDir(context: vscode.ExtensionContext, root: vscode.Uri) {
-  await context.globalState.update(NON_PROJECT_DIR_KEY, root);
-}
+// export async function setNonProjectRootDir(context: vscode.ExtensionContext, root: vscode.Uri) {
+//   await context.globalState.update(NON_PROJECT_DIR_KEY, root);
+// }
 
 // export async function setOrCreateNonProjectRoot(
 //   context: vscode.ExtensionContext,
@@ -119,19 +119,19 @@ export async function setNonProjectRootDir(context: vscode.ExtensionContext, roo
 //   return root;
 // }
 
-function getProjectWsFolder(): vscode.WorkspaceFolder | undefined {
-  const doc = util.tryToGetDocument({});
-  if (doc) {
-    const folder = vscode.workspace.getWorkspaceFolder(doc.uri);
-    if (folder) {
-      return folder;
-    }
-  }
-  if (vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders.length > 0) {
-    return vscode.workspace.workspaceFolders[0];
-  }
-  return undefined;
-}
+// function getProjectWsFolder(): vscode.WorkspaceFolder | undefined {
+//   const doc = util.tryToGetDocument({});
+//   if (doc) {
+//     const folder = vscode.workspace.getWorkspaceFolder(doc.uri);
+//     if (folder) {
+//       return folder;
+//     }
+//   }
+//   if (vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders.length > 0) {
+//     return vscode.workspace.workspaceFolders[0];
+//   }
+//   return undefined;
+// }
 
 /**
  * Figures out the current clojure project root, and stores it in Calva state
@@ -158,17 +158,17 @@ function getProjectWsFolder(): vscode.WorkspaceFolder | undefined {
  * Tries to resolve absolute path in relation to project root
  * @param filePath - absolute or relative to the project
  */
-export function resolvePath(filePath?: string) {
-  const root = getProjectWsFolder();
-  if (filePath && path.isAbsolute(filePath)) {
-    return filePath;
-  }
-  return filePath && root && path.resolve(root.uri.fsPath, filePath);
-}
+// export function resolvePath(filePath?: string) {
+//   const root = getProjectWsFolder();
+//   if (filePath && path.isAbsolute(filePath)) {
+//     return filePath;
+//   }
+//   return filePath && root && path.resolve(root.uri.fsPath, filePath);
+// }
 
 export { 
-  // extensionContext, 
+  extensionContext, 
   // outputChannel, 
   // connectionLogChannel, 
-  // analytics 
+  analytics 
 };

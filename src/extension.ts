@@ -7,6 +7,9 @@ import * as fmt from './calva-fmt/src/extension';
 import * as model from './cursor-doc/model';
 import * as config from './config';
 import * as whenContexts from './when-contexts';
+import * as util from './utilities';
+import * as state from './state';
+import status from './status';
 
 const windows: boolean = os.platform() == 'win32';
 
@@ -55,6 +58,25 @@ function thenFocusTextEditor() {
 	setTimeout(() => vscode.commands.executeCommand('workbench.action.focusActiveEditorGroup'), 250);
 }
 
+async function onDidSave(testController: vscode.TestController, document: vscode.TextDocument) {
+	const { evaluate, test } = config.getConfig();
+  
+	if (document.languageId !== 'janet') {
+	  return;
+	}
+  
+	// 	if (test && util.getConnectedState()) {
+	// 	//   void testRunner.runNamespaceTests(testController, document);
+	// 	  state.analytics().logEvent('Calva', 'OnSaveTest').send();
+	// 	} else if (evaluate) {
+	// 	  if (!outputWindow.isResultsDoc(document)) {
+	// 		await eval.loadFile(document, config.getConfig().prettyPrintingOptions);
+	// 		outputWindow.appendPrompt();
+	// 		state.analytics().logEvent('Calva', 'OnSaveLoad').send();
+	// 	  }
+	// 	}
+}  
+
 function onDidOpen(document) {
 	if (document.languageId !== 'janet') {
 	  return;
@@ -80,6 +102,9 @@ function setKeybindingsEnabledContext() {
 export function activate(context: vscode.ExtensionContext) {
 
 	console.log('Extension "vscode-janet" is now active!');
+
+	const controller = vscode.tests.createTestController('calvaTestController', 'Calva');
+	context.subscriptions.push(controller);  
 
 	if (!janetExists()) {
 		vscode.window.showErrorMessage('Can\'t find Janet language on your computer! Check your PATH variable.');
@@ -136,6 +161,28 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	));
 
+	// //EVENTS
+	context.subscriptions.push(
+		vscode.workspace.onDidOpenTextDocument((document) => {
+			onDidOpen(document);
+	})
+	);
+	context.subscriptions.push(
+		vscode.workspace.onDidSaveTextDocument((document) => {
+			void onDidSave(controller, document);
+	})
+	);
+	context.subscriptions.push(
+		vscode.window.onDidChangeActiveTextEditor((editor) => {
+			status.update();
+			onDidChangeEditorOrSelection(editor);
+	})
+	);
+	//   context.subscriptions.push(
+	// 		vscode.workspace.onDidChangeTextDocument(annotations.onDidChangeTextDocument)
+	//   );
+	
+
 	model.initScanner(vscode.workspace.getConfiguration('editor').get('maxTokenizationLineLength'));
 
 	// Initial set of the provided contexts
@@ -160,4 +207,11 @@ export function activate(context: vscode.ExtensionContext) {
 	} catch (e) {
 		console.error('Failed activating Paredit: ' + e.message);
 	}
+} 
+
+function deactivate() {
+	state.analytics().logEvent('LifeCycle', 'Deactivated').send();
+	// jackIn.calvaJackout();
+	return paredit.deactivate();
+	// return lsp.deactivate();
 }
