@@ -60,7 +60,7 @@ toplevel.terminal(
   (l, m) => ({ type: 'ws' })
 );
 // comments -- 2022-07-06: Updated for Janet comment syntax rather than Clojure (`#` instead of `;`)
-toplevel.terminal('comment', /#.*/, (l, m) => ({ type: 'comment' }));
+toplevel.terminal('comment', /#.*$/, (l, m) => ({ type: 'comment' }));
 // Calva repl prompt, it contains special colon symbols and a hard space
 toplevel.terminal(
   'comment',

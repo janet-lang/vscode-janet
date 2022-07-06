@@ -83,7 +83,7 @@ function onDidOpen(document) {
 	}
 }
   
-  function onDidChangeEditorOrSelection(editor: vscode.TextEditor) {
+function onDidChangeEditorOrSelection(editor: vscode.TextEditor) {
 	// replHistory.setReplHistoryCommandsActiveContext(editor);
 	whenContexts.setCursorContextIfChanged(editor);
 }
@@ -161,22 +161,22 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	));
 
-	// //EVENTS
+	//EVENTS
 	context.subscriptions.push(
 		vscode.workspace.onDidOpenTextDocument((document) => {
 			onDidOpen(document);
-	})
+		})
 	);
 	context.subscriptions.push(
 		vscode.workspace.onDidSaveTextDocument((document) => {
 			void onDidSave(controller, document);
-	})
+		})
 	);
 	context.subscriptions.push(
 		vscode.window.onDidChangeActiveTextEditor((editor) => {
 			status.update();
 			onDidChangeEditorOrSelection(editor);
-	})
+		})
 	);
 	//   context.subscriptions.push(
 	// 		vscode.workspace.onDidChangeTextDocument(annotations.onDidChangeTextDocument)

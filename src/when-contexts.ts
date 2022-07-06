@@ -51,6 +51,9 @@ export function setCursorContextIfChanged(editor: vscode.TextEditor) {
     return;
   }
   const currentContexts = determineCursorContexts(editor.document, editor.selection.active);
+  if (editor.selection.active.line == 0 && editor.selection.active.character == 0) {
+    delete currentContexts[currentContexts.indexOf("janet:cursorInComment")];
+  }
   if (!deepEqual(lastContexts, currentContexts)) {
     setCursorContexts(currentContexts);
   }

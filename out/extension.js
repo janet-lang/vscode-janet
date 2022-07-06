@@ -126,7 +126,7 @@ function activate(context) {
             thenFocusTextEditor();
         });
     }));
-    // //EVENTS
+    //EVENTS
     context.subscriptions.push(vscode.workspace.onDidOpenTextDocument((document) => {
         onDidOpen(document);
     }));
