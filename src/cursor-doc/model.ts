@@ -384,7 +384,7 @@ export class LineInputModel implements EditableModel {
    * @param line the line to retrieve the lexer state.
    */
   private getStateForLine(line: number): ScannerState {
-    return line == 0 ? { inString: false } : { ...this.lines[line - 1].endState };
+    return line == 0 ? { inString: false, inLongString: false } : { ...this.lines[line - 1].endState };
   }
 
   /**

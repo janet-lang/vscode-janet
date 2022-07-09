@@ -145,8 +145,9 @@ export async function formatPosition(
   onType: boolean = false,
   extraConfig = {}
 ): Promise<boolean> {
-  const doc: vscode.TextDocument = editor.document,
-    formattedInfo = await formatPositionInfo(editor, onType, extraConfig);
+  // console.log("calva-fmt/src/format.ts/formatPosition called")
+  const doc: vscode.TextDocument = editor.document,  
+  formattedInfo = await formatPositionInfo(editor, onType, extraConfig);
   if (formattedInfo && formattedInfo.previousText != formattedInfo.formattedText) {
     return editor
       .edit(

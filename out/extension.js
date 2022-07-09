@@ -10,6 +10,8 @@ const fmt = require("./calva-fmt/src/extension");
 const model = require("./cursor-doc/model");
 const config = require("./config");
 const whenContexts = require("./when-contexts");
+const edit = require("./edit");
+const annotations_1 = require("./providers/annotations");
 const state = require("./state");
 const status_1 = require("./status");
 const windows = os.platform() == 'win32';
@@ -85,8 +87,7 @@ function setKeybindingsEnabledContext() {
 }
 function activate(context) {
     console.log('Extension "vscode-janet" is now active!');
-    const controller = vscode.tests.createTestController('calvaTestController', 'Calva');
-    context.subscriptions.push(controller);
+    // Janet stuff
     if (!janetExists()) {
         vscode.window.showErrorMessage('Can\'t find Janet language on your computer! Check your PATH variable.');
         return;
@@ -126,20 +127,20 @@ function activate(context) {
             thenFocusTextEditor();
         });
     }));
+    // Calva stuff 
+    context.subscriptions.push(vscode.commands.registerCommand('janet.continueComment', edit.continueCommentCommand));
     //EVENTS
     context.subscriptions.push(vscode.workspace.onDidOpenTextDocument((document) => {
         onDidOpen(document);
     }));
     context.subscriptions.push(vscode.workspace.onDidSaveTextDocument((document) => {
-        void onDidSave(controller, document);
+        // void onDidSave(controller, document);
     }));
     context.subscriptions.push(vscode.window.onDidChangeActiveTextEditor((editor) => {
         status_1.default.update();
         onDidChangeEditorOrSelection(editor);
     }));
-    //   context.subscriptions.push(
-    // 		vscode.workspace.onDidChangeTextDocument(annotations.onDidChangeTextDocument)
-    //   );
+    context.subscriptions.push(vscode.workspace.onDidChangeTextDocument(annotations_1.default.onDidChangeTextDocument));
     model.initScanner(vscode.workspace.getConfiguration('editor').get('maxTokenizationLineLength'));
     // Initial set of the provided contexts
     setKeybindingsEnabledContext();

@@ -1169,6 +1169,7 @@ export const bindingForms = [
   'with-local-vars',
   'doseq',
   'with-redefs',
+  'when-let',
 ];
 
 function isInPairsList(cursor: LispTokenCursor, pairForms: string[]): boolean {

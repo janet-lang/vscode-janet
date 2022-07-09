@@ -89,6 +89,5 @@ export function determineContexts(
       }
     }
   }
-
   return contexts;
 }

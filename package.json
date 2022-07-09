@@ -126,6 +126,11 @@
 				"title": "Janet: Format file"
 			},
 			{
+				"command": "janet.continueComment",
+				"title": "Continue Comment (add a commented line below).",
+				"category": "Janet"
+			},
+			{
 				"category": "Janet Paredit",
 				"command": "janet.paredit.togglemode",
 				"title": "Toggle Paredit Mode",
@@ -813,6 +818,11 @@
 				"command": "janet.paredit.forceDeleteBackward",
 				"key": "alt+backspace",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap == strict && !editorReadOnly && !editorHasMultipleSelections"
+			},
+			{
+				"command": "janet.continueComment",
+			 	"key": "enter",
+				"when": "janet:keybindingsEnabled && editorLangId = janet && editorTextfocus && !janet:cursorInComment"
 			}
 		]
 	},

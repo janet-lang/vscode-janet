@@ -23,6 +23,7 @@ interface ResultOptions {
 }
 
 export function inferParensCommand(editor: vscode.TextEditor) {
+  // console.log("calva-fmt/src/infer.ts/inferParensCommand called");
   const position: vscode.Position = editor.selection.active,
     document = editor.document,
     currentText = document.getText(),

@@ -576,7 +576,7 @@ export {
   // writeTextToFile,
   // downloadFromUrl,
   // fetchFromUrl,
-  // cljsLib,
+  cljsLib,
   // randomSlug,
   // isWindows,
   tryToGetActiveTextEditor,

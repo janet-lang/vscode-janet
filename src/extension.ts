@@ -7,6 +7,8 @@ import * as fmt from './calva-fmt/src/extension';
 import * as model from './cursor-doc/model';
 import * as config from './config';
 import * as whenContexts from './when-contexts';
+import * as edit from './edit';
+import annotations from './providers/annotations';
 import * as util from './utilities';
 import * as state from './state';
 import status from './status';
@@ -103,9 +105,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	console.log('Extension "vscode-janet" is now active!');
 
-	const controller = vscode.tests.createTestController('calvaTestController', 'Calva');
-	context.subscriptions.push(controller);  
-
+	// Janet stuff
 	if (!janetExists()) {
 		vscode.window.showErrorMessage('Can\'t find Janet language on your computer! Check your PATH variable.');
 		return;
@@ -161,6 +161,12 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	));
 
+	// Calva stuff 
+
+	context.subscriptions.push(
+		vscode.commands.registerCommand('janet.continueComment', edit.continueCommentCommand)
+	);
+
 	//EVENTS
 	context.subscriptions.push(
 		vscode.workspace.onDidOpenTextDocument((document) => {
@@ -169,7 +175,7 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 	context.subscriptions.push(
 		vscode.workspace.onDidSaveTextDocument((document) => {
-			void onDidSave(controller, document);
+			// void onDidSave(controller, document);
 		})
 	);
 	context.subscriptions.push(
@@ -178,9 +184,9 @@ export function activate(context: vscode.ExtensionContext) {
 			onDidChangeEditorOrSelection(editor);
 		})
 	);
-	//   context.subscriptions.push(
-	// 		vscode.workspace.onDidChangeTextDocument(annotations.onDidChangeTextDocument)
-	//   );
+	context.subscriptions.push(
+		vscode.workspace.onDidChangeTextDocument(annotations.onDidChangeTextDocument)
+	);
 	
 
 	model.initScanner(vscode.workspace.getConfiguration('editor').get('maxTokenizationLineLength'));

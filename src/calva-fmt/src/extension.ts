@@ -52,12 +52,17 @@ export async function activate(context: vscode.ExtensionContext) {
     )
   );
   context.subscriptions.push(
-    vscode.commands.registerTextEditorCommand('calva-fmt.inferParens', inferer.inferParensCommand)
+    vscode.commands.registerTextEditorCommand(
+      'calva-fmt.inferParens', 
+      inferer.inferParensCommand)
   );
   context.subscriptions.push(
-    vscode.commands.registerTextEditorCommand('calva-fmt.tabIndent', (e) => {
-      inferer.indentCommand(e, ' ', true);
-    })
+    vscode.commands.registerTextEditorCommand(
+      'calva-fmt.tabIndent', 
+      (e) => {
+        inferer.indentCommand(e, ' ', true);
+      }
+    )
   );
   context.subscriptions.push(
     vscode.commands.registerTextEditorCommand('calva-fmt.tabDedent', (e) => {

@@ -2,7 +2,7 @@
 /**
  * Calva-inspired Janet Lexer
  * 
- * 2022-07-06: Borrowed from Calva, original stored a
+ * 2022-07-06: Borrowed from Calva, original stored in directory above
  *
  * NB: The lexer tokenizes any combination of clojure quotes, `~`, and `@` prepending a list, symbol, or a literal
  *     as one token, together with said list, symbol, or literal, even if there is whitespace between the quoting characters.
@@ -40,6 +40,8 @@ export function validPair(open: string, close: string): boolean {
       return openBracket === '{';
     case '"':
       return openBracket === '"';
+    case '```':
+      return openBracket === '`';
   }
   return false;
 }
@@ -73,7 +75,7 @@ toplevel.terminal(
 // (#[^\(\)\[\]\{\}"_@~\s,]+[\s,]*)*
 
 // open parens
-toplevel.terminal('open', /((?<=(^|[()[\]{}\s,]))['`~#@?^]\s*)*['`~#@?^]*[([{"]/, (l, m) => ({
+toplevel.terminal('open', /(```|((?<=(^|[()[\]{}\s,]))['`~#@?^]\s*)*['`~#@?^]*[([{"])/, (l, m) => ({
   type: 'open',
 }));
 
@@ -128,9 +130,10 @@ toplevel.terminal('reader', /#[^()[\]{}'"_@~\s,;\\]+/, (_l, _m) => ({
 }));
 
 // symbols, allows quite a lot, but can't start with `#_`, anything numeric, or a selection of chars
+// 2022-07-07: Removed ` from first capture group to try and support Long Strings
 toplevel.terminal(
   'id',
-  /(['`~#^@]\s*)*(((?<!#)_|[+-](?!\d)|[^-+\d_()[\]{}#,~@'`^"\s:;\\])[^()[\]{},~@`^"\s;\\]*)/,
+  /(['~#^@]\s*)*(((?<!#)_|[+-](?!\d)|[^-+\d_()[\]{}#,~@'`^"\s:;\\])[^()[\]{},~@`^"\s;\\]*)/,
   (l, m) => ({ type: 'id' })
 );
 
@@ -143,7 +146,8 @@ const inString = new LexicalGrammar();
 // end a string
 inString.terminal('close', /"/, (l, m) => ({ type: 'close' }));
 // still within a string
-inString.terminal('str-inside', /(\\.|[^"\s])+/, (l, m) => ({
+// 2022-07-07: Trying to make long strings work too
+inString.terminal('str-inside', /(?<="| |```)(\\.|[^"\s`]|`(?!`))+/, (l, m) => ({
   type: 'str-inside',
 }));
 // whitespace, excluding newlines
@@ -154,12 +158,37 @@ inString.terminal('ws-nl', /(\r?\n)/, (l, m) => ({ type: 'ws' }));
 // Lexer can croak on funny data without this catch-all safe: see https://github.com/BetterThanTomorrow/calva/issues/659
 inString.terminal('junk', /[\u0000-\uffff]/, (l, m) => ({ type: 'junk' }));
 
+/** this is inside-long-string string grammar. It spits out 'close' once it is time to switch back to the 'toplevel grammar,
+ * and 'long-str-inside' for the words in the string. */
+const inLongString = new LexicalGrammar();
+
+inLongString.terminal('comment', /#.*$/, (l, m) => ({ type: 'comment' }));
+
+inLongString.terminal('close', /```/, (l, m) => ({ type : 'close' }));
+
+inLongString.terminal('long-str-inside', /(?<="| |```)(\\.|[^"\s`]|`(?!`))+/, (l, m) => ({ 
+  type: 'long-str-inside',
+ }));
+
+inLongString.terminal('open', /(```|((?<=(^|[()[\]{}\s,]))['`~#@?^]\s*)*['`~#@?^]*[([{"])/, (l, m) => ({
+  type: 'open',
+}));
+
+// whitespace, excluding newlines
+inLongString.terminal('ws', /[\t ]+/, (l, m) => ({ type: 'ws' }));
+// newlines, we want each one as a token of its own
+inLongString.terminal('ws-nl', /(\r?\n)/, (l, m) => ({ type: 'ws' }));
+
+// Lexer can croak on funny data without this catch-all safe: see https://github.com/BetterThanTomorrow/calva/issues/659
+inLongString.terminal('junk', /[\u0000-\uffff]/, (l, m) => ({ type: 'junk' }));
+
 /**
  * The state of the scanner.
  * We only really need to know if we're inside a string or not.
  */
 export interface ScannerState {
   /** Are we scanning inside a string? If so use inString grammar, otherwise use toplevel. */
+  inLongString: boolean;
   inString: boolean;
 }
 
@@ -168,37 +197,55 @@ export interface ScannerState {
  * Takes a line of text and a start state, and returns an array of Token, updating its internal state.
  */
 export class Scanner {
-  state: ScannerState = { inString: false };
+  state: ScannerState = { inLongString: false, 
+                          inString: false };
 
   constructor(private maxLength: number) {}
 
   processLine(line: string, state: ScannerState = this.state) {
     const tks: Token[] = [];
     this.state = state;
-    let lex = (this.state.inString ? inString : toplevel).lex(line, this.maxLength);
+    let lex = (this.state.inString ? inString : (this.state.inLongString ? inLongString : toplevel)).lex(line, this.maxLength);
     let tk: LexerToken;
     do {
       tk = lex.scan();
       if (tk) {
         const oldpos = lex.position;
-        if (tk.raw.match(/[~`'@#]*"$/)) {
+        if (tk.raw.match(/(```|[~`'@#]*")$/)) {
           switch (tk.type) {
             case 'open': // string started, switch to inString.
-              this.state = { ...this.state, inString: true };
-              lex = inString.lex(line, this.maxLength);
+              this.state = (tk.raw.match(/```$/) ? { ...this.state, inLongString: true } : { ...this.state, inString: true });
+              lex = (tk.raw.match(/```$/) ? inLongString : inString).lex(line, this.maxLength);
               lex.position = oldpos;
               break;
             case 'close':
               // string ended, switch back to toplevel
-              this.state = { ...this.state, inString: false };
-              lex = toplevel.lex(line, this.maxLength);
-              lex.position = oldpos;
-              break;
+              if (tk.raw.match(/```$/)) {
+                this.state = { ...this.state, inLongString: false }
+                lex = toplevel.lex(line, this.maxLength);
+                lex.position = oldpos;
+                break;
+              } else if (this.state.inLongString) {
+                this.state = { ...this.state, inString: false };
+                lex = inLongString.lex(line, this.maxLength);
+                lex.position = oldpos;
+                break;  
+              } else if (this.state.inString) {
+                this.state = { ...this.state, inString: false };
+                lex = toplevel.lex(line, this.maxLength);
+                lex.position = oldpos;
+                break;
+              } else {
+                break;
+              }
           }
         }
         tks.push({ ...tk, state: this.state });
       }
     } while (tk);
+    // Uncomment to observe the lexer's output
+    // console.log("cursor-doc/cdf-edits/janet-lexer.ts/Scanner/processLine ", tks);
+    //
     // insert a sentinel EOL value, this allows us to simplify TokenCaret's implementation.
     tks.push({
       type: 'eol',
