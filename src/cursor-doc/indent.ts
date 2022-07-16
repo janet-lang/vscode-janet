@@ -1,5 +1,6 @@
 import { EditableModel } from './model';
 import * as _ from 'lodash';
+import { InlineCompletionTriggerKind } from 'vscode';
 
 const whitespace = new Set(['ws', 'comment', 'eol']);
 
@@ -62,8 +63,10 @@ export function collectIndents(
   const indents: IndentInformation[] = [];
   const rules = config['cljfmt-options']['indents'];
   do {
+    // console.log("If not cursor.backwardSexp, go into If block ", !cursor.backwardSexp())
     if (!cursor.backwardSexp()) {
       // this needs some work..
+      // console.log("Set prevToken to ", cursor.getPrevToken())
       const prevToken = cursor.getPrevToken();
       if (prevToken.type == 'open' && prevToken.offset <= 1) {
         maxDepth = 0; // treat an sexpr starting on line 0 sensibly.
@@ -82,6 +85,8 @@ export function collectIndents(
         isList
           ? nextCursor.rowCol[1]
           : cursor.rowCol[1];
+
+      // console.log("firstItemIdent ", firstItemIdent);
 
       const token = cursor.getToken().raw;
       const startIndent = cursor.rowCol[1];
@@ -135,6 +140,7 @@ export function collectIndents(
       firstItemIdent: lastIndent >= 0 ? lastIndent : 0,
     });
   }
+  // console.log("src/cursor-doc/indent.ts/collectIndents ", indents);
   return indents;
 }
 

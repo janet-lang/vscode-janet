@@ -777,6 +777,7 @@ export async function close(
   close: string,
   start: number = doc.selection.active
 ) {
+  console.log("cursor-doc/paredit.ts/close triggered")
   const cursor = doc.getTokenCursor(start);
   const inString = cursor.withinString();
   cursor.forwardWhitespace(false);

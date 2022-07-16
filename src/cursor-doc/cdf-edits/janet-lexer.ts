@@ -245,7 +245,7 @@ export class Scanner {
     } while (tk);
     // Uncomment to observe the lexer's output
     // console.log("cursor-doc/cdf-edits/janet-lexer.ts/Scanner/processLine ", tks);
-    //
+    
     // insert a sentinel EOL value, this allows us to simplify TokenCaret's implementation.
     tks.push({
       type: 'eol',
