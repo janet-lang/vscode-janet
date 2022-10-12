@@ -111,27 +111,27 @@
 				"title": "Calva-fmt",
 				"type": "object",
 				"properties": {
-				  "calva.fmt.configPath": {
-					"type": "string",
-					"markdownDescription": "Path to [cljfmt](https://github.com/weavejester/cljfmt#configuration) configuration file. Absolute or relative to the project root directory. To provide the config via [clojure-lsp](https://clojure-lsp.io), set this to `CLOJURE-LSP` (case sensitive)."
-				  },
-				  "calva.fmt.formatAsYouType": {
-					"type": "boolean",
-					"default": true,
-					"description": "Auto-adjust indentation and format as you enter new lines."
-				  },
-				  "calva.fmt.newIndentEngine": {
-					"type": "boolean",
-					"default": true,
-					"markdownDescription": "Use the structural editor for indentation (instead of `cljfmt`)."
-				  },
-				  "calva.fmt.keepCommentTrailParenOnOwnLine": {
-					"type": "boolean",
-					"default": true,
-					"markdownDescription": "Treat `(comment...)` forms special and keep its closing paren on a line of its own."
-				  }
+					"calva.fmt.configPath": {
+						"type": "string",
+						"markdownDescription": "Path to [cljfmt](https://github.com/weavejester/cljfmt#configuration) configuration file. Absolute or relative to the project root directory. To provide the config via [clojure-lsp](https://clojure-lsp.io), set this to `CLOJURE-LSP` (case sensitive)."
+					},
+					"calva.fmt.formatAsYouType": {
+						"type": "boolean",
+						"default": true,
+						"description": "Auto-adjust indentation and format as you enter new lines."
+					},
+					"calva.fmt.newIndentEngine": {
+						"type": "boolean",
+						"default": true,
+						"markdownDescription": "Use the structural editor for indentation (instead of `cljfmt`)."
+					},
+					"calva.fmt.keepCommentTrailParenOnOwnLine": {
+						"type": "boolean",
+						"default": true,
+						"markdownDescription": "Treat `(comment...)` forms special and keep its closing paren on a line of its own."
+					}
 				}
-			  }
+			}
 		],
 		"commands": [
 			{
@@ -515,37 +515,37 @@
 				"title": "Format Current Form",
 				"category": "Janet Format",
 				"enablement": "editorLangId == janet"
-			  },
-			  {
+			},
+			{
 				"command": "calva-fmt.alignCurrentForm",
 				"title": "Format and Align Current Form (recursively, experimental)",
 				"category": "Janet Format",
 				"enablement": "editorLangId == janet"
-			  },
-			  {
+			},
+			{
 				"command": "calva-fmt.trimCurrentFormWhiteSpace",
 				"title": "Format Current Form and trim space between forms",
 				"category": "Janet Format",
 				"enablement": "editorLangId == janet"
-			  },
-			  {
+			},
+			{
 				"command": "calva-fmt.inferParens",
 				"title": "Infer Parens (from the indentation)",
 				"category": "Janet Format",
 				"enablement": "editorLangId == janet"
-			  },
-			  {
+			},
+			{
 				"command": "calva-fmt.tabIndent",
 				"title": "Indent Line",
 				"category": "Janet Format",
 				"enablement": "editorLangId == janet"
-			  },
-			  {
+			},
+			{
 				"command": "calva-fmt.tabDedent",
 				"title": "Dedent Line",
 				"category": "Janet Format",
 				"enablement": "editorLangId == janet"
-			  }
+			}
 		],
 		"keybindings": [
 			{
@@ -882,34 +882,34 @@
 			},
 			{
 				"command": "janet.continueComment",
-			 	"key": "enter",
+				"key": "enter",
 				"when": "janet:keybindingsEnabled && editorLangId = janet && editorTextfocus && !janet:cursorInComment"
 			},
 			{
 				"command": "calva-fmt.formatCurrentForm",
 				"key": "tab",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && !editorReadOnly && !inSnippetMode && !suggestWidgetVisible && !hasOtherSuggestions && !inSnippetMode && !inlineSuggestionVisible"
-			  },
-			  {
+			},
+			{
 				"command": "calva-fmt.alignCurrentForm",
 				"key": "ctrl+alt+l",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && !editorReadOnly && !suggestWidgetVisible && !hasOtherSuggestions"
-			  },
-			  {
+			},
+			{
 				"command": "calva-fmt.inferParens",
 				"key": "ctrl+alt+p i",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && !editorReadOnly && !suggestWidgetVisible && !hasOtherSuggestions"
-			  },
-			  {
+			},
+			{
 				"command": "calva-fmt.tabIndent",
 				"key": "ctrl+i",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && !editorReadOnly && !suggestWidgetVisible && !hasOtherSuggestions"
-			  },
-			  {
+			},
+			{
 				"command": "calva-fmt.tabDedent",
 				"key": "shift+tab",
 				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && !editorReadOnly && !suggestWidgetVisible && !hasOtherSuggestions"
-			  }
+			}
 		]
 	},
 	"scripts": {
@@ -919,14 +919,14 @@
 		"watch": "tsc -watch -p ./"
 	},
 	"dependencies": {
+		"@types/universal-analytics": "^0.4.2",
 		"immutable": "3.8.1",
 		"immutable-cursor": "2.0.1",
 		"lodash": "^4.17.19",
 		"lodash.isequal": "4.5.0",
 		"parinfer": "^3.12.0",
-		"uuidv4": "6.2.12",
-		"@types/universal-analytics": "^0.4.2",
-		"universal-analytics": "^0.5.3"
+		"universal-analytics": "^0.5.3",
+		"uuidv4": "6.2.12"
 	},
 	"devDependencies": {
 		"@types/node": "^12.12.0",
@@ -935,6 +935,6 @@
 		"@typescript-eslint/parser": "^4.16.0",
 		"eslint": "^7.21.0",
 		"source-map-support": "^0.5.21",
-		"typescript": "^4.2.2"
+		"typescript": "^4.7.4"
 	}
 }

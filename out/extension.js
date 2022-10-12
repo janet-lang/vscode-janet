@@ -161,6 +161,12 @@ function activate(context) {
     catch (e) {
         console.error('Failed activating Paredit: ' + e.message);
     }
+    try {
+        void fmt.activate(context);
+    }
+    catch (e) {
+        console.error('Failed activating Formatter: ' + e.message);
+    }
 }
 exports.activate = activate;
 function deactivate() {
