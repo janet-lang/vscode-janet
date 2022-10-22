@@ -25,7 +25,8 @@ function janetExists(): boolean {
 
 function newREPL(): Thenable<vscode.Terminal> {
 	const terminal = vscode.window.createTerminal(terminalName);
-	terminal.sendText(janetBinary + ' -s', true);
+	// Original: terminal.sendText(janetBinary + ' -s', true); changed on 2022-10-22
+	terminal.sendText(janetBinary, true);
 	return vscode.window.withProgress({
 		location: vscode.ProgressLocation.Notification,
 		title: "Running Janet REPL...",
