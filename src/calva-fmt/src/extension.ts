@@ -35,37 +35,37 @@ export async function activate(context: vscode.ExtensionContext) {
   );
   context.subscriptions.push(
     vscode.commands.registerTextEditorCommand(
-      'calva-fmt.formatCurrentForm',
+      'janet.calva-fmt.formatCurrentForm',
       formatter.formatPositionCommand
     )
   );
   context.subscriptions.push(
     vscode.commands.registerTextEditorCommand(
-      'calva-fmt.alignCurrentForm',
+      'janet.calva-fmt.alignCurrentForm',
       formatter.alignPositionCommand
     )
   );
   context.subscriptions.push(
     vscode.commands.registerTextEditorCommand(
-      'calva-fmt.trimCurrentFormWhiteSpace',
+      'janet.calva-fmt.trimCurrentFormWhiteSpace',
       formatter.trimWhiteSpacePositionCommand
     )
   );
   context.subscriptions.push(
     vscode.commands.registerTextEditorCommand(
-      'calva-fmt.inferParens', 
+      'janet.calva-fmt.inferParens', 
       inferer.inferParensCommand)
   );
   context.subscriptions.push(
     vscode.commands.registerTextEditorCommand(
-      'calva-fmt.tabIndent', 
+      'janet.calva-fmt.tabIndent', 
       (e) => {
         inferer.indentCommand(e, ' ', true);
       }
     )
   );
   context.subscriptions.push(
-    vscode.commands.registerTextEditorCommand('calva-fmt.tabDedent', (e) => {
+    vscode.commands.registerTextEditorCommand('janet.calva-fmt.tabDedent', (e) => {
       inferer.indentCommand(e, ' ', false);
     })
   );
@@ -88,7 +88,7 @@ export async function activate(context: vscode.ExtensionContext) {
   );
   vscode.window.onDidChangeActiveTextEditor(inferer.updateState);
   vscode.workspace.onDidChangeConfiguration(async (e) => {
-    if (e.affectsConfiguration('calva.fmt.formatAsYouType')) {
+    if (e.affectsConfiguration('janet.calva.fmt.formatAsYouType')) {
       vscode.languages.setLanguageConfiguration(
         'janet',
         getLanguageConfiguration(await config.getConfig()['format-as-you-type'])

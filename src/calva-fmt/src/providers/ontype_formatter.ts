@@ -34,8 +34,8 @@ export class FormatOnTypeEditProvider implements vscode.OnTypeFormattingEditProv
     const editor = util.getActiveTextEditor();
 
     const pos = editor.selection.active;
-    if (vscode.workspace.getConfiguration('calva.fmt').get('formatAsYouType')) {
-      if (vscode.workspace.getConfiguration('calva.fmt').get('newIndentEngine')) {
+    if (vscode.workspace.getConfiguration('janet.calva.fmt').get('formatAsYouType')) {
+      if (vscode.workspace.getConfiguration('janet.calva.fmt').get('newIndentEngine')) {
         void formatter.indentPosition(pos, document);
       } else {
         try {

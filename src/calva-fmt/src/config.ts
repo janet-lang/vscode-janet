@@ -30,7 +30,7 @@ async function readConfiguration(): Promise<{
   'cljfmt-options-string': string;
   'cljfmt-options': object;
 }> {
-  const workspaceConfig = vscode.workspace.getConfiguration('calva.fmt');
+  const workspaceConfig = vscode.workspace.getConfiguration('janet.calva.fmt');
   const configPath: string | undefined = workspaceConfig.get('configPath');
 
   // if (configPath === LSP_CONFIG_KEY) {

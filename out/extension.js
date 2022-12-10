@@ -23,7 +23,8 @@ function janetExists() {
 }
 function newREPL() {
     const terminal = vscode.window.createTerminal(terminalName);
-    terminal.sendText(janetBinary + ' -s', true);
+    // Original: terminal.sendText(janetBinary + ' -s', true); changed on 2022-10-22
+    terminal.sendText(janetBinary, true);
     return vscode.window.withProgress({
         location: vscode.ProgressLocation.Notification,
         title: "Running Janet REPL...",
@@ -160,12 +161,6 @@ function activate(context) {
     }
     catch (e) {
         console.error('Failed activating Paredit: ' + e.message);
-    }
-    try {
-        void fmt.activate(context);
-    }
-    catch (e) {
-        console.error('Failed activating Formatter: ' + e.message);
     }
 }
 exports.activate = activate;
