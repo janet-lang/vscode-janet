@@ -883,7 +883,7 @@
 			{
 				"command": "janet.continueComment",
 				"key": "enter",
-				"when": "janet:keybindingsEnabled && editorLangId = janet && editorTextfocus && !janet:cursorInComment"
+				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && janet:cursorInComment"
 			},
 			{
 				"command": "janet.calva-fmt.formatCurrentForm",
