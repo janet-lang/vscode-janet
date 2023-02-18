@@ -11,7 +11,6 @@
 This extension is not published yet. To install proceed to local install section.
 
 ## Local install
-
 ```
 # First, make sure you have Node.js installed. 
 
