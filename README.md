@@ -22,13 +22,13 @@ npm install -g vsce
 cd ~/.vscode/extensions
 git clone https://github.com/janet-lang/vscode-janet.git
 
-# Install vscode-janet dependencies
+# Install vscode-janet dependencies.
 npm install
 
-# Generates the vscode-janet-0.0.2..vsix file
+# Generate the vscode-janet-0.0.2..vsix file.
 vsce package
 
-# Install the extension
+# Install the extension.
 code --install-extension vscode-janet-0.0.2.vsix
 ```
 
