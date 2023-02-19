@@ -14,8 +14,7 @@ This extension is not published yet. To install proceed to local install section
 ```
 # First, make sure you have Node.js version 14 or greater installed. 
 
-# Clone the extension into vscode's extension directory.
-cd ~/.vscode/extensions
+# Clone the extension.
 git clone https://github.com/janet-lang/vscode-janet.git
 cd vscode-janet
 
@@ -25,9 +24,24 @@ npm install
 # Generate the vcode extension (VSIX) file using vsce. 
 npx vsce package
 
-# Finally install the extension.
+# Install the extension.
 code --install-extension vscode-janet-0.0.2.vsix
+
+# Finally reload the vscode window (cmd + shift + P > Developer: Reload Window).
 ```
+
+Alternatively you can clone the extension right into vscode's extention directory. This is easier, but can be unreliable as vscode will sometimes clean up the extension directory and remove vscode-janet.
+```
+# Clone the extension
+cd ~/.vscode/extensions
+git clone https://github.com/janet-lang/vscode-janet.git
+
+# Force vscode to regenerate the extensions file
+mv extensions.json /tmp/ 
+
+# Finally reload the vscode window (cmd + shift + P > Developer: Reload Window)  
+```
+
 
 ## Debug this extension
 
