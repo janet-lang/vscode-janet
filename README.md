@@ -40,6 +40,9 @@ git clone https://github.com/janet-lang/vscode-janet.git
 mv extensions.json /tmp/ 
 
 # Finally reload the vscode window (cmd + shift + P > Developer: Reload Window).
+
+# If you're finding that vscode isn't loading the extension, you can force it to
+# regenerate the extensions.json file by removing ~/.vscode/extensions/extensions.json.
 ```
 
 
