@@ -21,7 +21,7 @@ cd vscode-janet
 # Install vscode-janet dependencies.
 npm install
 
-# Generate the vcode extension (VSIX) file using vsce. 
+# Generate the vscode extension (VSIX) file using vsce. 
 npx vsce package
 
 # Install the extension.
@@ -32,14 +32,14 @@ code --install-extension vscode-janet-0.0.2.vsix
 
 Alternatively you can clone the extension right into vscode's extention directory. This is easier, but can be unreliable as vscode will sometimes clean up the extension directory and remove vscode-janet.
 ```
-# Clone the extension
+# Clone the extension.
 cd ~/.vscode/extensions
 git clone https://github.com/janet-lang/vscode-janet.git
 
-# Force vscode to regenerate the extensions file
+# Force vscode to regenerate the extensions.json file.
 mv extensions.json /tmp/ 
 
-# Finally reload the vscode window (cmd + shift + P > Developer: Reload Window)  
+# Finally reload the vscode window (cmd + shift + P > Developer: Reload Window).
 ```
 
 
