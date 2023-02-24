@@ -3,7 +3,7 @@
 	"displayName": "Janet",
 	"description": "Janet language support for Visual Studio Code",
 	"icon": "images/icon.png",
-	"version": "0.0.2",
+	"version": "0.0.2-a",
 	"publisher": "janet-lang",
 	"repository": "https://github.com/janet-lang/vscode-janet",
 	"engines": {

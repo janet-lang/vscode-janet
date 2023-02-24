@@ -225,7 +225,7 @@
       <key>match</key>
       <string>(?&lt;![\.:\w_\-=!@\$%^&amp;?/&lt;&gt;*]):[\.:\w_\-=!@\$%^&amp;?/&lt;&gt;*]*</string>
       <key>name</key>
-      <string>constant.keyword.janet</string>
+      <string>variable.other.constant</string>
     </dict>
     <key>symbol</key>
     <dict>

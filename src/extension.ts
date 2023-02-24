@@ -186,6 +186,12 @@ export function activate(context: vscode.ExtensionContext) {
 		})
 	);
 	context.subscriptions.push(
+		vscode.window.onDidChangeTextEditorSelection((editor) => {
+			status.update();
+			onDidChangeEditorOrSelection(editor.textEditor);
+		})
+	);
+	context.subscriptions.push(
 		vscode.workspace.onDidChangeTextDocument(annotations.onDidChangeTextDocument)
 	);
 	
