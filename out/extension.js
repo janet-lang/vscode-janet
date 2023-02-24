@@ -141,6 +141,10 @@ function activate(context) {
         status_1.default.update();
         onDidChangeEditorOrSelection(editor);
     }));
+    context.subscriptions.push(vscode.window.onDidChangeTextEditorSelection((editor) => {
+        status_1.default.update();
+        onDidChangeEditorOrSelection(editor.textEditor);
+    }));
     context.subscriptions.push(vscode.workspace.onDidChangeTextDocument(annotations_1.default.onDidChangeTextDocument));
     model.initScanner(vscode.workspace.getConfiguration('editor').get('maxTokenizationLineLength'));
     // Initial set of the provided contexts
