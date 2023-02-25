@@ -1,24 +1,18 @@
 {
-	"name": "vscode-janet",
-	"displayName": "Janet",
-	"description": "Janet language support for Visual Studio Code",
+	"name": "vscode-janet-plus-plus",
+	"displayName": "Janet++",
+	"description": "Expanded Janet language support for Visual Studio Code",
 	"icon": "images/icon.png",
 	"version": "0.0.2-a",
-	"publisher": "janet-lang",
-	"repository": "https://github.com/janet-lang/vscode-janet",
+	"publisher": "CFiggers",
+	"repository": "https://github.com/CFiggers/vscode-janet",
 	"engines": {
 		"vscode": "^1.34.0"
 	},
 	"categories": [
 		"Programming Languages"
 	],
-	"activationEvents": [
-		"onLanguage:janet",
-		"onCommand:janet.startREPL",
-		"onCommand:janet.eval",
-		"onCommand:janet.evalFile",
-		"onCommand:janet.formatFile"
-	],
+	"activationEvents": [],
 	"main": "./out/extension.js",
 	"contributes": {
 		"languages": [
@@ -920,6 +914,7 @@
 	},
 	"dependencies": {
 		"@types/universal-analytics": "^0.4.2",
+		"acorn": "^8.8.2",
 		"immutable": "3.8.1",
 		"immutable-cursor": "2.0.1",
 		"lodash": "^4.17.19",
@@ -934,7 +929,6 @@
 		"@typescript-eslint/eslint-plugin": "^4.16.0",
 		"@typescript-eslint/parser": "^4.16.0",
 		"eslint": "^7.21.0",
-		"source-map-support": "^0.5.21",
-		"typescript": "^4.7.4"
+		"source-map-support": "^0.5.21"
 	}
 }

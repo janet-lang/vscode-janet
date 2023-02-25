@@ -9,7 +9,7 @@
 })(this, function () {
 
 var SHADOW_IMPORT_PATH = __dirname + '/../../.shadow-cljs/builds/calva-lib/dev/out/cljs-runtime';
-if (__dirname == '.') { SHADOW_IMPORT_PATH = "/home/caleb/.vscode-server/extensions/vscode-janet/.shadow-cljs/builds/calva-lib/dev/out/cljs-runtime"; }
+if (__dirname == '.') { SHADOW_IMPORT_PATH = "/home/caleb/projects/vscode/vscode-janet-plus-plus/.shadow-cljs/builds/calva-lib/dev/out/cljs-runtime"; }
 global.$CLJS = global;
 global.shadow$provide = {};
 try {require('source-map-support').install();} catch (e) {console.warn('no "source-map-support" (run "npm install source-map-support --save-dev" to get it)');}
