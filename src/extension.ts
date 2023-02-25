@@ -154,7 +154,7 @@ export function activate(context: vscode.ExtensionContext) {
 		() => {
 			
 			getREPL(true).then(terminal => {
-				sendSource(terminal, "(import spork/fmt)(fmt/format-file \""+
+				sendSource(terminal, "(import spork/fmt) (fmt/format-file \""+
 					vscode.window.activeTextEditor.document.uri.fsPath.replace(/\\/g, "/")
 				+"\")");
 				thenFocusTextEditor();

@@ -122,7 +122,7 @@ function activate(context) {
     }));
     context.subscriptions.push(vscode.commands.registerCommand('janet.formatFile', () => {
         getREPL(true).then(terminal => {
-            sendSource(terminal, "(import spork/fmt)(fmt/format-file \"" +
+            sendSource(terminal, "(import spork/fmt) (fmt/format-file \"" +
                 vscode.window.activeTextEditor.document.uri.fsPath.replace(/\\/g, "/")
                 + "\")");
             thenFocusTextEditor();
