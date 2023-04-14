@@ -1,6 +1,6 @@
 (ns calva.fmt.formatter
   (:require [pez-cljfmt.core :as pez-cljfmt]
-            [cljfmt.core :as cljfmt]
+            #_[cljfmt.core :as cljfmt]
             #_[zprint.core :refer [zprint-str]]
             [calva.js-utils :refer [jsify cljify]]
             [calva.fmt.util :as util]
@@ -13,7 +13,7 @@
   [indents]
   (if (:replace (meta indents))
     indents
-    (merge cljfmt/default-indents indents)))
+    (merge pez-cljfmt/default-indents indents)))
 
 (def ^:private default-fmt
   {:remove-surrounding-whitespace? true
@@ -47,7 +47,7 @@
       (pez-cljfmt/reformat-string range-text (-> cljfmt-options
                                                  (assoc :align-associative? true)
                                                  (dissoc :remove-multiple-non-indenting-spaces?)))
-      (cljfmt/reformat-string range-text (-> cljfmt-options
+      (pez-cljfmt/reformat-string range-text (-> cljfmt-options
                                              (assoc :remove-multiple-non-indenting-spaces?
                                                     trim-space-between?))))))
 

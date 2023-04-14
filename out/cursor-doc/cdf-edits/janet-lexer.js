@@ -61,7 +61,7 @@ exports.toplevel.terminal('comment',
 // current idea for prefixing data reader
 // (#[^\(\)\[\]\{\}"_@~\s,]+[\s,]*)*
 // open parens
-exports.toplevel.terminal('open', /(```|((?<=(^|[()[\]{}\s,]))['`~#@?^]\s*)*['`~#@?^]*[([{"])/, (l, m) => ({
+exports.toplevel.terminal('open', /(```|((?<=(^|[()[\]{}\s,]))['`~#@?^|]\s*)*['`~#@?^|]*[([{"])/, (l, m) => ({
     type: 'open',
 }));
 // close parens

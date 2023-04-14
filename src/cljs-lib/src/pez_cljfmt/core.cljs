@@ -56,9 +56,13 @@
 (defn- reader-macro? [zloc]
   (and zloc (= (n/tag (z/node zloc)) :reader-macro)))
 
+(defn- anon-fn? [zloc]
+  (and zloc (= (n/tag (z/node zloc)) :fn)))
+
 (defn- missing-whitespace? [zloc]
   (and (element? zloc)
        (not (reader-macro? (zip/up zloc)))
+       (not (anon-fn? (zip/up zloc)))
        (element? (zip/right zloc))))
 
 (defn insert-missing-whitespace [form]
@@ -129,11 +133,11 @@
 
 (def ^:private start-element
   {:meta "^", :meta* "#^", :vector "[",       :map "{"
-   :list "(", :eval "#=",  :uneval "#_",      :fn "#("
+   :list "(", :eval "#=",  :uneval "#_",      :fn "|(" ;; Updated for Janet 2023-04-14
    :set "#{", :deref "@",  :reader-macro "#", :unquote "~"
    :var "#'", :quote "'",  :syntax-quote "`", :unquote-splicing "~@"
    ;; Janet-specific options
-   :j-table "@{" :j-array "@[" :j-buffer "@\""
+   :j-table "@{" :j-array "@[" :j-buffer "@\"" :j-anonfn "|("
    })
 
 (defn- prior-line-string [zloc]

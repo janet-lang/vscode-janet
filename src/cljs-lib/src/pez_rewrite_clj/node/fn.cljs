@@ -31,7 +31,7 @@
   [sym-seq vararg? max-n sym]
   (if (symbol? sym)
     (let [nm (name sym)]
-      (if (= (.indexOf nm "%") 0)
+      (if (= (.indexOf nm "$") 0) ; Updated for Janet 2023-04-15
         (let [i (sym-index (subs nm 1))]
 ;;           (if (and (= i 0) (not (realized? vararg?)))
 ;;             (deliver vararg? true))
@@ -47,7 +47,7 @@
                                 "rest__"
                                 (str "p" i "__"))
                          s (name (gensym base))]]
-               (symbol (str s "#")))
+               (symbol (str s "|")))
         vararg? false ;(promise)
         max-n (atom 0)
         body (w/prewalk
@@ -72,7 +72,7 @@
   (length [_]
     (+ 3 (node/sum-lengths children)))
   (string [_]
-    (str "#(" (node/concat-strings children) ")"))
+    (str "|(" (node/concat-strings children) ")")) ;; Updated for Janet 2023-04-14
 
   node/InnerNode
   (inner? [_]

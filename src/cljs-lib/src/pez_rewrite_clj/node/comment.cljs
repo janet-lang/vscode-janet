@@ -12,7 +12,7 @@
   (length [_]
     (+ 1 (count s)))
   (string [_]
-    (str ";" s))
+    (str "#" s)) ;; Updated for Janet 2023-04-14
 
   Object
   (toString [this]

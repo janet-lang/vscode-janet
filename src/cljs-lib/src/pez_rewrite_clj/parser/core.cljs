@@ -64,46 +64,47 @@
 ;; ### Reader Specialities
 
 
-(defn- parse-conditional [reader]
-  ;; we need to examine the next character, so consume one (known \?)
-  (reader/next reader)
-  ;; we will always have a reader-macro-node as the result
-  (node/reader-macro-node
-    (let [read1 (fn [] (parse-printables reader :reader-macro 1))]
-      (cons (case (reader/peek reader)
-              ;; the easy case, just emit a token
-              \( (node/token-node (symbol "?"))
+;; (defn- parse-conditional [reader]
+;;   ;; we need to examine the next character, so consume one (known \?)
+;;   (reader/next reader)
+;;   ;; we will always have a reader-macro-node as the result
+;;   (node/reader-macro-node
+;;     (let [read1 (fn [] (parse-printables reader :reader-macro 1))]
+;;       (cons (case (reader/peek reader)
+;;               ;; the easy case, just emit a token
+;;               \( (node/token-node (symbol "?"))
 
-              ;; the harder case, match \@, consume it and emit the token
-              \@ (do (reader/next reader)
-                   (node/token-node (symbol "?@")))
+;;               ;; the harder case, match \@, consume it and emit the token
+;;               \@ (do (reader/next reader)
+;;                    (node/token-node (symbol "?@")))
 
-              ;; otherwise no idea what we're reading but its \? prefixed
-              (do (reader/unread reader \?)
-                (first (read1))))
-            (read1)))))
+;;               ;; otherwise no idea what we're reading but its \? prefixed
+;;               (do (reader/unread reader \?)
+;;                 (first (read1))))
+;;             (read1)))))
 
 
 
-(defn- parse-sharp
+;; (defn- parse-sharp
+;;   [^not-native reader]
+;;   (reader/ignore reader)
+;;   (if (reader/whitespace? (peek-char reader))
+;;     (node/comment-node (reader/read-include-linebreak reader))
+;;     (case (peek-char reader)
+;;       nil (reader/throw-reader reader "Unexpected EOF.")
+;;       \{ (node/set-node (parse-delim reader \}))
+;;       ;; \( (node/fn-node (parse-delim reader \)))
+;;       \" (parse-regex reader)
+;;       \^ (node/meta-node (parse-printables reader :meta 2 true))
+;;       \' (node/var-node (parse-printables reader :var 1 true))
+;;       \= (node/eval-node (parse-printables reader :eval 1 true))
+;;       \_ (node/uneval-node (parse-printables reader :uneval 1 true))
+;;       \? (parse-conditional reader)
+;;       (node/reader-macro-node (parse-printables reader :reader-macro 2)))))
+
+(defn- parse-pipe
   [^not-native reader]
-  (reader/ignore reader)
-  (if (reader/whitespace? (peek-char reader))
-    (node/comment-node (reader/read-include-linebreak reader))
-    (case (peek-char reader)
-      nil (reader/throw-reader reader "Unexpected EOF.")
-      \{ (node/set-node (parse-delim reader \}))
-      \( (node/fn-node (parse-delim reader \)))
-      \" (parse-regex reader)
-      \^ (node/meta-node (parse-printables reader :meta 2 true))
-      \' (node/var-node (parse-printables reader :var 1 true))
-      \= (node/eval-node (parse-printables reader :eval 1 true))
-      \_ (node/uneval-node (parse-printables reader :uneval 1 true))
-      \? (parse-conditional reader)
-      (node/reader-macro-node (parse-printables reader :reader-macro 2)))))
-
-
-
+  (node/fn-node (parse-delim reader \))))
 
 (defn- parse-unmatched
   [^not-native reader]
@@ -150,7 +151,7 @@
         (identical? c *delimiter*)      reader/ignore
         (reader/whitespace? c)          parse-whitespace
         (identical? c \^)               parse-meta
-        (identical? c \#)               parse-sharp
+        (identical? c \#)               parse-comment ;; parse-sharp Updated for Janet 2023-04-14
         (identical? c \()               parse-list
         (identical? c \[)               parse-vector
         (identical? c \{)               parse-map
@@ -164,6 +165,7 @@
         (identical? c \@)               parse-deref
         (identical? c \")               parse-string
         (identical? c \:)               parse-keyword
+        (identical? c \|)               parse-pipe
         :else                           parse-token))
 
 

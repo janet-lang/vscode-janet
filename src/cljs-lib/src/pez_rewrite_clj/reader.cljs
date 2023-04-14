@@ -1,6 +1,6 @@
 (ns pez-rewrite-clj.reader
   (:refer-clojure :exclude [peek next])
-  (:require [cljs.tools.reader :as r]
+  (:require [cdf-rewrite-cljs-reader.reader :as r]
             [cljs.tools.reader.reader-types :as reader-types]
             [cljs.tools.reader.impl.commons :refer [parse-symbol]]
             [goog.string :as gstring]
@@ -36,7 +36,7 @@
   "Checks whether a given character is whitespace"
   [ch]
   ;(or (gstring/isBreakingWhitespace ch) (identical? \, ch))
-  (< -1 (.indexOf #js [\return \newline \tab \space ","] ch)))
+  (< -1 (.indexOf #js [\return \newline \tab \space] ch))) ; Updated for Janet 2023-04-15
 
 (defn ^boolean linebreak?
   "Checks whether the character is a newline"
@@ -46,7 +46,7 @@
 (defn ^boolean space?
   "Checks whether the character is a space"
   [c]
-  (< -1 (.indexOf #js [\tab \space ","] c)))
+  (< -1 (.indexOf #js [\tab \space] c)))
 
 (defn ^boolean whitespace-or-boundary?
   [c]
