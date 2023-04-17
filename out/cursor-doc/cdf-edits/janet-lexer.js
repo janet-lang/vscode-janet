@@ -41,6 +41,8 @@ function validPair(open, close) {
             return openBracket === '"';
         case '```':
             return openBracket === '`';
+        case '``':
+            return openBracket === '`';
     }
     return false;
 }

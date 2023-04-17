@@ -42,6 +42,8 @@ export function validPair(open: string, close: string): boolean {
       return openBracket === '"';
     case '```':
       return openBracket === '`';
+    case '``':
+      return openBracket === '`';
   }
   return false;
 }

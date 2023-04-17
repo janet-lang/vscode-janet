@@ -251,7 +251,14 @@
 (def default-indents
   (merge (read-resource "cljfmt/indents/clojure.clj")
          (read-resource "cljfmt/indents/compojure.clj")
-         (read-resource "cljfmt/indents/fuzzy.clj")))
+         (read-resource "cljfmt/indents/fuzzy.clj")
+         {'varfn [[:inner 0]] ; Janet-specific forms added 2023-04-17
+          "deftest:" [[:inner 0]]
+          'declare-project [[:inner 0]]
+          'declare-executable [[:inner 0]]
+          'unless [[:inner 0]]
+          'seq [[:block 1]]
+          'each [[:inner 0]]}))
 
 (defmulti ^:private indenter-fn
   (fn [sym alias-map [type & args]] type))
@@ -426,7 +433,7 @@
 
 (def ^:private binding-keywords
   #{"doseq" "let" "loop" "binding" "with-open" "go-loop" "if-let" "when-some"
-    "if-some" "for" "with-local-vars" "with-redefs" "when-let"})
+    "if-some" "for" "with-local-vars" "with-redefs" "when-let" "seq" "tabseq"})
 
 (defn- binding? [zloc]
   (and (z/vector? zloc)
