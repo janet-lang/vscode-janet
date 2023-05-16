@@ -33,7 +33,7 @@ function newREPL() {
         return new Promise(resolve => {
             setTimeout(() => {
                 terminal.show();
-                thenFocusTextEditor();
+                // thenFocusTextEditor();
                 resolve(terminal);
             }, 2000);
         });
@@ -100,11 +100,16 @@ function activate(context) {
         const editor = vscode.window.activeTextEditor;
         if (editor == null)
             return;
+        const terminal = vscode.window.terminals.find(x => x.name === terminalName);
+        const newTerminal = (terminal) ? false : true;
         getREPL(true).then(terminal => {
             function send(terminal) {
                 sendSource(terminal, editor.document.getText(editor.selection));
-                thenFocusTextEditor();
+                if (!newTerminal) {
+                    thenFocusTextEditor();
+                }
             }
+            ;
             if (editor.selection.isEmpty)
                 vscode.commands.executeCommand('editor.action.selectToBracket').then(() => send(terminal));
             else

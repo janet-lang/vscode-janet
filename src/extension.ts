@@ -35,7 +35,7 @@ function newREPL(): Thenable<vscode.Terminal> {
 		return new Promise<vscode.Terminal>(resolve => {
 			setTimeout(() => {
 				terminal.show();
-				thenFocusTextEditor();
+				// thenFocusTextEditor();
 				resolve(terminal);
 			}, 2000);
 		});
@@ -124,11 +124,16 @@ export function activate(context: vscode.ExtensionContext) {
 		() => {
 			const editor = vscode.window.activeTextEditor;
 			if (editor == null) return;
+			const terminal: vscode.Terminal = vscode.window.terminals.find(x => x.name === terminalName);
+			const newTerminal = (terminal) ? false : true
 			getREPL(true).then(terminal => {
 				function send(terminal: vscode.Terminal) {
 					sendSource(terminal, editor.document.getText(editor.selection));
-					thenFocusTextEditor();
-				}
+					if (!newTerminal) {
+						thenFocusTextEditor();
+					}
+				};
+				
 				if (editor.selection.isEmpty)
 					vscode.commands.executeCommand('editor.action.selectToBracket').then(() => send(terminal));
 				else

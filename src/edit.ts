@@ -14,6 +14,17 @@ export function continueCommentCommand() {
       if (cursor.getPrevToken().type === 'comment') {
         cursor.previous();
       } else {
+        void editor
+          .edit((edits) => edits.insert(position, `\n`), {
+            undoStopAfter: false,
+            undoStopBefore: true,
+          })
+          .then((fulfilled) => {
+            if (fulfilled) {
+              const newPosition = position.with(position.line + 1, newText.length);
+              editor.selection = new vscode.Selection(newPosition, newPosition);
+          }
+      }); 
         return;
       }
     }
