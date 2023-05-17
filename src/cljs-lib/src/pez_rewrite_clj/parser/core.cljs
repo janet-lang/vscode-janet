@@ -44,7 +44,7 @@
 (defn- parse-eof
   [^not-native reader]
   (when *delimiter*
-    (reader/throw-reader reader "Unexpected EOF.")))
+    (reader/throw-reader reader "Unexpected EOF [CDF debug].")))
 
 ;; ### Seqs
 
@@ -104,6 +104,7 @@
 
 (defn- parse-pipe
   [^not-native reader]
+  (reader/ignore reader)
   (node/fn-node (parse-delim reader \))))
 
 (defn- parse-unmatched
@@ -151,6 +152,7 @@
         (identical? c *delimiter*)      reader/ignore
         (reader/whitespace? c)          parse-whitespace
         (identical? c \^)               parse-meta
+        (identical? c \|)               parse-pipe
         (identical? c \#)               parse-comment ;; parse-sharp Updated for Janet 2023-04-14
         (identical? c \()               parse-list
         (identical? c \[)               parse-vector
@@ -164,8 +166,7 @@
         ;; (identical? c \;)               parse-comment
         (identical? c \@)               parse-deref
         (identical? c \")               parse-string
-        (identical? c \:)               parse-keyword
-        (identical? c \|)               parse-pipe
+        (identical? c \:)               parse-keyword 
         :else                           parse-token))
 
 
