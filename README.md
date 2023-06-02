@@ -6,9 +6,12 @@
 - Eval expression ```alt+e```
 - Eval file ```alt+l```
 
-## Notes
+## Quick Start
+1. [Install Janet](https://janet-lang.org/docs/index.html) if you haven't already.
+2. Install the [VS Code Janet extension](https://marketplace.visualstudio.com/items?itemName=janet-lang.vscode-janet).
 
-This extension is not published yet. To install proceed to local install section.
+
+You are ready to use Janet 🎉
 
 ## Local install
 ```
