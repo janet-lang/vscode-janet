@@ -116,6 +116,26 @@ function activate(context) {
                 send(terminal);
         });
     }));
+    context.subscriptions.push(vscode.commands.registerCommand('janet.letdef', () => {
+        const editor = vscode.window.activeTextEditor;
+        if (editor == null)
+            return;
+        const terminal = vscode.window.terminals.find(x => x.name === terminalName);
+        const newTerminal = (terminal) ? false : true;
+        getREPL(true).then(terminal => {
+            function sendWithDef(terminal) {
+                sendSource(terminal, "(def " + editor.document.getText(editor.selection) + ")");
+                if (!newTerminal) {
+                    thenFocusTextEditor();
+                }
+            }
+            ;
+            if (editor.selection.isEmpty)
+                vscode.commands.executeCommand('editor.action.selectToBracket').then(() => sendWithDef(terminal));
+            else
+                sendWithDef(terminal);
+        });
+    }));
     context.subscriptions.push(vscode.commands.registerCommand('janet.evalFile', () => {
         const editor = vscode.window.activeTextEditor;
         if (editor == null)
