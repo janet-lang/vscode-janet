@@ -138,7 +138,7 @@
 			},
 			{
 				"command": "janet.letdef",
-				"title": "Janet: Def a symbol and S-Expression"
+				"title": "Janet: Def a symbol and S-Expression (letdef)"
 			},
 			{
 				"command": "janet.evalFile",

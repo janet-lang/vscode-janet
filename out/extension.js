@@ -124,14 +124,15 @@ function activate(context) {
         const newTerminal = (terminal) ? false : true;
         getREPL(true).then(terminal => {
             function sendWithDef(terminal) {
-                sendSource(terminal, "(def " + editor.document.getText(editor.selection) + ")");
+                editor.document.getText(editor.selection).split("\n").forEach(x => sendSource(terminal, "(def " + x.trim() + ")"));
                 if (!newTerminal) {
                     thenFocusTextEditor();
                 }
             }
             ;
             if (editor.selection.isEmpty)
-                vscode.commands.executeCommand('editor.action.selectToBracket').then(() => sendWithDef(terminal));
+                vscode.commands.executeCommand('editor.action.selectToBracket', { 'selectBrackets': false })
+                    .then(() => sendWithDef(terminal));
             else
                 sendWithDef(terminal);
         });
