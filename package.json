@@ -571,28 +571,28 @@
 				"mac": "ctrl+left",
 				"win": "alt+left",
 				"linux": "alt+left",
-				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && !config.janet.paredit.hijackVSCodeDefaults && !janet:cursorInComment || janet:cursorBeforeComment"
+				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && !config.janet.paredit.hijackVSCodeDefaults && !janet:cursorInComment && !editorHasMultipleSelections && !janet:cursorInComment || janet:cursorBeforeComment && !editorHasMultipleSelections && !janet:cursorInComment && editorLangId == 'janet'"
 			},
 			{
 				"command": "janet.paredit.backwardSexp",
 				"mac": "alt+left",
 				"win": "ctrl+left",
 				"linux": "ctrl+left",
-				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && config.janet.paredit.hijackVSCodeDefaults && !janet:cursorInComment || janet:cursorBeforeComment"
+				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && !editorHasMultipleSelections && !janet:cursorInComment && config.janet.paredit.hijackVSCodeDefaults && !janet:cursorInComment || janet:cursorBeforeComment && !editorHasMultipleSelections && !janet:cursorInComment && editorLangId == 'janet'"
 			},
 			{
 				"command": "janet.paredit.forwardSexp",
 				"mac": "ctrl+right",
 				"win": "alt+right",
 				"linux": "alt+right",
-				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && !config.janet.paredit.hijackVSCodeDefaults && !janet:cursorInComment || janet:cursorAfterComment"
+				"when": "janet:cursorAfterComment && !editorHasMultipleSelections && !janet:cursorInComment && editorLangId == 'janet' || janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && !config.janet.paredit.hijackVSCodeDefaults && !janet:cursorInComment && !editorHasMultipleSelections"
 			},
 			{
 				"command": "janet.paredit.forwardSexp",
 				"mac": "alt+right",
 				"win": "ctrl+right",
 				"linux": "ctrl+right",
-				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && config.janet.paredit.hijackVSCodeDefaults && !janet:cursorInComment || janet:cursorAfterComment"
+				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && config.janet.paredit.hijackVSCodeDefaults && !janet:cursorInComment && !editorHasMultipleSelections || janet:cursorAfterComment && !editorHasMultipleSelections && !janet:cursorInComment && editorLangId == 'janet'"
 			},
 			{
 				"command": "janet.paredit.forwardDownSexp",
@@ -629,7 +629,7 @@
 				"mac": "shift+alt+right",
 				"win": "shift+ctrl+right",
 				"linux": "shift+ctrl+right",
-				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
+				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && !editorHasMultipleSelections && !janet:cursorInComment"
 			},
 			{
 				"command": "janet.paredit.selectRight",
@@ -643,7 +643,7 @@
 				"mac": "shift+alt+left",
 				"win": "shift+ctrl+left",
 				"linux": "shift+ctrl+left",
-				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
+				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/ && !editorHasMultipleSelections && !janet:cursorInComment"
 			},
 			{
 				"command": "janet.paredit.selectForwardDownSexp",
@@ -796,22 +796,22 @@
 			{
 				"command": "janet.paredit.killSexpForward",
 				"key": "ctrl+shift+delete",
-				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
+				"when": "editorTextFocus && janet:keybindingsEnabled && !editorHasMultipleCursors && !janet:cursorInComment && editorLangId == 'janet' && paredit:keyMap =~ /original|strict/"
 			},
 			{
 				"command": "janet.paredit.killSexpBackward",
 				"key": "ctrl+alt+backspace",
-				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
+				"when": "editorTextFocus && janet:keybindingsEnabled && !editorHasMultipleCursors && !janet:cursorInComment && editorLangId == 'janet' && paredit:keyMap =~ /original|strict/"
 			},
 			{
 				"command": "janet.paredit.killListForward",
 				"key": "ctrl+delete",
-				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
+				"when": "editorTextFocus && janet:keybindingsEnabled && !editorHasMultipleCursors && !janet:cursorInComment && editorLangId == 'janet' && paredit:keyMap =~ /original|strict/"
 			},
 			{
 				"command": "janet.paredit.killListBackward",
 				"key": "ctrl+backspace",
-				"when": "janet:keybindingsEnabled && editorLangId == janet && editorTextFocus && paredit:keyMap =~ /original|strict/"
+				"when": "editorTextFocus && janet:keybindingsEnabled && !editorHasMultipleCursors && !janet:cursorInComment && editorLangId == 'janet' && paredit:keyMap =~ /original|strict/"
 			},
 			{
 				"command": "janet.paredit.spliceSexpKillForward",
