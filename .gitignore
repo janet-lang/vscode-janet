@@ -9,3 +9,5 @@ package-lock.json
 .lsp
 .shadow-cljs
 .portal
+
+dist

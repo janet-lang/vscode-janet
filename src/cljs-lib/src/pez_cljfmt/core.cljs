@@ -433,7 +433,8 @@
 
 (def ^:private binding-keywords
   #{"doseq" "let" "loop" "binding" "with-open" "go-loop" "if-let" "when-some"
-    "if-some" "for" "with-local-vars" "with-redefs" "when-let" "seq" "tabseq"})
+    "if-some" "for" "with-local-vars" "with-redefs" "when-let" "seq" "tabseq"
+    "generate"})
 
 (defn- binding? [zloc]
   (and (z/vector? zloc)

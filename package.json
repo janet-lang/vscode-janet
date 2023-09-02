@@ -3,7 +3,7 @@
 	"displayName": "Janet++",
 	"description": "Expanded Janet language support for Visual Studio Code",
 	"icon": "images/icon.png",
-	"version": "0.0.2-d",
+	"version": "0.0.2-e",
 	"publisher": "CFiggers",
 	"repository": "https://github.com/CFiggers/vscode-janet",
 	"engines": {
@@ -13,7 +13,7 @@
 		"Programming Languages"
 	],
 	"activationEvents": [],
-	"main": "./out/extension.js",
+	"main": "./dist/extension.js",
 	"contributes": {
 		"languages": [
 			{
@@ -916,10 +916,17 @@
 		]
 	},
 	"scripts": {
-		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
+		"compile": "npm run compile-cljs && npm run compile-ts",
 		"lint": "eslint . --ext .ts,.tsx",
-		"watch": "tsc -watch -p ./"
+		"watch": "webpack --mode none --watch",
+		"compile-cljs": "npx shadow-cljs compile :calva-lib",
+		"compile-ts": "npx tsc --project ./tsconfig.json",
+		"clean": "rimraf ./out && rimraf ./tsconfig.tsbuildinfo && rimraf ./cljs-out",
+		"precompile": "npm i && npm run clean",
+		"release-cljs": "npx shadow-cljs release :calva-lib",
+		"prerelease": "npm run precompile && npm run release-cljs",
+		"release": "webpack --mode production",
+		"vscode:prepublish": "npm run release"
 	},
 	"dependencies": {
 		"@types/universal-analytics": "^0.4.2",
@@ -938,6 +945,10 @@
 		"@typescript-eslint/eslint-plugin": "^4.16.0",
 		"@typescript-eslint/parser": "^4.16.0",
 		"eslint": "^7.21.0",
-		"source-map-support": "^0.5.21"
+		"source-map-support": "^0.5.21",
+		"ts-loader": "^9.4.4",
+		"webpack": "^5.88.2",
+		"webpack-cli": "^5.1.4",
+		"rimraf": "^2.7.1"
 	}
 }

@@ -1,0 +1,16 @@
+# Put everything on the blacklist by default
+*
+*/**
+**/.DS_Store
+*/**/.DS_Store
+
+# Whitelist
+!language-configuration.json
+!janet.configuration.json
+!images/**
+!dist/**
+!package.json
+!README.md
+!CHANGELOG.md
+!LICENSE
+!syntaxes/**
