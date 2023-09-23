@@ -9,7 +9,7 @@ import * as config from './config';
 import * as whenContexts from './when-contexts';
 import * as edit from './edit';
 import annotations from './providers/annotations';
-import * as util from './utilities';
+// import * as util from './utilities';
 import * as state from './state';
 import status from './status';
 
@@ -104,7 +104,7 @@ function setKeybindingsEnabledContext() {
 
 export function activate(context: vscode.ExtensionContext) {
 
-	console.log('Extension "vscode-janet" is now active!');
+	console.log('Extension "vscode-janet" is activating.');
 
 	// Janet stuff
 	if (!janetExists()) {
@@ -112,62 +112,70 @@ export function activate(context: vscode.ExtensionContext) {
 		return;
 	}
 
-	context.subscriptions.push(vscode.commands.registerCommand(
-		'janet.startREPL',
-		() => {
-			getREPL(true);
-		}
-	));
+	const officialExtension = vscode.extensions.getExtension('janet-lang.vscode-janet');
 
-	context.subscriptions.push(vscode.commands.registerCommand(
-		'janet.eval',
-		() => {
-			const editor = vscode.window.activeTextEditor;
-			if (editor == null) return;
-			const terminal: vscode.Terminal = vscode.window.terminals.find(x => x.name === terminalName);
-			const newTerminal = (terminal) ? false : true
-			getREPL(true).then(terminal => {
-				function send(terminal: vscode.Terminal) {
-					sendSource(terminal, editor.document.getText(editor.selection));
-					if (!newTerminal) {
-						thenFocusTextEditor();
+	if(!officialExtension){
+
+		context.subscriptions.push(vscode.commands.registerCommand(
+			'janet.startREPL',
+			() => {
+				getREPL(true);
+			}
+		));
+	
+		context.subscriptions.push(vscode.commands.registerCommand(
+			'janet.eval',
+			() => {
+				const editor = vscode.window.activeTextEditor;
+				if (editor == null) return;
+				const terminal: vscode.Terminal = vscode.window.terminals.find(x => x.name === terminalName);
+				const newTerminal = (terminal) ? false : true;
+				getREPL(true).then(terminal => {
+					function send(terminal: vscode.Terminal) {
+						sendSource(terminal, editor.document.getText(editor.selection));
+						if (!newTerminal) {
+							thenFocusTextEditor();
+						}
 					}
-				};
+					
+					if (editor.selection.isEmpty)
+						vscode.commands.executeCommand('editor.action.selectToBracket').then(() => send(terminal));
+					else
+						send(terminal);
+				});
+			}
+		));
+
+		context.subscriptions.push(vscode.commands.registerCommand(
+			'janet.evalFile',
+			() => {
+				const editor = vscode.window.activeTextEditor;
+				if (editor == null) return;
+				getREPL(true).then(terminal => {
+					sendSource(terminal, editor.document.getText());
+					thenFocusTextEditor();
+				});
+			}
+		));
+	
+		context.subscriptions.push(vscode.commands.registerCommand(
+			'janet.formatFile',
+			() => {
 				
-				if (editor.selection.isEmpty)
-					vscode.commands.executeCommand('editor.action.selectToBracket').then(() => send(terminal));
-				else
-					send(terminal);
-			});
-		}
-	));
-
-	context.subscriptions.push(vscode.commands.registerCommand(
-		'janet.letdef',
-		() => {
-			const editor = vscode.window.activeTextEditor;
-			if (editor == null) return;
-			const terminal: vscode.Terminal = vscode.window.terminals.find(x => x.name === terminalName);
-			const newTerminal = (terminal) ? false :true
-			getREPL(true).then(terminal => {
-				function sendWithDef(terminal: vscode.Terminal) {
-					editor.document.getText(editor.selection).split("\n").forEach(x => 
-						sendSource(terminal, "(def " + x.trim() + ")"));
-					if(!newTerminal) {
-						thenFocusTextEditor();
-					}
-				};
-
-				if (editor.selection.isEmpty)
-					vscode.commands.executeCommand('editor.action.selectToBracket', 
-													{ 'selectBrackets' : false})
-													.then(() => sendWithDef(terminal));
-				else
-					sendWithDef(terminal);
-			})
-		}
-	));
-
+				getREPL(true).then(terminal => {
+					sendSource(terminal, "(import spork/fmt) (fmt/format-file \""+
+						vscode.window.activeTextEditor.document.uri.fsPath.replace(/\\/g, "/")
+					+"\")");
+					thenFocusTextEditor();
+				});
+			}
+		));
+	} else {
+		void vscode.window.showWarningMessage(
+			'The official Janet VS Code extension is detected. Features unique to the Janet++ extension should work fine, but you will not benefit from updated/improved versions of the official extension\'s functionality. You probably want to uninstall or disable the official extension.',
+			'Got it!'
+		);
+	}
 
 	context.subscriptions.push(vscode.commands.registerCommand(
 		'janet.letdef',
@@ -253,6 +261,8 @@ export function activate(context: vscode.ExtensionContext) {
 	} catch (e) {
 		console.error('Failed activating Paredit: ' + e.message);
 	}
+
+	console.log('Extension "vscode-janet" is now active!');
 } 
 
 function deactivate() {
