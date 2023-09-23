@@ -168,27 +168,29 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	));
 
+
 	context.subscriptions.push(vscode.commands.registerCommand(
-		'janet.evalFile',
+		'janet.letdef',
 		() => {
 			const editor = vscode.window.activeTextEditor;
 			if (editor == null) return;
+			const terminal: vscode.Terminal = vscode.window.terminals.find(x => x.name === terminalName);
+			const newTerminal = (terminal) ? false :true;
 			getREPL(true).then(terminal => {
-				sendSource(terminal, editor.document.getText());
-				thenFocusTextEditor();
-			});
-		}
-	));
+				function sendWithDef(terminal: vscode.Terminal) {
+					editor.document.getText(editor.selection).split("\n").forEach(x => 
+						sendSource(terminal, "(def " + x.trim() + ")"));
+					if(!newTerminal) {
+						thenFocusTextEditor();
+					}
+				}
 
-	context.subscriptions.push(vscode.commands.registerCommand(
-		'janet.formatFile',
-		() => {
-			
-			getREPL(true).then(terminal => {
-				sendSource(terminal, "(import spork/fmt) (fmt/format-file \""+
-					vscode.window.activeTextEditor.document.uri.fsPath.replace(/\\/g, "/")
-				+"\")");
-				thenFocusTextEditor();
+				if (editor.selection.isEmpty)
+					vscode.commands.executeCommand('editor.action.selectToBracket', 
+													{ 'selectBrackets' : false})
+													.then(() => sendWithDef(terminal));
+				else
+					sendWithDef(terminal);
 			});
 		}
 	));
