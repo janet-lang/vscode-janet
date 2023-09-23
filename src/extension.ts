@@ -61,28 +61,28 @@ function thenFocusTextEditor() {
 	setTimeout(() => vscode.commands.executeCommand('workbench.action.focusActiveEditorGroup'), 250);
 }
 
-async function onDidSave(testController: vscode.TestController, document: vscode.TextDocument) {
-	const { evaluate, test } = config.getConfig();
+// async function onDidSave(testController: vscode.TestController, document: vscode.TextDocument) {
+// 	const { evaluate, test } = config.getConfig();
   
-	if (document.languageId !== 'janet') {
-	  return;
-	}
+// 	if (document.languageId !== 'janet') {
+// 		return;
+// 	}
   
-	// 	if (test && util.getConnectedState()) {
-	// 	//   void testRunner.runNamespaceTests(testController, document);
-	// 	  state.analytics().logEvent('Calva', 'OnSaveTest').send();
-	// 	} else if (evaluate) {
-	// 	  if (!outputWindow.isResultsDoc(document)) {
-	// 		await eval.loadFile(document, config.getConfig().prettyPrintingOptions);
-	// 		outputWindow.appendPrompt();
-	// 		state.analytics().logEvent('Calva', 'OnSaveLoad').send();
-	// 	  }
-	// 	}
-}  
+// 	// 	if (test && util.getConnectedState()) {
+// 	// 	//   void testRunner.runNamespaceTests(testController, document);
+// 	// 	  state.analytics().logEvent('Calva', 'OnSaveTest').send();
+// 	// 	} else if (evaluate) {
+// 	// 	  if (!outputWindow.isResultsDoc(document)) {
+// 	// 		await eval.loadFile(document, config.getConfig().prettyPrintingOptions);
+// 	// 		outputWindow.appendPrompt();
+// 	// 		state.analytics().logEvent('Calva', 'OnSaveLoad').send();
+// 	// 	  }
+// 	// 	}
+// }  
 
 function onDidOpen(document) {
 	if (document.languageId !== 'janet') {
-	  return;
+		return;
 	}
 }
   
@@ -93,12 +93,12 @@ function onDidChangeEditorOrSelection(editor: vscode.TextEditor) {
   
 function setKeybindingsEnabledContext() {
 	const keybindingsEnabled = vscode.workspace
-	  .getConfiguration()
-	  .get(config.KEYBINDINGS_ENABLED_CONFIG_KEY);
+		.getConfiguration()
+		.get(config.KEYBINDINGS_ENABLED_CONFIG_KEY);
 	void vscode.commands.executeCommand(
-	  'setContext',
-	  config.KEYBINDINGS_ENABLED_CONTEXT_KEY,
-	  keybindingsEnabled
+		'setContext',
+		config.KEYBINDINGS_ENABLED_CONTEXT_KEY,
+		keybindingsEnabled
 	);
 }
 
@@ -236,9 +236,9 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(
 		vscode.workspace.onDidChangeConfiguration((e: vscode.ConfigurationChangeEvent) => {
-		  if (e.affectsConfiguration(config.KEYBINDINGS_ENABLED_CONFIG_KEY)) {
-			setKeybindingsEnabledContext();
-		  }
+			if (e.affectsConfiguration(config.KEYBINDINGS_ENABLED_CONFIG_KEY)) {
+				setKeybindingsEnabledContext();
+			}
 		})
 	);
 
