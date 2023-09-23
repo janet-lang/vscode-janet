@@ -258,7 +258,8 @@
           'declare-executable [[:inner 0]]
           'unless [[:inner 0]]
           'seq [[:block 1]]
-          'each [[:inner 0]]}))
+          'each [[:inner 0]]
+          'with-vars [[:block 1]]}))
 
 (defmulti ^:private indenter-fn
   (fn [sym alias-map [type & args]] type))
@@ -434,7 +435,7 @@
 (def ^:private binding-keywords
   #{"doseq" "let" "loop" "binding" "with-open" "go-loop" "if-let" "when-some"
     "if-some" "for" "with-local-vars" "with-redefs" "when-let" "seq" "tabseq"
-    "generate"})
+    "generate" "with-vars"})
 
 (defn- binding? [zloc]
   (and (z/vector? zloc)
