@@ -18,7 +18,7 @@ export class StatusBar {
     this._toggleBarItem = window.createStatusBarItem(StatusBarAlignment.Right);
     this._toggleBarItem.text = '(λ)';
     this._toggleBarItem.tooltip = '';
-    this._toggleBarItem.command = 'paredit.togglemode';
+    this._toggleBarItem.command = 'janet.paredit.togglemode';
     this._visible = false;
     this.keyMap = keymap;
 
