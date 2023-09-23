@@ -3,7 +3,7 @@
 	"displayName": "Janet++",
 	"description": "Expanded Janet language support for Visual Studio Code",
 	"icon": "images/icon.png",
-	"version": "0.0.2-e",
+	"version": "0.0.2-f",
 	"publisher": "CFiggers",
 	"repository": "https://github.com/CFiggers/vscode-janet",
 	"engines": {
@@ -130,23 +130,28 @@
 		"commands": [
 			{
 				"command": "janet.startREPL",
-				"title": "Janet: Start REPL"
+				"title": "Janet: Start REPL",
+				"enablement": "editorLangId == janet"
 			},
 			{
 				"command": "janet.eval",
-				"title": "Janet: Evaluate expression"
+				"title": "Janet: Evaluate expression",
+				"enablement": "editorLangId == janet"
 			},
 			{
 				"command": "janet.letdef",
-				"title": "Janet: Def a symbol and S-Expression (letdef)"
+				"title": "Janet: Def a symbol and S-Expression (letdef)",
+				"enablement": "editorLangId == janet"
 			},
 			{
 				"command": "janet.evalFile",
-				"title": "Janet: Evaluate file"
+				"title": "Janet: Evaluate file",
+				"enablement": "editorLangId == janet"
 			},
 			{
 				"command": "janet.formatFile",
-				"title": "Janet: Format file"
+				"title": "Janet: Format file",
+				"enablement": "editorLangId == janet"
 			},
 			{
 				"command": "janet.continueComment",
