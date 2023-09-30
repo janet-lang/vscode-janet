@@ -4,6 +4,7 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 import * as paredit from './paredit/extension';
 import * as fmt from './calva-fmt/src/extension';
+import * as lsp from './lsp/extension';
 import * as model from './cursor-doc/model';
 import * as config from './config';
 import * as whenContexts from './when-contexts';
@@ -262,12 +263,18 @@ export function activate(context: vscode.ExtensionContext) {
 		console.error('Failed activating Paredit: ' + e.message);
 	}
 
+	try {
+		lsp.activate(context);
+	} catch (e) {
+		console.error('Failed activating LSP: ' + e.message);
+	}
+
 	console.log('Extension "vscode-janet" is now active!');
 } 
 
 function deactivate() {
 	state.analytics().logEvent('LifeCycle', 'Deactivated').send();
 	// jackIn.calvaJackout();
+	lsp.deactivate();
 	return paredit.deactivate();
-	// return lsp.deactivate();
 }

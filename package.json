@@ -3,7 +3,8 @@
 	"displayName": "Janet++",
 	"description": "Expanded Janet language support for Visual Studio Code",
 	"icon": "images/icon.png",
-	"version": "0.0.2-f",
+	"version": "0.0.3",
+	"author": "Caleb Figgers",
 	"publisher": "CFiggers",
 	"repository": "https://github.com/CFiggers/vscode-janet",
 	"engines": {
@@ -123,6 +124,29 @@
 						"type": "boolean",
 						"default": true,
 						"markdownDescription": "Treat `(comment...)` forms special and keep its closing paren on a line of its own."
+					}
+				}
+			},
+			{
+				"title": "Janet LSP",
+				"type": "object",
+				"properties": {
+					"janet.lsp.maxNumberOfProblems": {
+						"scope": "resource",
+						"type": "number",
+						"default": 100,
+						"description": "Controls the maximum number of problems produced by the server."
+					},
+					"janet.lsp.trace.server": {
+						"scope": "window",
+						"type": "string",
+						"enum": [
+							"off",
+							"messages",
+							"verbose"
+						],
+						"default": "off",
+						"description": "Traces the communication between VS Code and the language server."
 					}
 				}
 			}
@@ -921,7 +945,7 @@
 		]
 	},
 	"scripts": {
-		"compile": "npm run compile-cljs && npm run compile-ts",
+		"compile": "npm run handle-lsp && npm run compile-cljs && npm run compile-ts",
 		"lint": "eslint . --ext .ts,.tsx",
 		"watch": "webpack --mode none --watch",
 		"compile-cljs": "npx shadow-cljs compile :calva-lib",
@@ -929,9 +953,12 @@
 		"clean": "rimraf ./out && rimraf ./tsconfig.tsbuildinfo && rimraf ./cljs-out",
 		"precompile": "npm i && npm run clean",
 		"release-cljs": "npx shadow-cljs release :calva-lib",
-		"prerelease": "npm run precompile && npm run release-cljs",
+		"prerelease": "npm run handle-lsp && npm run precompile && npm run release-cljs",
 		"release": "webpack --mode production",
-		"vscode:prepublish": "npm run release"
+		"vscode:prepublish": "npm run release",
+		"handle-lsp": "npm run build-lsp && npm run cp-lsp",
+		"build-lsp": "cd janet-lsp && jpm clean && jpm build && cd ..",
+        "cp-lsp": "rm ./dist/janet-lsp && cp ./janet-lsp/build/janet-lsp ./dist/janet-lsp"
 	},
 	"dependencies": {
 		"@types/universal-analytics": "^0.4.2",
@@ -942,18 +969,21 @@
 		"lodash.isequal": "4.5.0",
 		"parinfer": "^3.12.0",
 		"universal-analytics": "^0.5.3",
-		"uuidv4": "6.2.12"
+		"uuidv4": "6.2.12",
+		"vscode-languageclient": "^9.0.1"
 	},
 	"devDependencies": {
+		"@types/mocha": "^9.1.0",
 		"@types/node": "^12.12.0",
 		"@types/vscode": "^1.34.0",
 		"@typescript-eslint/eslint-plugin": "^4.16.0",
 		"@typescript-eslint/parser": "^4.16.0",
 		"eslint": "^7.21.0",
+		"mocha": "^10.2.0",
+		"rimraf": "^2.7.1",
 		"source-map-support": "^0.5.21",
 		"ts-loader": "^9.4.4",
 		"webpack": "^5.88.2",
-		"webpack-cli": "^5.1.4",
-		"rimraf": "^2.7.1"
+		"webpack-cli": "^5.1.4"
 	}
 }

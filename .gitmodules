@@ -1,0 +1,3 @@
+[submodule "janet-lsp"]
+	path = janet-lsp
+	url = git@github.com:CFiggers/janet-lsp.git
