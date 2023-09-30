@@ -259,6 +259,9 @@
           'unless [[:inner 0]]
           'seq [[:block 1]]
           'each [[:inner 0]]
+          'eachk [[:inner 0]]
+          'eachp [[:inner 0]]
+          'distinct [[:inner 0]]
           'with-vars [[:block 1]]}))
 
 (defmulti ^:private indenter-fn

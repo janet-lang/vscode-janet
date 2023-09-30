@@ -41,13 +41,13 @@ export class StatusBar {
       case 'original':
         this.visible = true;
         this._toggleBarItem.text = '(λ)';
-        this._toggleBarItem.tooltip = 'Toggle to Strict Mode';
+        this._toggleBarItem.tooltip = 'Janet: Toggle to Strict Mode';
         this._toggleBarItem.color = undefined;
         break;
       case 'strict':
         this.visible = true;
         this._toggleBarItem.text = '[λ]';
-        this._toggleBarItem.tooltip = 'Toggle to Original Mode';
+        this._toggleBarItem.tooltip = 'Janet: Toggle to Original Mode';
         this._toggleBarItem.color = undefined;
         break;
       default:
