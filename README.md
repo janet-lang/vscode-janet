@@ -1,55 +1,44 @@
 # Janet language support for Visual Studio Code
 
+This extension adds language support and some IDE-lite editor features for the [Janet](https://www.janet-lang.org) programming language to [VS Code](https://code.visualstudio.com/).
+
+Just starting with Janet? See the official language introduction [here](https://www.janet-lang.org/docs/index.html).
+
 ## Features
 
-- Syntax highlighting
-- Eval expression ```alt+e```
-- Eval file ```alt+l```
-- Structural editing via ParEdit-style Sexp commands
+- `.janet` file type support and syntax highlighting for Janet files
+- Create a Janet REPL session in the integrated terminal (`Janet: Start REPL` in the Command Palette)
+  - Evaluate expressions from any open `.janet` file (with ```alt+e```) or load the entire open file into the REPL (with ```alt+l```), creating a new one if none is currently active
+- Auto-format Janet code while typing, or format current form on command (with `Tab`)
+- Structural editing and navigation using ParEdit-style Sexp commands
+  - `Ctrl+Left/Right` to move cursor by S-Exp
+  - `Alt+Up/Down` to drag S-Exp forward/backward
+  - "Slurp" (extend parentheses), "Barf" (shrink parentheses), and other PareEdit commands (see [this visual guide to ParEdit on the Calva website](https://calva.io/paredit/) for more info, most of which applies without modification to this extension too)
+- Language Server Protocol via embedded [Janet LSP](https://www.github.com/CFiggers/janet-lsp)
+  - Inline compiler error underlining (glitchy on Windows at the moment)
+  - Function and macro autocomplete
+  - On-hover symbol definitions
 
-## Notes
+More coming soon!
 
-This extension is not published yet. To install proceed to local install section.
+# How to Install
 
-## Local install
-```
-# First, make sure you have Node.js version 14 or greater installed. 
+## VS Code Extension Marketplace
+-Navigate to the VS Code Extension marketplace within VS Code.
+-Search for "vscode-hy (hylang official)" and install as usual.
 
-# Clone the extension.
-git clone https://github.com/janet-lang/vscode-janet.git
-cd vscode-janet
+## Local Install
+- Navigate to your local .vscode (or .vscodium) extension directory (e.g. $ cd ~/.vscode/extensions)
+- Clone this repo within that directory (e.g. git clone https://www.github.com/hylang/vscode-hy)
+- Reload or relaunch any open VS Code/VS Codium windows
 
-# Install vscode-janet dependencies.
-npm install
+# Contributing
 
-# Generate the vscode extension (VSIX) file using vsce. 
-npx vsce package
+Issues and PRs are welcome!
 
-# Install the extension.
-code --install-extension vscode-janet-0.0.2.vsix
+# Prior Art
 
-# Finally reload the vscode window (cmd + shift + P > Developer: Reload Window).
-```
+Huge portions of this extension are remixed from other open source projects, including:
 
-Alternatively you can clone the extension right into vscode's extention directory. This is easier, but can be unreliable as vscode will sometimes clean up the extension directory and remove vscode-janet.
-```
-# Clone the extension.
-cd ~/.vscode/extensions
-git clone https://github.com/janet-lang/vscode-janet.git
-
-# Force vscode to regenerate the extensions.json file.
-mv extensions.json /tmp/ 
-
-# Finally reload the vscode window (cmd + shift + P > Developer: Reload Window).
-
-# If you're finding that vscode isn't loading the extension, you can force it to
-# regenerate the extensions.json file by removing ~/.vscode/extensions/extensions.json.
-```
-
-
-## Debug this extension
-
-- Run `npm install` in terminal to install dependencies
-- Run the `Run Extension` target in the Debug View in VS Code. This will:
-	- Start a task `npm: watch` to compile the code
-	- Run the extension in a new VS Code window
+- Janet's official VS Code Extension: [vscode-janet](https://www.github.com/janet-lang/vscode-janet), MIT License, Copyright (c) 2020 Calvin Rose and contributors
+- [Calva: A Clojure & ClojureScript IDE in Visual Studio Code](https://www.github.com/BetterThanTomorrow/calva), MIT License, Parts of the software are Copyright (c) 2016-2018 Stian Sivertsen; Other parts are Copyright (c) 2018 -> Better than Tomorrow
