@@ -24,10 +24,12 @@ More coming soon!
 # How to Install
 
 ## VS Code Extension Marketplace
--Navigate to the VS Code Extension marketplace within VS Code.
--Search for "vscode-hy (hylang official)" and install as usual.
+
+- Navigate to the VS Code Extension marketplace within VS Code.
+- Search for "vscode-hy (hylang official)" and install as usual.
 
 ## Local Install
+
 - Navigate to your local .vscode (or .vscodium) extension directory (e.g. $ cd ~/.vscode/extensions)
 - Clone this repo within that directory (e.g. git clone https://www.github.com/hylang/vscode-hy)
 - Reload or relaunch any open VS Code/VS Codium windows
