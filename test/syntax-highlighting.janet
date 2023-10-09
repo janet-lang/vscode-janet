@@ -2,6 +2,23 @@
 # All of the following forms should highlight purple if syntax is highlighting correctly.
 # Last updated 2023-10-08 based on Janet 1.31.0.
 
+# Special Forms
+(def)
+(var)
+(fn)
+(do)
+(quote)
+(if)
+(splice)
+(while)
+(break)
+(set)
+(quasiquote)
+(unquote)
+(upscope)
+
+# Core lib
+
 (%)
 (%=)
 (*)
