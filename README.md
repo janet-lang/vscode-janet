@@ -26,7 +26,7 @@ More coming soon!
 ## VS Code Extension Marketplace
 
 - Navigate to the VS Code Extension marketplace within VS Code.
-- Search for "vscode-hy (hylang official)" and install as usual.
+- Search for "Janet++" and install as usual.
 
 ## Local Install
 
