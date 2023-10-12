@@ -2,7 +2,7 @@
 	"name": "vscode-janet-plus-plus",
 	"displayName": "Janet++",
 	"description": "Expanded Janet language support for Visual Studio Code",
-	"icon": "images/janet-plus-plus-icon.png",
+	"icon": "images/icon_png_minimal.png",
 	"version": "0.0.5",
 	"author": "Caleb Figgers",
 	"publisher": "CalebFiggers",
@@ -32,10 +32,10 @@
 					".janet"
 				],
 				"configuration": "./janet.configuration.json",
-                "icon": {
-                    "light": "./images/icon_svg_minimal.svg",
-                    "dark": "./images/icon_svg_minimal.svg"
-                }
+				"icon": {
+					"light": "./images/icon_svg_minimal.svg",
+					"dark": "./images/icon_svg_minimal.svg"
+				}
 			}
 		],
 		"grammars": [
@@ -957,6 +957,8 @@
 		"compile": "npm run handle-lsp && npm run compile-cljs && npm run compile-ts",
 		"lint": "eslint . --ext .ts,.tsx",
 		"watch": "webpack --mode none --watch",
+		"watch-ts": "npx tsc --watch --project ./tsconfig.json",
+		"watch-cljs": "npx shadow-cljs -d cider/cider-nrepl:0.28.5 watch :calva-lib",
 		"compile-cljs": "npx shadow-cljs compile :calva-lib",
 		"compile-ts": "npx tsc --project ./tsconfig.json",
 		"clean": "rimraf ./out && rimraf ./tsconfig.tsbuildinfo && rimraf ./cljs-out",
@@ -967,7 +969,7 @@
 		"vscode:prepublish": "npm run release",
 		"handle-lsp": "npm run build-lsp && npm run cp-lsp",
 		"build-lsp": "cd janet-lsp && jpm clean && jpm build && cd ..",
-        "cp-lsp": "rm ./dist/janet-lsp && cp ./janet-lsp/build/janet-lsp ./dist/janet-lsp"
+		"cp-lsp": "rm ./dist/janet-lsp && cp ./janet-lsp/build/janet-lsp ./dist/janet-lsp"
 	},
 	"dependencies": {
 		"@types/universal-analytics": "^0.4.2",
@@ -990,6 +992,7 @@
 		"eslint": "^7.21.0",
 		"mocha": "^10.2.0",
 		"rimraf": "^2.7.1",
+		"shadow-cljs": "^2.25.8",
 		"source-map-support": "^0.5.21",
 		"ts-loader": "^9.4.4",
 		"webpack": "^5.88.2",
