@@ -258,6 +258,8 @@
           'declare-executable [[:inner 0]]
           'unless [[:inner 0]]
           'seq [[:block 1]]
+          'catseq [[:block 1]]
+          'tabseq [[:block 1]]
           'each [[:inner 0]]
           'eachk [[:inner 0]]
           'eachp [[:inner 0]]
@@ -438,7 +440,7 @@
 (def ^:private binding-keywords
   #{"doseq" "let" "loop" "binding" "with-open" "go-loop" "if-let" "when-some"
     "if-some" "for" "with-local-vars" "with-redefs" "when-let" "seq" "tabseq"
-    "generate" "with-vars"})
+    "catseq" "generate" "with-vars"})
 
 (defn- binding? [zloc]
   (and (z/vector? zloc)
