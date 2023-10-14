@@ -3,7 +3,7 @@
 	"displayName": "Janet++",
 	"description": "Expanded Janet language support for Visual Studio Code",
 	"icon": "images/icon_png_minimal.png",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"author": "Caleb Figgers",
 	"publisher": "CalebFiggers",
 	"repository": {
