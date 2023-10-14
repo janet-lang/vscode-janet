@@ -4,69 +4,17 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "Janet++ Compile",
 			"type": "npm",
-			"script": "compile",
-			"isBackground": false,
+			"script": "watch",
+			"problemMatcher": "$ts-webpack-watch",
+			"isBackground": true,
 			"presentation": {
-				"panel":"dedicated",
-				"group": "defaultJanet",
-				"close": true
+				"reveal": "never"
 			},
 			"group": {
 				"kind": "build",
-				"isDefault": false
+				"isDefault": true
 			}
-		},
-		{
-			"label": "Janet++ Watch CLJS",
-			"type": "npm",
-			"script": "watch-cljs",
-			"isBackground": true,
-			"group": {
-			  "kind": "build",
-			  "isDefault": false
-			},
-			"presentation": {
-			  "panel": "dedicated",
-			  "group": "defaultJanet"
-			}
-		},
-		{
-			"label": "Janet++ Watch TS",
-			"type": "npm",
-			"script": "watch-ts",
-			"isBackground": true,
-			"group": {
-			  "kind": "build",
-			  "isDefault": false
-			},
-			"problemMatcher": "$tsc-watch",
-			"presentation": {
-			  "panel": "dedicated",
-			  "group": "defaultJanet"
-			}
-		},
-		{
-		  "label": "Janet++ Watchers",
-		  "group": {
-			"kind": "build",
-			"isDefault": false
-		  },
-		  "dependsOn": [
-			"Janet++ Watch TS",
-			"Janet++ Watch CLJS"
-		  ]
-		},
-		{
-		  "label": "Janet++ Dev",
-		  "group": {
-			"kind": "build",
-			"isDefault": true
-		  },
-		  "dependsOrder": "sequence",
-		  "dependsOn": ["Janet++ Compile", "Janet++ Watchers"]
 		}
-
 	]
 }
