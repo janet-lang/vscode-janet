@@ -13,7 +13,8 @@
             [pez-rewrite-clj.node.reader-macro :as rm-node]
             [pez-rewrite-clj.node.quote :as q-node]
             [pez-rewrite-clj.node.uneval :as ue-node]
-            [pez-rewrite-clj.node.fn :as f-node]))
+            [pez-rewrite-clj.node.fn :as f-node]
+            [pez-rewrite-clj.node.splice :as sp-node]))
 
 
 
@@ -169,9 +170,9 @@
 (def unquote-node
   "See [[quote/unquote-node]]"
   q-node/unquote-node)
-(def unquote-splicing-node
-  "See [[quote/unquote-splicing-node]]"
-  q-node/unquote-splicing-node)
+;; (def unquote-splicing-node
+;;   "See [[quote/unquote-splicing-node]]"
+;;   q-node/unquote-splicing-node)
 
 
 ; *******************************
@@ -180,6 +181,13 @@
 (def uneval-node
   "See [[uneval/uneval-node]]"
   ue-node/uneval-node)
+
+; *******************************
+; see pez-rewrite-clj.node.splice 
+; *******************************
+(def splice-node
+  "See [[splice/splice-node]]"
+  sp-node/splice-node)
 
 
 ; *******************************

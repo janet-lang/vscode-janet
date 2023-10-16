@@ -102,6 +102,10 @@
 ;;       \? (parse-conditional reader)
 ;;       (node/reader-macro-node (parse-printables reader :reader-macro 2)))))
 
+(defn- parse-splice
+  [^not-native reader] 
+  (node/splice-node (parse-printables reader :splice 1 true)))
+
 (defn- parse-pipe
   [^not-native reader]
   (reader/ignore reader)
@@ -127,17 +131,13 @@
 
 (defn- parse-syntax-quote
   [^not-native reader]
-  (node/syntax-quote-node (parse-printables reader :syntax-quote 1 true)))
+  (node/syntax-quote-node 
+   (parse-printables reader :syntax-quote 1 true)))
 
 (defn- parse-unquote
-  [^not-native reader]
-  (reader/ignore reader)
-  (let [c (peek-char reader)]
-    (if (= c \@)
-      (node/unquote-splicing-node
-        (parse-printables reader :unquote 1 true))
-      (node/unquote-node
-        (parse-printables reader :unquote 1)))))
+  [^not-native reader] 
+  (node/unquote-node
+   (parse-printables reader :unquote 1 true)))
 
 (defn- parse-comment
   [^not-native reader]
@@ -160,13 +160,14 @@
         (identical? c \})               parse-unmatched
         (identical? c \])               parse-unmatched
         (identical? c \))               parse-unmatched
-        (identical? c \~)               parse-unquote
+        ;; (identical? c \~)               parse-unquote
         (identical? c \')               parse-quote
-        (identical? c \`)               parse-syntax-quote
-        ;; (identical? c \;)               parse-comment
+        (identical? c \~)               parse-syntax-quote
+        (identical? c \;)               parse-splice
         (identical? c \@)               parse-deref
         (identical? c \")               parse-string
-        (identical? c \:)               parse-keyword 
+        (identical? c \:)               parse-keyword
+        (identical? c \,)               parse-unquote 
         :else                           parse-token))
 
 

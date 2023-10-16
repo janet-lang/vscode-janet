@@ -50,26 +50,26 @@
   [children]
   (if (sequential? children)
     (->node
-      :syntax-quote "`" 'quote
+      :syntax-quote "~" 'quote
       children)
     (recur [children])))
 
-(defn unquote-node
-  "Create node representing an unquoted form. (`~...`)
+(defn unquote-node ; Updated for Janet on 2023-10-16
+  "Create node representing an unquoted form. (`,...`)
    Takes either a seq of nodes or a single one."
   [children]
   (if (sequential? children)
     (->node
-      :unquote "~" 'unquote
+      :unquote "," 'unquote
       children)
     (recur [children])))
 
-(defn unquote-splicing-node
-  "Create node representing an unquote-spliced form. (`~@...`)
-   Takes either a seq of nodes or a single one."
-  [children]
-  (if (sequential? children)
-    (->node
-      :unquote-splicing "~@" 'unquote-splicing
-      children)
-    (recur [children])))
+;; (defn unquote-splicing-node
+;;   "Create node representing an unquote-spliced form. (`~@...`)
+;;    Takes either a seq of nodes or a single one."
+;;   [children]
+;;   (if (sequential? children)
+;;     (->node
+;;       :unquote-splicing "~@" 'unquote-splicing
+;;       children)
+;;     (recur [children])))

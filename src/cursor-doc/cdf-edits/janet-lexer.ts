@@ -53,7 +53,8 @@ export interface Token extends LexerToken {
 }
 
 // whitespace, excluding newlines
-toplevel.terminal('ws', /[\t ,]+/, (l, m) => ({ type: 'ws' }));
+// 2023-10-16: Removed `,` from whitespace definition
+toplevel.terminal('ws', /[\t ]+/, (l, m) => ({ type: 'ws' }));
 // newlines, we want each one as a token of its own
 toplevel.terminal('ws-nl', /(\r|\n|\r\n)/, (l, m) => ({ type: 'ws' }));
 // lots of other things are considered whitespace
