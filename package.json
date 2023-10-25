@@ -3,7 +3,7 @@
 	"displayName": "Janet++",
 	"description": "Expanded Janet language support for Visual Studio Code",
 	"icon": "images/icon_png_minimal_glow.png",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"author": "Caleb Figgers",
 	"publisher": "CalebFiggers",
 	"repository": {
@@ -117,7 +117,7 @@
 				"properties": {
 					"janet.calva.fmt.configPath": {
 						"type": "string",
-						"markdownDescription": "Path to [cljfmt](https://github.com/weavejester/cljfmt#configuration) configuration file. Absolute or relative to the project root directory. To provide the config via [clojure-lsp](https://clojure-lsp.io), set this to `CLOJURE-LSP` (case sensitive)."
+						"markdownDescription": "Path to [cljfmt](https://github.com/weavejester/cljfmt#configuration) configuration file. Absolute or relative to the project root directory."
 					},
 					"janet.calva.fmt.formatAsYouType": {
 						"type": "boolean",
@@ -140,6 +140,15 @@
 				"title": "Janet LSP",
 				"type": "object",
 				"properties": {
+					"janet.lsp.enableLsp": {
+						"type": "boolean",
+						"markdownDescription": "Whether or not to start up an LSP for Janet when activating Janet++. By default, will start up [Janet LSP](https://www.github.com/CFiggers/janet-lsp), which ships with Janet++.",
+						"default": true
+					},
+					"janet.lsp.customJanetLspCommand": {
+						"type" : "string",
+						"markdownDescription": "A custom command to execute when attempting to launch an LSP for Janet. This command will be attempted as though run at the command line and should result in a persistent server process that can handle LSP requests via STDIO."
+					},
 					"janet.lsp.maxNumberOfProblems": {
 						"scope": "resource",
 						"type": "number",
@@ -969,7 +978,7 @@
 		"vscode:prepublish": "npm run release",
 		"handle-lsp": "npm run build-lsp && npm run cp-lsp",
 		"build-lsp": "cd janet-lsp && jpm clean && jpm build && cd ..",
-		"cp-lsp": "rm ./dist/janet-lsp && cp ./janet-lsp/build/janet-lsp ./dist/janet-lsp"
+		"cp-lsp": "rimraf ./dist/janet-lsp.jimage && cp ./janet-lsp/build/janet-lsp.jimage ./dist/janet-lsp.jimage"
 	},
 	"dependencies": {
 		"@types/universal-analytics": "^0.4.2",

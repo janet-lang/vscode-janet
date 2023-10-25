@@ -5,6 +5,8 @@ import {
     ExtensionContext,
 } from 'vscode';
 
+import * as config from '../config';
+
 import {
     LanguageClient,
     LanguageClientOptions,
@@ -53,6 +55,50 @@ function getServer(): string {
     // );
 }
 
+function getServerImage(): string {
+    // const windows = process.platform === "win32";
+    // const suffix = windows ? ".exe" : "";
+    // const binaryName = "janet-lsp" + suffix;
+    const binaryName = "janet-lsp.jimage";
+
+    return path.resolve(__dirname, binaryName);
+	// const bundledPath = path.resolve(__dirname, binaryName);
+
+    // const bundledValidation = validateServer(bundledPath);
+    // if (bundledValidation.valid) {
+    //     return bundledPath;
+    // }
+
+    // const binaryValidation = validateServer(binaryName);
+    // if (binaryValidation.valid) {
+    //     return binaryName;
+    // }
+
+    // throw new Error(
+    //     `Could not find a valid janet-lsp binary.\nBundled: ${bundledValidation.message}\nIn PATH: ${binaryValidation.message}`
+    // );
+}
+
+function getServerOptions(): ServerOptions {
+    let options: ServerOptions;
+
+    if (config.getConfig().customJanetLspCommand) {
+        options = {
+            command: config.getConfig().customJanetLspCommand[0],
+            args: config.getConfig().customJanetLspCommand.slice(1),
+            transport: TransportKind.stdio
+        };
+    } else {
+        options = {
+            command: "janet",
+            args: ["-i", getServerImage()],
+            transport: TransportKind.stdio
+        };
+    }
+    
+    return options;
+}
+
 // TODO: This is a good idea, figure it out later
 
 // function validateServer(path: string): { valid: boolean; message: string } {
@@ -84,28 +130,28 @@ function getServer(): string {
 // function updateStatusBarFn(item: vscode.StatusBarItem, status: LspStatus) {
 //   switch (status) {
 //     case LspStatus.Stopped: {
-//       item.text = "$(circle-outline) janet-lsp";
-//       item.tooltip = "janet-lsp is not active, click to get a menu";
+//       item.text = "$(circle-outline) Janet LSP";
+//       item.tooltip = "Janet LSP is not active, click to get a menu";
 //       break;
 //     }
 //     case LspStatus.Starting: {
-//       item.text = "$(sync~spin) janet-lsp";
-//       item.tooltip = "janet-lsp is starting";
+//       item.text = "$(sync~spin) Janet LSP";
+//       item.tooltip = "Janet LSP is starting";
 //       break;
 //     }
 //     case LspStatus.Running: {
-//       item.text = "$(circle-filled) janet-lsp";
-//       item.tooltip = "janet-lsp is active";
+//       item.text = "$(circle-filled) Janet LSP";
+//       item.tooltip = "Janet LSP is active";
 //       break;
 //     }
 //     case LspStatus.Failed: {
-//       item.text = "$(error) janet-lsp";
-//       item.tooltip = "janet-lsp failed to start";
+//       item.text = "$(error) Janet LSP";
+//       item.tooltip = "Janet LSP failed to start";
 //       break;
 //     }
 //     case LspStatus.Unknown: {
-//       item.text = "janet-lsp";
-//       item.tooltip = "Open a janet file to see the server status";
+//       item.text = "Janet LSP";
+//       item.tooltip = "Open a .janet file to see the server status";
 //       break;
 //     }
 //   }
@@ -147,11 +193,19 @@ export function activate(context: ExtensionContext) {
     //     updateStatusBarFn(status_bar_item, client.status);
     //   };
     
-    const serverOptions: ServerOptions = {
-		command: getServer(),
-		args: [],
-		transport: TransportKind.stdio
-	};
+    // const serverOptions: ServerOptions = {
+	// 	command: getServer(),
+	// 	args: [],
+	// 	transport: TransportKind.stdio
+	// };
+
+    // const serverOptions: ServerOptions = {
+	// 	command: "janet",
+	// 	args: ["-i", getServerImage()],
+	// 	transport: TransportKind.stdio
+	// };
+
+    const serverOptions: ServerOptions = getServerOptions();
 
 	const clientOptions: LanguageClientOptions = {
 		documentSelector: [

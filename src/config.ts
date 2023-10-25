@@ -103,6 +103,7 @@ function _trimAliasName(name: string): string {
 function getConfig() {
   const configOptions = vscode.workspace.getConfiguration('janet');
   const pareditOptions = vscode.workspace.getConfiguration('janet.paredit');
+  const lspOptions = vscode.workspace.getConfiguration('janet.lsp');
 
   const w =
     configOptions.inspect<customREPLCommandSnippet[]>('customREPLCommandSnippets')
@@ -160,10 +161,13 @@ function getConfig() {
     jackIn: {
       useDeprecatedAliasFlag: configOptions.get<boolean>('jackIn.useDeprecatedAliasFlag'),
     },
-    enableClojureLspOnStart: configOptions.get<boolean>('enableClojureLspOnStart'),
     projectRootsSearchExclude: configOptions.get<string[]>('projectRootsSearchExclude', []),
     useLiveShare: configOptions.get<boolean>('useLiveShare'),
     definitionProviderPriority: configOptions.get<string[]>('definitionProviderPriority'),
+
+    // Janet LSP
+    enableLsp: lspOptions.get<boolean>('enableLsp'),
+    customJanetLspCommand: lspOptions.get<string[]>('customJanetLspCommand', []),
   };
 }
 
