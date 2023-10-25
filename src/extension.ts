@@ -263,12 +263,14 @@ export function activate(context: vscode.ExtensionContext) {
 		console.error('Failed activating Paredit: ' + e.message);
 	}
 
-	try {
-		lsp.activate(context);
-	} catch (e) {
-		console.error('Failed activating LSP: ' + e.message);
+	if(janetExists() && config.getConfig().enableLsp){
+		try {
+			lsp.activate(context);
+		} catch (e) {
+			console.error('Failed activating LSP: ' + e.message);
+		}
 	}
-
+		
 	console.log('Extension "vscode-janet" is now active!');
 } 
 
